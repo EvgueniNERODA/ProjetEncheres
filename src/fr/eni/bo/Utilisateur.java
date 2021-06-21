@@ -24,6 +24,13 @@ public class Utilisateur {
 		
 	}
 
+	
+	public Utilisateur(String nom) {
+		this();
+		this.nom = nom;
+	}
+
+
 	//getters/setters
 	
 
