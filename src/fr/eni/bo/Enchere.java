@@ -1,0 +1,72 @@
+package fr.eni.bo;
+
+import java.util.List;
+import java.time.LocalDate;
+
+public class Enchere {
+	private int no_enchere;
+	private LocalDate dateEnchere;
+	private int montant_enchere;
+	private List <Utilisateur> listeUtilisateurs;
+	
+	
+	//constructeurs 
+	
+	public Enchere() {
+		
+	}
+
+
+	//getters/setters
+	
+
+	
+
+
+	public int getNo_enchere() {
+		return no_enchere;
+	}
+
+
+	public void setNo_enchere(int no_enchere) {
+		this.no_enchere = no_enchere;
+	}
+
+
+	public LocalDate getDateEnchere() {
+		return dateEnchere;
+	}
+
+
+	public void setDateEnchere(LocalDate dateEnchere) {
+		this.dateEnchere = dateEnchere;
+	}
+
+
+	public int getMontant_enchere() {
+		return montant_enchere;
+	}
+
+
+	public void setMontant_enchere(int montant_enchere) {
+		this.montant_enchere = montant_enchere;
+	}
+
+
+	public List<Utilisateur> getListeUtilisateurs() {
+		return listeUtilisateurs;
+	}
+
+
+	public void setListeUtilisateurs(List<Utilisateur> listeUtilisateurs) {
+		this.listeUtilisateurs = listeUtilisateurs;
+	} 
+	
+	//affichage
+		@Override
+		public String toString() {
+			return "Enchere [no_enchere=" + no_enchere + ", dateEnchere=" + dateEnchere + ", montant_enchere="
+					+ montant_enchere + "]";
+		}
+	
+}
