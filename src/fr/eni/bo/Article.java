@@ -2,8 +2,14 @@ package fr.eni.bo;
 
 import java.util.List;
 import java.time.LocalDate;
-
-public class ArticleVendu {
+/**
+ * 
+ * Création de la classe ArticleVendu
+ * Elle permet la creation d'un article afin de le mettre en vente sur
+ * notre site d'enchère.
+ * 
+ */
+public class Article {
 
 	private int noArticle;
 	private String nomArticle;
@@ -12,22 +18,20 @@ public class ArticleVendu {
 	private LocalDate dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
-	private boolean etatVente;
+	private boolean etatVente = false;
+	
 	private Utilisateur utilisateur;
 	private Enchere enchere;
 	private List <Categorie> listeCategorie;
 	private Retrait retrait;
 	
-	
-	public ArticleVendu() {
+/*************************************************CONSTRUCTEURS**************************************************/	
+	public Article() {
 		
 	}
 
 	
-	//getters/setters
-
-
-
+/*************************************************GETTERS/SETTERS************************************************/
 	public int getNoArticle() {
 		return noArticle;
 	}
@@ -147,11 +151,10 @@ public class ArticleVendu {
 		this.retrait = retrait;
 	}
 
-
-	//affichage
+/***************************************************AFFICHAGE*********************************************************/
 	@Override
 	public String toString() {
-		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + "]";
 	}

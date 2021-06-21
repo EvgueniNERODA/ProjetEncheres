@@ -1,16 +1,23 @@
 package fr.eni.bo;
-
+/**
+ * 
+ * Création de la classe Categorie.
+ * Elle permet la définition de la catégorie d'un article créée pour une mise 
+ * aux enchères.
+ *
+ */
 public class Categorie {
 	private int noCotegorie;
 	private String libelle;
-	private ArticleVendu articleVendu;
+	private Article article;
 	
-	//constructeurs
+
+/*************************************************CONSTRUCTEURS****************************************************/	
 	public Categorie() {
 		
 	}
 
-	//getters/setters
+/*************************************************GETTERS/SETTERS**************************************************/	
 	public int getNoCotegorie() {
 		return noCotegorie;
 	}
@@ -27,18 +34,18 @@ public class Categorie {
 		this.libelle = libelle;
 	}
 
-	public ArticleVendu getArticleVendu() {
-		return articleVendu;
+	public Article getArticle() {
+		return article;
 	}
 
-	public void setArticleVendu(ArticleVendu articleVendu) {
-		this.articleVendu = articleVendu;
+	public void setArticleVendu(Article article) {
+		this.article = article;
 	}
 
-	//affichage
+/***************************************************AFFICHAGE****************************************************/	
 	@Override
 	public String toString() {
-		return "Categorie [noCotegorie=" + noCotegorie + ", libelle=" + libelle + ", articleVendu=" + articleVendu
+		return "Categorie [noCotegorie=" + noCotegorie + ", libelle=" + libelle + ", article=" + article
 				+ "]";
 	}
 	

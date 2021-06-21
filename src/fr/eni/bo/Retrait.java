@@ -1,18 +1,24 @@
 package fr.eni.bo;
-
+/**
+ * 
+ * Création de la classe Retrait.
+ * Elle permet de définir un lieu de retrait de l'enchère différent du
+ * l'adresse initial d'un utilisateur.
+ *
+ */
 public class Retrait {
 
 	private String rue;
 	private int code_Postal;
 	private String ville;
-	private ArticleVendu articleARetirer;
+	private Article articleARetirer;
 	
-	//constructeurs
+/*************************************************CONSTRUCTEURS****************************************************/	
 	public Retrait() {
 		
 	}
 
-	//getters/setters
+/*************************************************GETTERS/SETTERS**************************************************/	
 	public String getRue() {
 		return rue;
 	}
@@ -37,12 +43,19 @@ public class Retrait {
 		this.ville = ville;
 	}
 
-	public ArticleVendu getArticleARetirer() {
+	public Article getArticleARetirer() {
 		return articleARetirer;
 	}
 
-	public void setArticleARetirer(ArticleVendu articleARetirer) {
+	public void setArticleARetirer(Article articleARetirer) {
 		this.articleARetirer = articleARetirer;
+	}
+
+/*************************************************AFFICHAGE**************************************************/	
+	@Override
+	public String toString() {
+		return "Retrait [rue=" + rue + ", code_Postal=" + code_Postal + ", ville=" + ville + ", articleARetirer="
+				+ articleARetirer + "]";
 	}
 	
 	

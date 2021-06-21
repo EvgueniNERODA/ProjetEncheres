@@ -1,7 +1,13 @@
 package fr.eni.bo;
 
 import java.util.List;
-
+/**
+ * 
+ * Création de la classe Utilisateur.
+ * Elle permet la création d'un compte utilisateur sur le site 
+ * d'enchère.
+ *
+ */
 public class Utilisateur {
 	private int noUtilisateur;
 	private String pseudo;
@@ -15,28 +21,16 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
-	private List <ArticleVendu> listeArticles;
+	private List <Article> listeArticles;
 	private Enchere enchere;
 	
 	
-	//constructeurs
+/*************************************************CONSTRUCTEURS******************************************************/	
 	public Utilisateur() {
 		
 	}
 
-	
-	public Utilisateur(String nom) {
-		this();
-		this.nom = nom;
-	}
-
-
-	//getters/setters
-	
-
-	
-	
-
+/*************************************************GETTERS/SETTERS*****************************************************/	
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
@@ -133,11 +127,11 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
-	public List<ArticleVendu> getListeArticles() {
+	public List<Article> getListeArticles() {
 		return listeArticles;
 	}
 
-	public void setListeArticles(List<ArticleVendu> listeArticles) {
+	public void setListeArticles(List<Article> listeArticles) {
 		this.listeArticles = listeArticles;
 	}
 
@@ -149,7 +143,7 @@ public class Utilisateur {
 		this.enchere = enchere;
 	}
 	
-	//affichage
+/****************************************************AFFICHAGE*******************************************************/	
 		@Override
 		public String toString() {
 			return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="

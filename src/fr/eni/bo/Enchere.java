@@ -2,7 +2,12 @@ package fr.eni.bo;
 
 import java.util.List;
 import java.time.LocalDate;
-
+/**
+ * 
+ * Création de la classe Enchere.
+ * Elle permet 
+ *
+ */
 public class Enchere {
 	private int no_enchere;
 	private LocalDate dateEnchere;
@@ -10,19 +15,12 @@ public class Enchere {
 	private List <Utilisateur> listeUtilisateurs;
 	
 	
-	//constructeurs 
-	
+/*************************************************CONSTRUCTEURS**************************************************/	
 	public Enchere() {
 		
 	}
 
-
-	//getters/setters
-	
-
-	
-
-
+/*************************************************GETTERS/SETTERS************************************************/	
 	public int getNo_enchere() {
 		return no_enchere;
 	}
@@ -62,7 +60,7 @@ public class Enchere {
 		this.listeUtilisateurs = listeUtilisateurs;
 	} 
 	
-	//affichage
+/**************************************************AFFICHAGE****************************************************/	
 		@Override
 		public String toString() {
 			return "Enchere [no_enchere=" + no_enchere + ", dateEnchere=" + dateEnchere + ", montant_enchere="
