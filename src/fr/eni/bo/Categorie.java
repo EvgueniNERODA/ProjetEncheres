@@ -1,4 +1,7 @@
 package fr.eni.bo;
+
+import java.util.List;
+
 /**
  * 
  * Création de la classe Categorie.
@@ -9,7 +12,7 @@ package fr.eni.bo;
 public class Categorie {
 	private int noCotegorie;
 	private String libelle;
-	private Article article;
+	private List <Article> listeArticles;
 	
 
 /*************************************************CONSTRUCTEURS****************************************************/	
@@ -33,19 +36,22 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
 
-	public Article getArticle() {
-		return article;
+	
+
+public List<Article> getListeArticles() {
+		return listeArticles;
 	}
 
-	public void setArticleVendu(Article article) {
-		this.article = article;
+	public void setListeArticles(List<Article> listeArticles) {
+		this.listeArticles = listeArticles;
 	}
 
 /***************************************************AFFICHAGE****************************************************/	
 	@Override
 	public String toString() {
-		return "Categorie [noCotegorie=" + noCotegorie + ", libelle=" + libelle + ", article=" + article
+		return "Categorie [noCotegorie=" + noCotegorie + ", libelle=" + libelle + ", article=" + listeArticles
 				+ "]";
 	}
 	

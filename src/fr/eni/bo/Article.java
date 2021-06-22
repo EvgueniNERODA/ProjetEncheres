@@ -21,8 +21,8 @@ public class Article {
 	private boolean etatVente = false;
 	
 	private Utilisateur utilisateur;
-	private Enchere enchere;
-	private List <Categorie> listeCategorie;
+	private List <Enchere> listeEncheres;
+	private Categorie categorie;
 	private Retrait retrait;
 	
 /*************************************************CONSTRUCTEURS**************************************************/	
@@ -122,23 +122,26 @@ public class Article {
 	}
 
 
-	public Enchere getEnchere() {
-		return enchere;
+	
+
+
+	public List<Enchere> getListeEncheres() {
+		return listeEncheres;
 	}
 
 
-	public void setEnchere(Enchere enchere) {
-		this.enchere = enchere;
+	public void setListeEncheres(List<Enchere> listeEncheres) {
+		this.listeEncheres = listeEncheres;
 	}
 
 
-	public List<Categorie> getListeCategorie() {
-		return listeCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
 
-	public void setListeCategorie(List<Categorie> listeCategorie) {
-		this.listeCategorie = listeCategorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 

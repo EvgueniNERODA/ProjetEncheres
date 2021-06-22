@@ -12,7 +12,7 @@ public class Enchere {
 	private int no_enchere;
 	private LocalDate dateEnchere;
 	private int montant_enchere;
-	private List <Utilisateur> listeUtilisateurs;
+	private Utilisateur utilisateur;
 	
 	
 /*************************************************CONSTRUCTEURS**************************************************/	
@@ -51,13 +51,13 @@ public class Enchere {
 	}
 
 
-	public List<Utilisateur> getListeUtilisateurs() {
-		return listeUtilisateurs;
+	public Utilisateur getUtilisateurs() {
+		return utilisateur;
 	}
 
 
-	public void setListeUtilisateurs(List<Utilisateur> listeUtilisateurs) {
-		this.listeUtilisateurs = listeUtilisateurs;
+	public void setUtilisateurs(Utilisateur utilisateurs) {
+		this.utilisateur = utilisateurs;
 	} 
 	
 /**************************************************AFFICHAGE****************************************************/	

@@ -21,20 +21,20 @@
         <div class="saisie">
             <div >
                 <ul>
-                    <li><label for="pseudo">Pseudo :</label><input type="text" id="pseudo"></li>
-                    <li><label for="prenom">Prénom :</label><input type="text" id="prenom"></li>
-                    <li><label for="tel">Teléphone :</label><input type="tel" id="tel"></li>
-                    <li><label for="cp">Code postal :</label><input type="text" id="cp"></li>
-                    <li><label for="password">Mot de passe :</label><input type="password" id="password"></li>
+                    <li><label for="pseudo">Pseudo :</label><input type="text" id="pseudo" name="pseudo"></li>
+                    <li><label for="prenom">Prénom :</label><input type="text" id="prenom" name="prenom"></li>
+                    <li><label for="tel">Teléphone :</label><input type="tel" id="tel" name="tel"></li>
+                    <li><label for="cp">Code postal :</label><input type="text" id="cp" name="cp"></li>
+                    <li><label for="password">Mot de passe :</label><input type="password" id="password" name="password"></li>
                 </ul>
             </div>
             <div >
                 <ul>
-                    <li><label for="nom">Nom :</label><input type="text" id="nom"></li>
-                    <li><label for="mail">Email :</label><input type="email" id="mail"></li>
-                    <li><label for="rue">Rue :</label><input type="text" id="rue"></li>
-                    <li><label for="ville">Ville :</label><input type="text" id="ville"></li>
-                    <li><label for="conf">Confirmation :</label><input type="password" id="conf"></li>
+                    <li><label for="nom">Nom :</label><input type="text" id="nom" name="nom"></li>
+                    <li><label for="mail">Email :</label><input type="email" id="mail" name="mail"></li>
+                    <li><label for="rue">Rue :</label><input type="text" id="rue" name="rue"></li>
+                    <li><label for="ville">Ville :</label><input type="text" id="ville" name="ville"></li>
+                    <li><label for="conf">Confirmation :</label><input type="password" id="conf" name="conf"></li>
                 </ul>
             </div>
 

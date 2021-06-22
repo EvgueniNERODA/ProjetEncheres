@@ -14,15 +14,15 @@ public class Utilisateur {
 	private String nom;
 	private String prenom;
 	private String email;
-	private int telephone;
+	private String telephone;
 	private String rue;
-	private int codePostal;
+	private String codePostal;
 	private String ville;
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
 	private List <Article> listeArticles;
-	private Enchere enchere;
+	private List <Enchere>  listeEnchere;
 	
 	
 /*************************************************CONSTRUCTEURS******************************************************/	
@@ -71,11 +71,11 @@ public class Utilisateur {
 		this.email = email;
 	}
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
@@ -87,11 +87,11 @@ public class Utilisateur {
 		this.rue = rue;
 	}
 
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -135,12 +135,12 @@ public class Utilisateur {
 		this.listeArticles = listeArticles;
 	}
 
-	public Enchere getEnchere() {
-		return enchere;
+	public List <Enchere> getListeEnchere() {
+		return listeEnchere;
 	}
 
-	public void setEnchere(Enchere enchere) {
-		this.enchere = enchere;
+	public void setListeEnchere(Enchere enchere) {
+		this.listeEnchere = listeEnchere;
 	}
 	
 /****************************************************AFFICHAGE*******************************************************/	
