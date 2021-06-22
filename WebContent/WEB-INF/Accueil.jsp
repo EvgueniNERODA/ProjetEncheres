@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Accueil</h1>
-
-
+<a href="${pageContext.request.contextPath }/Inscription">S'inscrire</a>
+<a href="${pageContext.request.contextPath }/ServletConnexion">Se connecter</a>
 </body>
 </html>

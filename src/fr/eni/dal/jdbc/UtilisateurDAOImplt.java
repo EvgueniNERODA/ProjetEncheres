@@ -13,8 +13,10 @@ import fr.eni.dal.UtilisateurDAO;
 
 public class UtilisateurDAOImplt implements UtilisateurDAO {
 	
-	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email=? AND motDePasse =?";
-	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND motDePasse=?";
+	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email=? AND mot_de_passe =?";
+	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?";
+	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEUR WHERE email=?";
+	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE pseudo=?";
 	
 	@Override
 	public boolean verifier(Utilisateur utilisateur) {
@@ -75,7 +77,13 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur selectPseudo(String pseudo) {
-		// TODO Auto-generated method stub
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
+			pstmt.setString(1, pseudo);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return null;
 	}
 	
