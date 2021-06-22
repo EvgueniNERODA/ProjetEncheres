@@ -1,4 +1,4 @@
-package fr.eni.dal;
+package fr.eni.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
