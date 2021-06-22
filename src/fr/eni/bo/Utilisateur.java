@@ -26,8 +26,20 @@ public class Utilisateur {
 	
 	
 /*************************************************CONSTRUCTEURS******************************************************/	
-	public Utilisateur() {
-		
+	public Utilisateur() {	
+	}
+	
+/**
+*** Constructeur pour la vérification d'Email existant
+*** @param identifiant, motdepasse, emailExiste
+**/
+	public Utilisateur(String identifiant, String motdepasse, boolean emailExiste) {
+		if(emailExiste) {
+			this.email = identifiant;
+		}else {
+			this.pseudo = identifiant;
+		}	
+		this.motDePasse = motdepasse;
 	}
 
 /*************************************************GETTERS/SETTERS*****************************************************/	
