@@ -9,5 +9,5 @@ import fr.eni.bo.Utilisateur;
 public interface ArticleDAO {
 
 	
-	
+			
 }

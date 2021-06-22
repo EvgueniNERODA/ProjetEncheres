@@ -1,5 +1,12 @@
 package fr.eni.dal;
 
-public class UtilisateurDAO {
+import fr.eni.bo.Utilisateur;
+
+public interface UtilisateurDAO {
+
+	 Utilisateur selectPseudo(String pseudo) ;
+		
+	
+	
 
 }
