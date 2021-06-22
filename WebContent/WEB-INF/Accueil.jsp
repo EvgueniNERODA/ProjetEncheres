@@ -10,5 +10,8 @@
 <body>
 <h1>Accueil</h1>
 
+<a href="${pageContext.request.contextPath }/Inscription">S'inscrire</a>
+<a href="${pageContext.request.contextPath }/ServletConnexion">Se connecter</a>
+>>>>>>> branch 'main' of https://github.com/EvgueniNERODA/ProjetEncheres
 </body>
 </html>
