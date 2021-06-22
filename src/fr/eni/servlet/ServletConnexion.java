@@ -48,19 +48,10 @@ public class ServletConnexion extends HttpServlet {
     	// On vérifie si l'utilisateur existe avec son adresse mail
     	if(identifiant.contains("@")) {
     		utilisateur = new Utilisateur(identifiant,motDePasse,true);
-        	try {
-				existeEnBdd = utilisateurManager.verifier(utilisateur);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			}
-        //Sinon on vérifie si son pseudo existe
+        	existeEnBdd = utilisateurManager.verifier(utilisateur);
     	}else {
     		utilisateur = new Utilisateur(identifiant,motDePasse,false); 
-    		try {
-				existeEnBdd = utilisateurManager.verifier(utilisateur);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			}   	
+    		existeEnBdd = utilisateurManager.verifier(utilisateur);	
     	}
   
     	// Si l'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
@@ -68,7 +59,7 @@ public class ServletConnexion extends HttpServlet {
     	if(existeEnBdd == true) {
     		HttpSession session = request.getSession();
     		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
-    		RequestDispatcher rd = request.getRequestDispatcher("/AccueilConnecte.jsp");
+    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
         	rd.forward(request, response);
         // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
         //(mauvais mdp ou identifiant inconnu)

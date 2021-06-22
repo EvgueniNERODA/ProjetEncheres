@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="/accueil.jsp"><button>LE COIN QU'EST BON</button></a>
+<a href="<%=request.getContextPath() %>/Accueil"><button>LE COIN QU'EST BON</button></a>
 
 
 </body>
