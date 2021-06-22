@@ -21,7 +21,8 @@ import fr.eni.outils.BusinessException;
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
-       
+   
+/**************************************************DO-GET*****************************************************************/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//On passe dans la ServletConnexion depuis l'Accueil.jsp vers Connexion.jsp
@@ -29,7 +30,7 @@ public class ServletConnexion extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	
+/**************************************************DO-POST*****************************************************************/	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
@@ -44,35 +45,28 @@ public class ServletConnexion extends HttpServlet {
     	request.setAttribute("identifiant", identifiant);
     	request.setAttribute("motdepasse", motDePasse);
     	
-    	// On vérifie s'il existe avec son adresse mail
+    	// On vérifie si l'utilisateur existe avec son adresse mail
     	if(identifiant.contains("@")) {
     		utilisateur = new Utilisateur(identifiant,motDePasse,true);
-        	try {
-				existeEnBdd = utilisateurManager.verifier(utilisateur);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			}
+        	existeEnBdd = utilisateurManager.verifier(utilisateur);
     	}else {
     		utilisateur = new Utilisateur(identifiant,motDePasse,false); 
-    		try {
-				existeEnBdd = utilisateurManager.verifier(utilisateur);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			}   	
+    		existeEnBdd = utilisateurManager.verifier(utilisateur);	
     	}
-    	
-    	// Si oui on redirige l'utilisateur vers la page d'acceuil (version connecté) avec la creation d'une session
+  
+    	// Si l'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
+    	//	avec la creation d'une session
     	if(existeEnBdd == true) {
     		HttpSession session = request.getSession();
-    	
+    		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
+    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
+        	rd.forward(request, response);
+        // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
+        //(mauvais mdp ou identifiant inconnu)
+    	}else {
+    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/erreurSeConnecter.jsp");
+        	rd.forward(request, response);
+    	}
     }
-    	
-    
-		// Si non on redirige sur Connexion.jsp avec un message d'erreur (mauvais mdp ou identifiant inconnu)
-		
-    	
-    	
-		doGet(request, response);
-	}
 
 }

@@ -7,7 +7,7 @@
 
 <body>
 	
-	<form action="<%=request.getContextPath() %>/servlet/ServletConnexion"
+	<form action="<%=request.getContextPath() %>/ServletConnexion"
 		  method="POST">
 	
 		<div>
