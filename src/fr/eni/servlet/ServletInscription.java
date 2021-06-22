@@ -61,12 +61,13 @@ public class ServletInscription extends HttpServlet {
 			UtilisateurManager manager = new UtilisateurManager();
 			
 			
-			
+			//on vérifie si le pseudo et le mail existe déja en BDD
 			if (manager.selectPseudo(pseudo) != null) {
 				verifDoublon = true;
 			}else  if (manager.selectMail(password) != null){
-				//le mail existe déjà
+				verifDoublon = true;
 			} else {
+			//sinon on crée un nouvel utilisateur
 				manager.insertNouvelUtilisateur (pseudo, prenom, telephone, codePostal, password, nom, email, rue, ville);
 			}
 			
