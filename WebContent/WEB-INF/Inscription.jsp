@@ -41,7 +41,7 @@
         </div>
 
         <input type="submit" value="Créer">
-        <a href="$">Annuler</a>
+        <a href="${pageContext.request.contextPath }/ServletAccueil">Annuler</a>
     </form>
 
 </body>

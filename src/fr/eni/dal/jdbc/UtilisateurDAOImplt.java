@@ -86,6 +86,12 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public Utilisateur selectMail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

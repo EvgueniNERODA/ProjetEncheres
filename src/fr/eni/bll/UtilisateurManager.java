@@ -28,10 +28,26 @@ public class UtilisateurManager {
 		return DAOFactory.getUtilisateurDAO().verifier(utilisateur);
 	}
 	
+
 	public Utilisateur selectPseudo(String pseudo) {
 		
-		return UtilisateurDAO.selectPseudo(pseudo);
+		return DAOFactory.getUtilisateurDAO().selectPseudo(pseudo);
 	}
 	
+	
+	
+/***************************************METHODE-INSERTION-INSERTION-NOUVEL-UTILISATEUR****************************/	
+	public void insertNouvelUtilisateur(String pseudo, String prenom, String telephone, String codePostal,
+			String password, String nom, String email, String rue, String ville) {
+		
+		
+	}
+
+public Utilisateur selectMail(String email) {
+	
+	return DAOFactory.getUtilisateurDAO().selectMail(email);
+}
+
+
 	
 }

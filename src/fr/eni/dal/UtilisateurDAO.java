@@ -9,5 +9,8 @@ public interface UtilisateurDAO {
 
 	
 	public boolean verifier(Utilisateur utilisateur);
+
+
+	Utilisateur selectMail(String email);
 	
 }
