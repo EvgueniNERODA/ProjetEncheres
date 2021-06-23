@@ -42,6 +42,11 @@ public class Utilisateur {
 		this.motDePasse = motdepasse;
 	}
 
+	
+	public Utilisateur(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
 /*************************************************GETTERS/SETTERS*****************************************************/	
 	public int getNoUtilisateur() {
 		return noUtilisateur;

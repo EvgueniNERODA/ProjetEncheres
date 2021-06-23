@@ -16,8 +16,8 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email=? AND mot_de_passe =?";
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?";
 
-	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEUR WHERE email=?";
-	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE pseudo=?";
+	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEURS WHERE email=?";
+	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 
 	
 	@Override
@@ -79,12 +79,17 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur selectPseudo(String pseudo) {
+		Utilisateur utilisateur = new Utilisateur();
 		try (Connection cnx = JdbcTools.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
 			pstmt.setString(1, pseudo);
-			pstmt.executeUpdate();
+			
+			
+			ResultSet rs = pstmt.executeQuery();
+			rs.getString("pseudo");
+			
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		return null;
 	}
