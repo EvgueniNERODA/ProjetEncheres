@@ -39,16 +39,17 @@ public class ServletConnexion extends HttpServlet {
 		String identifiant = request.getParameter("identifiant");
 		String motDePasse = request.getParameter("motDePasse");
 		
-		// On vérifie si l'utilisateur existe en BDD
+		// Verification si l'utilisateur existe en BDD
 		boolean existeEnBdd = false;
     	Utilisateur utilisateur = new Utilisateur();
     	request.setAttribute("identifiant", identifiant);
-    	request.setAttribute("motdepasse", motDePasse);
+    	request.setAttribute("motDePasse", motDePasse);
     	
     	// On vérifie si l'utilisateur existe avec son adresse mail
     	if(identifiant.contains("@")) {
     		utilisateur = new Utilisateur(identifiant,motDePasse,true);
         	existeEnBdd = utilisateurManager.verifier(utilisateur);
+        // Sinon on vérifie que l'utilisateur existe avec un pseudo
     	}else {
     		utilisateur = new Utilisateur(identifiant,motDePasse,false); 
     		existeEnBdd = utilisateurManager.verifier(utilisateur);	

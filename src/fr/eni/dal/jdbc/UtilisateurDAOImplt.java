@@ -13,8 +13,8 @@ import fr.eni.dal.UtilisateurDAO;
 
 public class UtilisateurDAOImplt implements UtilisateurDAO {
 	
-	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email=? AND mot_de_passe =?";
-	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?";
+	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=? AND mot_de_passe =?";
+	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
 
 	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEUR WHERE email=?";
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE pseudo=?";
@@ -31,14 +31,14 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 				pstmt.setString(2, utilisateur.getMotDePasse());
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
-					utilisateur.setNoUtilisateur(rs.getInt("idUtilisateur"));
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					utilisateur.setPseudo(rs.getString("pseudo"));
 					utilisateur.setNom(rs.getString("nom"));
 					utilisateur.setPrenom(rs.getString("prenom"));
 					utilisateur.setEmail(rs.getString("email"));
 					utilisateur.setTelephone(rs.getString("telephone"));
 					utilisateur.setRue(rs.getString("rue"));
-					utilisateur.setCodePostal(rs.getString("codePostal"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
 					utilisateur.setVille(rs.getString("ville"));
 					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 					utilisateur.setCredit(rs.getInt("credit"));
@@ -46,7 +46,8 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 					existe = true;
 				}
 			} catch (SQLException e) {
-				
+				//TODO : handle exception
+				e.printStackTrace();
 			}
 		}else {
 			try (Connection cnx = JdbcTools.getConnection()){
@@ -55,14 +56,14 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 				pstmt.setString(2, utilisateur.getMotDePasse());
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
-					utilisateur.setNoUtilisateur(rs.getInt("idUtilisateur"));
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					utilisateur.setPseudo(rs.getString("pseudo"));
 					utilisateur.setNom(rs.getString("nom"));
 					utilisateur.setPrenom(rs.getString("prenom"));
 					utilisateur.setEmail(rs.getString("email"));
 					utilisateur.setTelephone(rs.getString("telephone"));
 					utilisateur.setRue(rs.getString("rue"));
-					utilisateur.setCodePostal(rs.getString("codePostal"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
 					utilisateur.setVille(rs.getString("ville"));
 					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 					utilisateur.setCredit(rs.getInt("credit"));
@@ -70,7 +71,8 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 					existe = true;
 				}
 			} catch (SQLException e) {
-				
+				//TODO : handle exception
+				e.printStackTrace();
 			}
 		}
 

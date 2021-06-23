@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="<%=request.getContextPath() %>/Accueil"><button>LE COIN QU'EST BON</button></a>
+<a href="${pageContext.request.contextPath }/ServletAccueil"><button>LE COIN QU'EST BON</button></a>
 
 
 </body>
