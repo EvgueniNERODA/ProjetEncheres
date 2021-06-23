@@ -29,12 +29,12 @@ public class UtilisateurManager {
 	}
 	
 
-	public Utilisateur selectPseudo(String pseudo) {
+	public String selectPseudo(String pseudo) {
 		
 		return DAOFactory.getUtilisateurDAO().selectPseudo(pseudo);
 	}
 	
-	public Utilisateur selectMail(String email) {
+	public String selectMail(String email) {
 		
 		return DAOFactory.getUtilisateurDAO().selectMail(email);
 	}

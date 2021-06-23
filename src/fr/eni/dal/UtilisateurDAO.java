@@ -10,13 +10,13 @@ import fr.eni.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 
-	Utilisateur selectPseudo(String pseudo) ;
+	String selectPseudo(String pseudo) ;
 
 	
 	public boolean verifier(Utilisateur utilisateur);
 
 
-	Utilisateur selectMail(String email);
+	String selectMail(String email);
 	
 	
 	void insertNouvelUtilisateur(Utilisateur utilisateur);

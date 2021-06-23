@@ -2,6 +2,7 @@ package fr.eni.servlet;
 
 import java.io.IOException;
 
+import javax.activation.MailcapCommandMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,8 @@ import fr.eni.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletInscription
+ * vérifie si le pseudo et le mail existent déjà
+ * crée un nouvel utilisateur
  */
 @WebServlet("/ServletInscription")
 public class ServletInscription extends HttpServlet {
@@ -22,8 +25,8 @@ public class ServletInscription extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
+		rd.forward(request, response);
 	}
 
 	
@@ -62,20 +65,18 @@ public class ServletInscription extends HttpServlet {
 		
 		try {
 			UtilisateurManager manager = new UtilisateurManager();
+			Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
 			
-			
-			//on vérifie si le pseudo et le mail existe déja en BDD
-			
-			if (manager.selectPseudo(pseudo) == null) {
+			//on vérifie si le pseudo et le mail existent déja en BDD
+				if (pseudo.equals(manager.selectPseudo(pseudo)) ) {
 				verifPseudo = true;
-				System.out.println(manager.selectPseudo(pseudo));
 				request.setAttribute("verifPseudo", verifPseudo);
 				
 				//redirection vers la page d'inscription
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
 	        	rd.forward(request, response);
 				
-			}else  if (manager.selectMail(email) == null){
+			}else  if (email.equals(manager.selectMail(email))){
 				verifMail = true;
 				request.setAttribute("verifMail", verifMail);
 
@@ -85,7 +86,6 @@ public class ServletInscription extends HttpServlet {
 			} else {
 				
 				//sinon on crée un nouvel utilisateur + retour à la page d'accueil en mode connécté
-				Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
 				
 				manager.insertNouvelUtilisateur (newUtilisateur);
 				

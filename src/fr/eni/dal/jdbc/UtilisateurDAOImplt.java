@@ -132,23 +132,23 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 * Cette méthode est utilisée lors de la création d'un utilisateur sur le site d'enchère. 
 */
 	@Override
-	public Utilisateur selectPseudo(String pseudo) {
+	public String selectPseudo(String pseudo) {
+		String pseudoBdd = "";
 		
-		Utilisateur utilisateur = new Utilisateur();
 		try (Connection cnx = JdbcTools.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
 			pstmt.setString(1, pseudo);
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
+			pseudoBdd = rs.getString("pseudo");
 			
-			utilisateur = new Utilisateur(rs.getString("pseudo"));
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return utilisateur;
+		return pseudoBdd;
 	}
 
 /*******************************************************METHODES-SELECTMAIL***************************************************************/
@@ -157,8 +157,9 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 * Cette méthode est utilisée lors de la création d'un utilisateur sur le site d'enchère. 
 */
 	@Override
-	public Utilisateur selectMail(String email) {
-		Utilisateur utilisateur = new Utilisateur();
+	public String selectMail(String email) {
+		String mailBdd = "";
+		
 		try (Connection cnx = JdbcTools.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_MAIL);
 			pstmt.setString(1, email);
@@ -166,13 +167,13 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			
-			utilisateur = new Utilisateur(rs.getString("email"));
+			mailBdd = rs.getString("email");
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return utilisateur;
+		return mailBdd;
 	}
 
 /*************************************************METHODES-INSERTNOUVELUTILISATEUR***************************************************************/

@@ -37,7 +37,7 @@
 	</div>
 	
 	<div>
-		<a href="/Inscription.jsp"><button>Créer un compte</button></a>
+		<a href="${pageContext.request.contextPath }/ServletInscription"><button>Créer un compte</button></a>
 	</div>
 	
 	<c:if test="${existeEnBdd == false}">

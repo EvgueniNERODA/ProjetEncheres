@@ -4,12 +4,5 @@
   <welcome-file-list>
     <welcome-file>Inscription</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>Inscription</servlet-name>
-    <jsp-file>/WEB-INF/Inscription.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Inscription</servlet-name>
-    <url-pattern>/Inscription</url-pattern>
-  </servlet-mapping>
+  
 </web-app>
