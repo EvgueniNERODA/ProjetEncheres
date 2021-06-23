@@ -62,7 +62,12 @@
 		</div>
 		
 	</form>
-	
+	<c:if test="${verifMail == true}">
+    	Le le mail existe déjà!!!
+	</c:if>
+	<c:if test="${verifPseudo == true}">
+    	Le pseudo existe déjà!!!
+	</c:if>
 	
 </div>
 </body>

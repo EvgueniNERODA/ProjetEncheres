@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
@@ -41,7 +42,8 @@ public class ServletInscription extends HttpServlet {
 		String rue = "";
 		String ville = "";
 		String confirmPassword = "";
-		boolean verifDoublon = false;
+		boolean verifPseudo = false;
+		boolean verifMail = false;
 		
 		//récupération saisie utilisateur
 		pseudo = request.getParameter("pseudo");
@@ -64,30 +66,38 @@ public class ServletInscription extends HttpServlet {
 			
 			//on vérifie si le pseudo et le mail existe déja en BDD
 			
-			if (manager.selectPseudo(pseudo) != null) {
-				verifDoublon = true;
-				
+			if (manager.selectPseudo(pseudo) == null) {
+				verifPseudo = true;
 				System.out.println(manager.selectPseudo(pseudo));
-			}else  if (manager.selectMail(email) != null){
-				verifDoublon = true;
+				request.setAttribute("verifPseudo", verifPseudo);
+				
+				//redirection vers la page d'inscription
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
+	        	rd.forward(request, response);
+				
+			}else  if (manager.selectMail(email) == null){
+				verifMail = true;
+				request.setAttribute("verifMail", verifMail);
+
+				//redirection vers la page d'inscription
+	    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
+	        	rd.forward(request, response);
 			} else {
 				
-			//sinon on crée un nouvel utilisateur
+				//sinon on crée un nouvel utilisateur + retour à la page d'accueil en mode connécté
 				Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
-				System.out.println(newUtilisateur);
-				manager.insertNouvelUtilisateur (newUtilisateur);	
-			}
+				
+				manager.insertNouvelUtilisateur (newUtilisateur);
+				
+				HttpSession session = request.getSession();
+	    		session.setAttribute("noUtilisateur", newUtilisateur.getNoUtilisateur());
+	    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
+	        	rd.forward(request, response);
+			}   	  				
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//retour vers la page Login en mode connécté
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
-		rd.forward(request, response);
-		
-		
-		
-	}
-
+				
+}
 }
