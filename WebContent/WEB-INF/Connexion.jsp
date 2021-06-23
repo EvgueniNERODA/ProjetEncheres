@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -38,5 +39,9 @@
 	<div>
 		<a href="/Inscription.jsp"><button>Créer un compte</button></a>
 	</div>
+	
+	<c:if test="${existeEnBdd == false}">
+    	Le compte n'existe pas ou le mot de passe est incorrecte.
+	</c:if>
 </body>
 </html>

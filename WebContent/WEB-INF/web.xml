@@ -12,5 +12,4 @@
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/Inscription</url-pattern>
   </servlet-mapping>
- 
-  </web-app>
+</web-app>

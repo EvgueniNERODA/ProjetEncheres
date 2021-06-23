@@ -65,7 +65,8 @@ public class ServletConnexion extends HttpServlet {
         // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
         //(mauvais mdp ou identifiant inconnu)
     	}else {
-    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/erreurSeConnecter.jsp");
+    		request.setAttribute("existeEnBdd", existeEnBdd);
+    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
         	rd.forward(request, response);
     	}
     }

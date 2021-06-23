@@ -6,7 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Accueil Connecté</title>
 </head>
-<body>
 
+<%@include file="./fragments/header.jsp" %>
+
+<body>
+<h1>Accueil Connecté</h1>
+
+<a href="${pageContext.request.contextPath }/ServletDeconnexion">Deconnection</a>
+<a href="${pageContext.request.contextPath }//ServletModifProfil">Mon Profil</a>
 </body>
 </html>
