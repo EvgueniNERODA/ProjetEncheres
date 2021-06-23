@@ -8,42 +8,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import fr.eni.bll.UtilisateurManager;
-import fr.eni.bo.Utilisateur;
 
 /**
- * Servlet implementation class ServletProfil
+ * Servlet implementation class ServletModifProfil
  */
 @WebServlet("/ServletModifProfil")
 public class ServletModifProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private Utilisateur utilisateur = new Utilisateur();
-	private static UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
-       
        
 /**************************************************DO-GET*****************************************************************/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//On arrive dans la ServletModifProfil depuis l'AccueilConnecte.jsp 
-		//On récupère la session en cours 
-		Utilisateur utilisateur = new Utilisateur();
-		HttpSession session = request.getSession();
-		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
-		utilisateur = utilisateurManager.find_user(idUtilisateur);
-	
-		//On envoie l'utilisateur vers ModifProfil.jsp et on se redirige dessus
-		request.setAttribute("utilisateur", utilisateur);
+		//On arrive dans la ServletModifProfil depuis MonProfil.jsp et on redirige vers ModifProfil.jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModifProfil.jsp");
 		rd.forward(request, response);
 	}
 
-/**************************************************DO-POST*****************************************************************/	
+/**************************************************DO-POST*****************************************************************/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//TODO 
+		//On récupère les données modifier de ModifProfil.jsp
+		//On récupère l'noUtilisateur afin de savoir quel utilisateur est concerné par le changement. 
+		//On vérifie que la nouvelle adresse mail et le nouveau pseudo ne sont pas déjà présent en BDD
+		//On fait un appel à une méthode Update afin de modifier l'utilisateur présent en BDD
 	}
 
 }
