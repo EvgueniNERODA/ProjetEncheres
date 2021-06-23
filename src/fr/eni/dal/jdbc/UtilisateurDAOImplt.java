@@ -14,6 +14,7 @@ import sun.security.mscapi.CKeyPairGenerator.RSA;
 
 public class UtilisateurDAOImplt implements UtilisateurDAO {
 	
+	private static final String FIND_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur=?";
 	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=? AND mot_de_passe =?";
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
 
@@ -21,6 +22,12 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+	
+/*******************************************************METHODES-VERIFIER***************************************************************/
+/**
+ * Méthode pour vérifier si l'utilisateur existe en BDD via son adresse mail ou son pseudo.
+ * Cette méthode est utilisée pour la connexion sur le site d'enchère. 
+ */
 	
 	@Override
 	public boolean verifier(Utilisateur utilisateur) {
@@ -81,6 +88,11 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		return existe;
 	}
 
+/*******************************************************METHODES-SELECTPSEUDO***************************************************************/
+/**
+* Méthode pour vérifier si le pseudo existe déjà BDD.
+* Cette méthode est utilisée lors de la création d'un utilisateur sur le site d'enchère. 
+*/
 	@Override
 	public Utilisateur selectPseudo(String pseudo) {
 		
@@ -101,6 +113,11 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		return utilisateur;
 	}
 
+/*******************************************************METHODES-SELECTMAIL***************************************************************/
+/**
+* Méthode pour vérifier si le mail existe déjà BDD.
+* Cette méthode est utilisée lors de la création d'un utilisateur sur le site d'enchère. 
+*/
 	@Override
 	public Utilisateur selectMail(String email) {
 		Utilisateur utilisateur = new Utilisateur();
@@ -120,6 +137,11 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		return utilisateur;
 	}
 
+/*************************************************METHODES-INSERTNOUVELUTILISATEUR***************************************************************/
+/**
+* Méthode pour inserer un nouvel utilisateur dans la BDD.
+* Cette méthode est utilisée lors de la création d'un utilisateur sur le site d'enchère. 
+*/
 	@Override
 	public void insertNouvelUtilisateur(Utilisateur utilisateur) {
 		try (Connection cnx = JdbcTools.getConnection()){
