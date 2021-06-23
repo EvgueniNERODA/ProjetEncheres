@@ -1,49 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./inscription.css">
-    <title>Mon profil</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./inscription.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+<title>Mon profil</title>
 </head>
 
-<body>
+<body class="p-3 mb-2 bg-white text-dark">
+	<div class="p-3 mb-2 bg-light text-dark">
 
+	<h1 class="d-flex justify-content-center">Mon profil</h1>
+	<form action="" method="POST" name="inscription">
 
-    <h1>Mon profil</h1>
-    <form action="" method="POST" name="inscription">
+		
+		
+		<div class="input-group mb-3">
+				
+  				<input type="text" class="form-control" placeholder="Pseudo" name="pseudo">
+  			
+  				<input type="text" class="form-control" placeholder="Nom" name="nom">
+		</div>
+		<div class="input-group mb-3">
+			
+  				<input type="text" class="form-control" placeholder="Prénom" name="prenom">
+  			
+  				<input type="text" class="form-control" placeholder="Email" name="mail">
+		</div>
+		<div class="input-group mb-3">
+			
+  				<input type="text" class="form-control" placeholder="Teléphone" name="tel">
+  			
+  				<input type="text" class="form-control" placeholder="Rue" name="rue">
+		</div>
+		<div class="input-group mb-3">
+			
+  				<input type="text" class="form-control" placeholder="Code postal" name="cp">
+  			
+  				<input type="text" class="form-control" placeholder="Ville" name="ville">
+		</div>
+		<div class="input-group mb-3">
+			
+  				<input type="text" class="form-control" placeholder="Mot de passe" name="password">
+  			
+  				<input type="text" class="form-control" placeholder="Confirmation" name="conf">
+		</div>
 
-        <div class="saisie">
-            <div >
-                <ul>
-                    <li><label for="pseudo">Pseudo :</label><input type="text" id="pseudo" name="pseudo"></li>
-                    <li><label for="prenom">Prénom :</label><input type="text" id="prenom" name="prenom"></li>
-                    <li><label for="tel">Teléphone :</label><input type="tel" id="tel" name="tel"></li>
-                    <li><label for="cp">Code postal :</label><input type="text" id="cp" name="cp"></li>
-                    <li><label for="password">Mot de passe :</label><input type="password" id="password" name="password"></li>
-                </ul>
-            </div>
-            <div >
-                <ul>
-                    <li><label for="nom">Nom :</label><input type="text" id="nom" name="nom"></li>
-                    <li><label for="mail">Email :</label><input type="email" id="mail" name="mail"></li>
-                    <li><label for="rue">Rue :</label><input type="text" id="rue" name="rue"></li>
-                    <li><label for="ville">Ville :</label><input type="text" id="ville" name="ville"></li>
-                    <li><label for="conf">Confirmation :</label><input type="password" id="conf" name="conf"></li>
-                </ul>
-            </div>
-
-        </div>
-
-        <input type="submit" value="Créer">
-        <a href="${pageContext.request.contextPath }/ServletAccueil">Annuler</a>
-    </form>
-
+		<div class="d-flex justify-content-center">
+			<input class="btn btn-outline-primary" type="submit" value="   Créer   "> 
+			<a href="${pageContext.request.contextPath }/ServletAccueil" class="btn btn-outline-primary">Annuler</a>
+		</div>
+		
+	</form>
+	
+	
+</div>
 </body>
 
 </html>
