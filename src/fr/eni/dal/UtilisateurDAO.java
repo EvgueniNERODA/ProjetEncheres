@@ -1,11 +1,16 @@
 package fr.eni.dal;
 
 import fr.eni.bo.Utilisateur;
-
+/**
+ * 
+ * Interface utilisateurDAO.
+ * Elle permet de faire appel aux méthodes définie dans utilisateurDAOImplt.
+ *
+ */
 
 public interface UtilisateurDAO {
 
-	 Utilisateur selectPseudo(String pseudo) ;
+	Utilisateur selectPseudo(String pseudo) ;
 
 	
 	public boolean verifier(Utilisateur utilisateur);
@@ -15,5 +20,7 @@ public interface UtilisateurDAO {
 	
 	
 	void insertNouvelUtilisateur(Utilisateur utilisateur);
+	
+	Utilisateur find_user(int noUtilisateur);
 	
 }

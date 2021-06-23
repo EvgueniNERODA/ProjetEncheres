@@ -29,10 +29,13 @@ public class ServletModifProfil extends HttpServlet {
 		
 		//On arrive dans la ServletModifProfil depuis l'AccueilConnecte.jsp 
 		//On récupère la session en cours 
+		Utilisateur utilisateur = new Utilisateur();
 		HttpSession session = request.getSession();
+		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
+		utilisateur = utilisateurManager.find_user(idUtilisateur);
+	
+		//On envoie l'utilisateur vers ModifProfil.jsp et on se redirige dessus
 		request.setAttribute("utilisateur", utilisateur);
-		
-		//On pars vers ModifProfil.jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModifProfil.jsp");
 		rd.forward(request, response);
 	}

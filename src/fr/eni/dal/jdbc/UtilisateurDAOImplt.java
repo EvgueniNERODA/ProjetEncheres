@@ -11,7 +11,12 @@ import fr.eni.bo.Utilisateur;
 import fr.eni.dal.JdbcTools;
 import fr.eni.dal.UtilisateurDAO;
 import sun.security.mscapi.CKeyPairGenerator.RSA;
-
+/**
+ * 
+ * Classe UtilisateurDAOImplt.
+ * Elle est utilisée pour la création des requêtes SQL pour la BDD Microsoft SQL Server.
+ *
+ */
 public class UtilisateurDAOImplt implements UtilisateurDAO {
 	
 	private static final String FIND_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur=?";
@@ -22,7 +27,40 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	
+/*******************************************************METHODES-FINDUSER***************************************************************/
+/**
+* Méthode pour afficher un l'utilisateur présent en BDD via son no_utilisateur.
+* Cette méthode est utilisée pour lors de l'affichage de la page modif profil sur le site d'enchère. 
+*/
+	@Override
+	public Utilisateur find_user(int noUtilisateur) {
+		Utilisateur utilisateur = new Utilisateur();
+		
+		try (Connection cnx = JdbcTools.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(FIND_USER);
+			pstmt.setInt(1, noUtilisateur);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+			}
+		} catch (SQLException e) {
+			//TODO : handle exception
+			e.printStackTrace();
+		}
+	return utilisateur;
+}
+
 /*******************************************************METHODES-VERIFIER***************************************************************/
 /**
  * Méthode pour vérifier si l'utilisateur existe en BDD via son adresse mail ou son pseudo.
