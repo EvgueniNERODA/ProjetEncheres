@@ -23,7 +23,7 @@ public class UtilisateurManager {
 
 	}
 
-/***************************************METHODE-VERIFIER-UTILISATEURS-EMAIL-OU-PSEUDO******************************/	
+/***************************************METHODES-VERIFIER-UTILISATEURS-EMAIL-OU-PSEUDO******************************/	
 	public boolean verifier(Utilisateur utilisateur) {
 		return DAOFactory.getUtilisateurDAO().verifier(utilisateur);
 	}

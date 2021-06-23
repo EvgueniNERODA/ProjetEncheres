@@ -41,7 +41,7 @@
 	</div>
 	
 	<c:if test="${existeEnBdd == false}">
-    	Le compte n'existe pas ou le mot de passe est incorrecte.
+    	Le compte n'existe pas ou le mot de passe est incorrect.
 	</c:if>
 </body>
 </html>

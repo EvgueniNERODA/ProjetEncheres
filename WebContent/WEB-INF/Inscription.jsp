@@ -51,9 +51,9 @@
 		</div>
 		<div class="input-group mb-3">
 			
-  				<input type="text" class="form-control" placeholder="Mot de passe" name="password">
+  				<input type="password" class="form-control" placeholder="Mot de passe" name="password">
   			
-  				<input type="text" class="form-control" placeholder="Confirmation" name="conf">
+  				<input type="password" class="form-control" placeholder="Confirmation" name="conf">
 		</div>
 
 		<div class="d-flex justify-content-center">
@@ -62,7 +62,12 @@
 		</div>
 		
 	</form>
-	
+	<c:if test="${verifMail == true}">
+    	Le le mail existe déjà!!!
+	</c:if>
+	<c:if test="${verifPseudo == true}">
+    	Le pseudo existe déjà!!!
+	</c:if>
 	
 </div>
 </body>
