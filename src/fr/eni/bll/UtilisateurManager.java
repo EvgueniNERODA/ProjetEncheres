@@ -34,19 +34,20 @@ public class UtilisateurManager {
 		return DAOFactory.getUtilisateurDAO().selectPseudo(pseudo);
 	}
 	
+	public Utilisateur selectMail(String email) {
+		
+		return DAOFactory.getUtilisateurDAO().selectMail(email);
+	}
 	
 	
-/***************************************METHODE-INSERTION-INSERTION-NOUVEL-UTILISATEUR****************************/	
-	public void insertNouvelUtilisateur(String pseudo, String prenom, String telephone, String codePostal,
-			String password, String nom, String email, String rue, String ville) {
-		
-		
+/***************************************METHODE-INSERTION-NOUVEL-UTILISATEUR****************************/	
+	public void insertNouvelUtilisateur(Utilisateur utilisateur) {
+	
+	UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+	utilisateurDAO.insertNouvelUtilisateur(utilisateur);
 	}
 
-public Utilisateur selectMail(String email) {
-	
-	return DAOFactory.getUtilisateurDAO().selectMail(email);
-}
+
 
 
 	

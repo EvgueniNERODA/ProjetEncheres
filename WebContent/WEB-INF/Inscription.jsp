@@ -21,7 +21,7 @@
 	<div class="p-3 mb-2 bg-light text-dark">
 
 	<h1 class="d-flex justify-content-center">Mon profil</h1>
-	<form action="" method="POST" name="inscription">
+	<form action="${pageContext.request.contextPath }/ServletInscription" method="POST" name="inscription">
 
 		
 		
@@ -35,7 +35,7 @@
 			
   				<input type="text" class="form-control" placeholder="Prénom" name="prenom">
   			
-  				<input type="text" class="form-control" placeholder="Email" name="mail">
+  				<input type="email" class="form-control" placeholder="Email" name="email">
 		</div>
 		<div class="input-group mb-3">
 			

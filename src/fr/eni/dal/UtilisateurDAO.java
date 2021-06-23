@@ -13,4 +13,7 @@ public interface UtilisateurDAO {
 
 	Utilisateur selectMail(String email);
 	
+	
+	void insertNouvelUtilisateur(Utilisateur utilisateur);
+	
 }

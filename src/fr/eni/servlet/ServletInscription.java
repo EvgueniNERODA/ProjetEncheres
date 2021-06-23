@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.bll.UtilisateurManager;
+import fr.eni.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletInscription
@@ -59,16 +60,21 @@ public class ServletInscription extends HttpServlet {
 		
 		try {
 			UtilisateurManager manager = new UtilisateurManager();
-			
+			Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
+			System.out.println(newUtilisateur);
+			manager.insertNouvelUtilisateur (newUtilisateur);
 			
 			//on vérifie si le pseudo et le mail existe déja en BDD
+			
 			if (manager.selectPseudo(pseudo) != null) {
 				verifDoublon = true;
+				
+				System.out.println(manager.selectPseudo(pseudo));
 			}else  if (manager.selectMail(email) != null){
 				verifDoublon = true;
 			} else {
 			//sinon on crée un nouvel utilisateur
-				manager.insertNouvelUtilisateur (pseudo, prenom, telephone, codePostal, password, nom, email, rue, ville);
+				
 			}
 			
 		} catch (Exception e) {
@@ -76,7 +82,7 @@ public class ServletInscription extends HttpServlet {
 		}
 		
 		//retour vers la page Login en mode connécté
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
 		rd.forward(request, response);
 		
 		
