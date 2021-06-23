@@ -60,9 +60,7 @@ public class ServletInscription extends HttpServlet {
 		
 		try {
 			UtilisateurManager manager = new UtilisateurManager();
-			Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
-			System.out.println(newUtilisateur);
-			manager.insertNouvelUtilisateur (newUtilisateur);
+			
 			
 			//on vérifie si le pseudo et le mail existe déja en BDD
 			
@@ -73,8 +71,11 @@ public class ServletInscription extends HttpServlet {
 			}else  if (manager.selectMail(email) != null){
 				verifDoublon = true;
 			} else {
-			//sinon on crée un nouvel utilisateur
 				
+			//sinon on crée un nouvel utilisateur
+				Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
+				System.out.println(newUtilisateur);
+				manager.insertNouvelUtilisateur (newUtilisateur);	
 			}
 			
 		} catch (Exception e) {

@@ -51,9 +51,9 @@
 		</div>
 		<div class="input-group mb-3">
 			
-  				<input type="text" class="form-control" placeholder="Mot de passe" name="password">
+  				<input type="password" class="form-control" placeholder="Mot de passe" name="password">
   			
-  				<input type="text" class="form-control" placeholder="Confirmation" name="conf">
+  				<input type="password" class="form-control" placeholder="Confirmation" name="conf">
 		</div>
 
 		<div class="d-flex justify-content-center">
