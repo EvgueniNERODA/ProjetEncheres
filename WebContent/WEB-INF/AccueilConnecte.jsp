@@ -13,6 +13,6 @@
 <h1>Accueil Connecté</h1>
 
 <a href="${pageContext.request.contextPath }/ServletDeconnexion">Deconnection</a>
-<a href="${pageContext.request.contextPath }//ServletModifProfil">Mon Profil</a>
+<a href="${pageContext.request.contextPath }//ServletMonProfil">Mon Profil</a>
 </body>
 </html>
