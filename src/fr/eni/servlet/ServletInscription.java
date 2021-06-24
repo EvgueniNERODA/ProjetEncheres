@@ -95,19 +95,15 @@ public class ServletInscription extends HttpServlet {
 			} else {
 
 				// sinon on crée un nouvel utilisateur + retour à la page d'accueil en mode  connécté
-				
 				manager.insertNouvelUtilisateur(newUtilisateur);
 				
 				//création de la session
 				HttpSession session = request.getSession();
 				
-				//select de l'utilisateur qui vient d'être crée
-				
-				
-				
+				//select de l'utilisateur qui vient d'être crée					
 				int noUtilisateur = manager.selectAll(pseudo).getNoUtilisateur();
 				
-				System.out.println(noUtilisateur);
+				//ouverture de la session
 				session.setAttribute("noUtilisateur", noUtilisateur);
 				response.sendRedirect("./ServletAccueilConnecte");
 				
