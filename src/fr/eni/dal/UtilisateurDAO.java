@@ -22,5 +22,9 @@ public interface UtilisateurDAO {
 	void insertNouvelUtilisateur(Utilisateur utilisateur);
 	
 	Utilisateur find_user(int noUtilisateur);
+
+
+	void updateUserById(Utilisateur utilisateur);
+
 	
 }
