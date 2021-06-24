@@ -40,6 +40,7 @@ public class UtilisateurManager {
 	}
 	
 	
+
 /*****************************************METHODE-SELECT ALL UTILISATEUR AVEC PESEUDO******************************/
 	
 	public Utilisateur selectAll(String pseudo) {
@@ -49,17 +50,27 @@ public class UtilisateurManager {
 	}
 	
 	
-/*****************************************METHODE-INSERTION-NOUVEL-UTILISATEUR*************************************/	
+
+/******************************************METHODE-INSERTION-NOUVEL-UTILISATEUR*************************************/	
+
 	public void insertNouvelUtilisateur(Utilisateur utilisateur) {
 	
 	UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	utilisateurDAO.insertNouvelUtilisateur(utilisateur);
 	}
 
-/********************************************METHODE-AFFICHAGE-PAGE-MODIF-PROFIL***********************************/
+/******************************************METHODE-AFFICHAGE-PAGE-MODIF-PROFIL*************************************/
 	public Utilisateur find_user(int noUtilisateur) {
 		return DAOFactory.getUtilisateurDAO().find_user(noUtilisateur);
 	}
+
+	
+/******************************************METHODE-UPDATE-USER-BY-ID***********************************************/
+	public void update_by_id(Utilisateur utilisateur) {
+		UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+		utilisateurDAO.updateUserById(utilisateur);
+}
+
 
 
 

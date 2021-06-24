@@ -24,6 +24,11 @@ public interface UtilisateurDAO {
 	Utilisateur find_user(int noUtilisateur);
 
 
+
 	Utilisateur selectAll(String pseudo);
+
+	void updateUserById(Utilisateur utilisateur);
+
+
 	
 }

@@ -24,11 +24,12 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String FIND_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur=?";
 	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=? AND mot_de_passe =?";
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
-
 	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEURS WHERE email=?";
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS WHERE pseudo=?";
+	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET no_utilisateur=?, pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur= ? WHERE no_utilisateur=?";
+
 
 /*******************************************************METHODES-FINDUSER***************************************************************/
 /**
@@ -208,8 +209,8 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		}
 		
 	}
-
 	
+
 	/**
 	* Méthode pour afficher un l'utilisateur présent en BDD via son pseudo.
 	* Utilisée dans ServletInscription pour rappeler l'utilisateur nouvellement crée. 
@@ -242,7 +243,37 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		return utilisateur;
 }
 
+
+/*************************************************METHODES-UPDATE-USER-BY-ID***************************************************************/
+/**
+* Méthode pour modifier un utilisateur déjà présent en BDD.
+* Cette méthode est utilisée lors de la modification d'un profif utilisateur. 
+*/
+
 	
-	
+	public void updateUserById(Utilisateur utilisateur) {
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_USER_BY_ID);
+			
+			pstmt.setInt(1,utilisateur.getNoUtilisateur());
+			pstmt.setString(2, utilisateur.getPseudo());
+			pstmt.setString(3, utilisateur.getNom());
+			pstmt.setString(4, utilisateur.getPrenom());
+			pstmt.setString(5, utilisateur.getEmail());
+			pstmt.setString(6, utilisateur.getTelephone());
+			pstmt.setString(7, utilisateur.getRue());
+			pstmt.setString(8, utilisateur.getCodePostal());
+			pstmt.setString(9, utilisateur.getVille());
+			pstmt.setString(10, utilisateur.getMotDePasse());
+			pstmt.setInt(11, utilisateur.getCredit());
+			pstmt.setBoolean(12, utilisateur.isAdministrateur());
+			
+			pstmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
