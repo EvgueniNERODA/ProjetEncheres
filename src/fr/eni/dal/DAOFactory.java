@@ -1,5 +1,6 @@
 package fr.eni.dal;
 
+import fr.eni.dal.jdbc.CategorieDAOImplt;
 import fr.eni.dal.jdbc.UtilisateurDAOImplt;
 
 public class DAOFactory {
@@ -9,4 +10,8 @@ public class DAOFactory {
 	}
 	
 
+	public static CategorieDAO getCategorieDAO () {
+		return new CategorieDAOImplt();
+		
+	}
 }

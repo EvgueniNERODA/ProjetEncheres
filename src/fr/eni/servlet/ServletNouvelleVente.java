@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.bll.CategorieManager;
+
 /**
  * Servlet implementation class ServletNouvelleVente
  */
@@ -18,6 +20,10 @@ public class ServletNouvelleVente extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CategorieManager manager = new CategorieManager();
+		//séléction des catégories présentes en BDD
+		manager.selectCategories ();
+		
 		
 		//renvoi vers la page Nouvelle Vente
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/NouvelleVente.jsp");

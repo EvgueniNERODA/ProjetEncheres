@@ -22,11 +22,11 @@
   	</div>
 	<div class="form-group">
 	    <label for="description">Description</label>
-	    <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+	    <textarea class="form-control" id="description" rows="3" name="description" maxlength="300"></textarea>
 	</div>
 	<div class="form-group">
-    <label for="catégorie">Catégorie</label>
-    <select class="form-control" id="catégorie">
+    <label for="categorie">Catégorie</label>
+    <select class="form-control" id="categorie">
       <option>1</option>
       <option>2</option>
       <option>3</option>
