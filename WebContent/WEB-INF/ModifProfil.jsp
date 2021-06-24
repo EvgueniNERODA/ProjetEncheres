@@ -20,48 +20,52 @@
 <body class="p-3 mb-2 bg-white text-dark">
 	<div class="p-3 mb-2 bg-light text-dark">
 
-	<h1 class="d-flex justify-content-center">Modification du profil</h1>
-	<form action="${pageContext.request.contextPath }/ServletModifProfil" method="POST" name="modifProfil">
+		<h1 class="d-flex justify-content-center">Modification du profil</h1>
+		<form action="${pageContext.request.contextPath }/ServletModifProfil"
+			method="POST" name="modifProfil">
 
-		
-		
-		<div class="input-group mb-3">
-				
-  				<input type="text" class="form-control" placeholder="Pseudo" name="pseudo">
-  			
-  				<input type="text" class="form-control" placeholder="Nom" name="nom">
-		</div>
-		<div class="input-group mb-3">
-			
-  				<input type="text" class="form-control" placeholder="Prénom" name="prenom">
-  			
-  				<input type="email" class="form-control" placeholder="Email" name="email">
-		</div>
-		<div class="input-group mb-3">
-			
-  				<input type="text" class="form-control" placeholder="Teléphone" name="tel">
-  			
-  				<input type="text" class="form-control" placeholder="Rue" name="rue">
-		</div>
-		<div class="input-group mb-3">
-			
-  				<input type="text" class="form-control" placeholder="Code postal" name="cp">
-  			
-  				<input type="text" class="form-control" placeholder="Ville" name="ville">
-		</div>
-		<div class="input-group mb-3">
-			
-  				<input type="password" class="form-control" placeholder="Mot de passe" name="password">
-  			
-  				<input type="password" class="form-control" placeholder="Confirmation" name="conf">
-		</div>
 
-		<div class="d-flex justify-content-center">
-			<input class="btn btn-outline-primary" type="submit" value="Modifier"> 
-			<a href="${pageContext.request.contextPath }/WEB-INF/MonProfil.jsp" class="btn btn-outline-primary">Annuler</a>
-		</div>
-	</form>
-	
+
+			<div class="input-group mb-3">
+
+				<input type="text" class="form-control" placeholder="Pseudo"
+					name="pseudo"> <input type="text" class="form-control"
+					placeholder="Nom" name="nom">
+			</div>
+			<div class="input-group mb-3">
+
+				<input type="text" class="form-control" placeholder="Prénom"
+					name="prenom"> <input type="email" class="form-control"
+					placeholder="Email" name="email">
+			</div>
+			<div class="input-group mb-3">
+
+				<input type="text" class="form-control" placeholder="Teléphone"
+					name="tel"> <input type="text" class="form-control"
+					placeholder="Rue" name="rue">
+			</div>
+			<div class="input-group mb-3">
+
+				<input type="text" class="form-control" placeholder="Code postal"
+					name="cp"> <input type="text" class="form-control"
+					placeholder="Ville" name="ville">
+			</div>
+			<div class="input-group mb-3">
+
+				<input type="password" class="form-control"
+					placeholder="Mot de passe" name="password"> <input
+					type="password" class="form-control" placeholder="Confirmation"
+					name="conf">
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<input class="btn btn-outline-primary" type="submit"
+					value="Modifier"> <a
+					href="${pageContext.request.contextPath }/WEB-INF/MonProfil.jsp"
+					class="btn btn-outline-primary">Annuler</a>
+			</div>
+		</form>
+
 	</div>
 </body>
 

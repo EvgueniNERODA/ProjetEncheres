@@ -15,26 +15,26 @@ import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
 
 /**
- * Servlet implementation class ServletInscription
- * vérifie si le pseudo et le mail existent déjà
- * crée un nouvel utilisateur
+ * Servlet implementation class ServletInscription vérifie si le pseudo et le
+ * mail existent déjà crée un nouvel utilisateur
  */
 @WebServlet("/ServletInscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
 		rd.forward(request, response);
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//force l'encodage en UTF8 pour ne pas avoir de problèmes d'encodage dans la BDD
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// force l'encodage en UTF8 pour ne pas avoir de problèmes d'encodage dans la
+		// BDD
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String pseudo = "";
 		String prenom = "";
 		String telephone = "";
@@ -47,8 +47,9 @@ public class ServletInscription extends HttpServlet {
 		String confirmPassword = "";
 		boolean verifPseudo = false;
 		boolean verifMail = false;
-		
-		//récupération saisie utilisateur
+		boolean verifPassword = false;
+
+		// récupération saisie utilisateur
 		pseudo = request.getParameter("pseudo");
 		prenom = request.getParameter("prenom");
 		telephone = request.getParameter("tel");
@@ -59,45 +60,55 @@ public class ServletInscription extends HttpServlet {
 		rue = request.getParameter("rue");
 		ville = request.getParameter("ville");
 		confirmPassword = request.getParameter("conf");
-		
 
-		
-		
 		try {
 			UtilisateurManager manager = new UtilisateurManager();
-			Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom,  email, telephone, rue, codePostal, ville, password );
+			Utilisateur newUtilisateur = new Utilisateur(pseudo, prenom, nom, email, telephone, rue, codePostal, ville,
+					password);
 			
-			//on vérifie si le pseudo et le mail existent déja en BDD
-				if (pseudo.equals(manager.selectPseudo(pseudo)) ) {
+			// vérifacation corréspondance mots de passe
+			if (!confirmPassword.equals(password)) {
+				verifPassword = true;
+				request.setAttribute("verifPassword", verifPassword);
+
+				// redirection vers la page d'inscription
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
+				rd.forward(request, response);
+
+				// on vérifie si le pseudo et le mail existent déja en BDD
+			} else if (pseudo.equals(manager.selectPseudo(pseudo))) {
+
 				verifPseudo = true;
 				request.setAttribute("verifPseudo", verifPseudo);
-				
-				//redirection vers la page d'inscription
+
+				// redirection vers la page d'inscription
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
-	        	rd.forward(request, response);
-				
-			}else  if (email.equals(manager.selectMail(email))){
+				rd.forward(request, response);
+
+			} else if (email.equals(manager.selectMail(email))) {
 				verifMail = true;
 				request.setAttribute("verifMail", verifMail);
 
-				//redirection vers la page d'inscription
-	    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
-	        	rd.forward(request, response);
+				// redirection vers la page d'inscription
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
+				rd.forward(request, response);
 			} else {
+
+				// sinon on crée un nouvel utilisateur + retour à la page d'accueil en mode  connécté
 				
-				//sinon on crée un nouvel utilisateur + retour à la page d'accueil en mode connécté
-				
-				manager.insertNouvelUtilisateur (newUtilisateur);
-				
+				manager.insertNouvelUtilisateur(newUtilisateur);
+
 				HttpSession session = request.getSession();
-	    		session.setAttribute("noUtilisateur", newUtilisateur.getNoUtilisateur());
-	    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
-	        	rd.forward(request, response);
-			}   	  				
-			
+				session.setAttribute("noUtilisateur", newUtilisateur.getNoUtilisateur());
+				RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
+				rd.forward(request, response);
+				System.out.println(newUtilisateur);
+				//response.sendRedirect("/ServletAccueilConnecte");
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
-}
+
+	}
 }

@@ -21,39 +21,55 @@
 	<div class="p-3 mb-2 bg-light text-dark">
 
 	<h1 class="d-flex justify-content-center">Mon profil</h1>
-	<form action="${pageContext.request.contextPath }/ServletInscription" method="POST" name="inscription">
+	<form action="${pageContext.request.contextPath }/ServletInscription" method="POST" name="inscription" class="row g-3">
 
 		
 		
-		<div class="input-group mb-3">
+		<div  class="col-md-6">
+				<label for="inputEmail4" class="form-label">Pseudo</label>
+  				<input type="text" class="form-control" placeholder="Pseudo" name="pseudo" pattern="^(?![0-9]*$)[a-zA-Z0-9]+$"  id="exampleInputEmail1" required>
+  		</div>
+  		<div  class="col-md-6">		
+  				<label for="inputEmail4" class="form-label">Nom</label>
+  				<input type="text" class="form-control" placeholder="Nom" name="nom" required>
+  				
+		</div>
+		<div class="col-md-6">
+			
+				<label for="inputEmail4" class="form-label">Prénom</label>
+  				<input type="text" class="form-control" placeholder="Prénom" name="prenom" required>
+  		</div>
+  		<div class="col-md-6">	
+  				<label for="inputEmail4" class="form-label">Email</label>
+  				<input type="email" class="form-control" placeholder="Email" name="email" pattern="^[\w.-]+@\w+.\w{2,3}$" required>
+		</div>
+		<div class="col-md-6">	
 				
-  				<input type="text" class="form-control" placeholder="Pseudo" name="pseudo">
-  			
-  				<input type="text" class="form-control" placeholder="Nom" name="nom">
+				<label for="inputEmail4" class="form-label">Teléphone</label>
+  				<input type="text" class="form-control" placeholder="Teléphone" name="tel" pattern="[0-9]+">
+  		</div>		
+  		<div class="col-md-6">	
+  				<label for="inputEmail4" class="form-label">Rue</label>
+  				<input type="text" class="form-control" placeholder="Rue" name="rue" required>
+  				
 		</div>
-		<div class="input-group mb-3">
+		<div class="col-md-6">	
 			
-  				<input type="text" class="form-control" placeholder="Prénom" name="prenom">
-  			
-  				<input type="email" class="form-control" placeholder="Email" name="email">
+				<label for="inputEmail4" class="form-label">Code postalo</label>
+  				<input type="text" class="form-control" placeholder="Code postal" name="cp" pattern="[0-9]+" required>
+  		</div>
+  		<div class="col-md-6">	
+  				<label for="inputEmail4" class="form-label">Ville</label>
+  				<input type="text" class="form-control" placeholder="Ville" name="ville" required>
 		</div>
-		<div class="input-group mb-3">
+		<div class="col-md-6">	
 			
-  				<input type="text" class="form-control" placeholder="Teléphone" name="tel">
-  			
-  				<input type="text" class="form-control" placeholder="Rue" name="rue">
-		</div>
-		<div class="input-group mb-3">
-			
-  				<input type="text" class="form-control" placeholder="Code postal" name="cp">
-  			
-  				<input type="text" class="form-control" placeholder="Ville" name="ville">
-		</div>
-		<div class="input-group mb-3">
-			
-  				<input type="password" class="form-control" placeholder="Mot de passe" name="password">
-  			
-  				<input type="password" class="form-control" placeholder="Confirmation" name="conf">
+				<label for="inputEmail4" class="form-label">Mot de passe</label>
+  				<input type="password" class="form-control" placeholder="Mot de passe" name="password" required>
+  		</div>
+  		<div class="col-md-6">	
+  				<label for="inputEmail4" class="form-label">Confirmation mot de passe</label>
+  				<input type="password" class="form-control" placeholder="Confirmation" name="conf" required>
 		</div>
 
 		<div class="d-flex justify-content-center">
@@ -68,8 +84,12 @@
 	<c:if test="${verifPseudo == true}">
     	Le pseudo existe déjà!!!
 	</c:if>
-	
+	<c:if test="${verifPassword == true}">
+    	Veuillez saisir des mots de passe identiques.
+	</c:if>
 </div>
+
+
 </body>
 
 </html>
