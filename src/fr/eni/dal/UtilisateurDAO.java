@@ -22,5 +22,8 @@ public interface UtilisateurDAO {
 	void insertNouvelUtilisateur(Utilisateur utilisateur);
 	
 	Utilisateur find_user(int noUtilisateur);
+
+
+	Utilisateur selectAll(String pseudo);
 	
 }

@@ -60,9 +60,11 @@ public class ServletConnexion extends HttpServlet {
     	if(existeEnBdd == true) {
     		HttpSession session = request.getSession();
     		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
-    		RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
-        	rd.forward(request, response);
-    		System.out.println(utilisateur.getNoUtilisateur());
+    		
+    		response.sendRedirect("./ServletAccueilConnecte");
+    		//RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
+        	//rd.forward(request, response);
+    		
     		
         // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
         //(mauvais mdp ou identifiant inconnu)

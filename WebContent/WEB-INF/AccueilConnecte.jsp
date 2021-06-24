@@ -15,5 +15,8 @@
 	<a href="${pageContext.request.contextPath }/ServletDeconnexion">Deconnection</a>
 	<a href="${pageContext.request.contextPath }//ServletMonProfil">Mon
 		Profil</a>
+		
+	<a href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre Un Article</a>
+		
 </body>
 </html>

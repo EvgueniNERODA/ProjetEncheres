@@ -55,7 +55,7 @@
 		</div>
 		<div class="col-md-6">	
 			
-				<label for="inputEmail4" class="form-label">Code postalo</label>
+				<label for="inputEmail4" class="form-label">Code postal</label>
   				<input type="text" class="form-control" placeholder="Code postal" name="cp" pattern="[0-9]+" required>
   		</div>
   		<div class="col-md-6">	
