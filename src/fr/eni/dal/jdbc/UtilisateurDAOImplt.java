@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.tomcat.dbcp.dbcp2.PStmtKey;
 
-import com.sun.prism.shader.Solid_LinearGradient_REFLECT_AlphaTest_Loader;
+
+
 
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.JdbcTools;
 import fr.eni.dal.UtilisateurDAO;
-import sun.security.mscapi.CKeyPairGenerator.RSA;
+
 /**
  * 
  * Classe UtilisateurDAOImplt.
@@ -28,7 +28,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS WHERE pseudo=?";
-	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET no_utilisateur=?, pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur= ? WHERE no_utilisateur=?";
+	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
 
 
 /*******************************************************METHODES-FINDUSER***************************************************************/
@@ -256,20 +256,18 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		try (Connection cnx = JdbcTools.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_USER_BY_ID);
 			
-			pstmt.setInt(1,utilisateur.getNoUtilisateur());
-			pstmt.setString(2, utilisateur.getPseudo());
-			pstmt.setString(3, utilisateur.getNom());
-			pstmt.setString(4, utilisateur.getPrenom());
-			pstmt.setString(5, utilisateur.getEmail());
-			pstmt.setString(6, utilisateur.getTelephone());
-			pstmt.setString(7, utilisateur.getRue());
-			pstmt.setString(8, utilisateur.getCodePostal());
-			pstmt.setString(9, utilisateur.getVille());
-			pstmt.setString(10, utilisateur.getMotDePasse());
-			pstmt.setInt(11, utilisateur.getCredit());
-			pstmt.setBoolean(12, utilisateur.isAdministrateur());
-			
+			pstmt.setString(1, utilisateur.getPseudo());
+			pstmt.setString(2, utilisateur.getNom());
+			pstmt.setString(3, utilisateur.getPrenom());
+			pstmt.setString(4, utilisateur.getEmail());
+			pstmt.setString(5, utilisateur.getTelephone());
+			pstmt.setString(6, utilisateur.getRue());
+			pstmt.setString(7, utilisateur.getCodePostal());
+			pstmt.setString(8, utilisateur.getVille());
+			pstmt.setString(9, utilisateur.getMotDePasse());
+			pstmt.setInt(10,utilisateur.getNoUtilisateur());
 			pstmt.executeUpdate();
+			
 			
 		}catch (SQLException e) {
 			e.printStackTrace();

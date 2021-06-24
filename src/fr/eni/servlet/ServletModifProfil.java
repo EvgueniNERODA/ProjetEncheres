@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.security.ConcurrentMessageDigest;
+
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
 
@@ -52,8 +54,9 @@ public class ServletModifProfil extends HttpServlet {
 		
 		//On récupère la session
 		HttpSession session = request.getSession();
-		int idUtilisateur = (int)session.getAttribute("noUtilisateur");				
+		int idUtilisateur = (int)session.getAttribute("noUtilisateur");	
 		
+		/**********************************************METHODE-DO-POST-UPDATE**************************************/
 		//On récupère les données modifier de ModifProfil.jsp
 		pseudo = request.getParameter("pseudo");
 		prenom = request.getParameter("prenom");
@@ -66,9 +69,10 @@ public class ServletModifProfil extends HttpServlet {
 		actualPassword = request.getParameter("actualPassword");
 		newPassword = request.getParameter("newPassword");
 		confirmPassword = request.getParameter("confirmPassword");
-		Utilisateur utilisateur = new Utilisateur(pseudo, prenom, nom, email, telephone, rue, codePostal, ville,
-				newPassword);
 		
+		Utilisateur utilisateur = new Utilisateur(idUtilisateur, pseudo, prenom, nom, email, telephone, rue, codePostal, ville,
+				newPassword);
+	
 		// Vérification correspondance des mots de passe
 		if (!confirmPassword.equals(newPassword)) {
 			verifPassword = true;
@@ -96,15 +100,14 @@ public class ServletModifProfil extends HttpServlet {
 			rd.forward(request, response);
 			}
 		
-		//On récupère l'noUtilisateur afin de savoir quel utilisateur est concerné par le changement. 
-		utilisateur = utilisateurManager.find_user(idUtilisateur);
-		
 		//On fait un appel à une méthode Update afin de modifier l'utilisateur présent en BDD
 		utilisateurManager.update_by_id(utilisateur);
 		
 		//Redirection vers la page monProfil avec affichage du profil modifié
 		RequestDispatcher rd = request.getRequestDispatcher("/ServletMonProfil");
 		rd.forward(request, response);
+		
+		/**********************************************METHODE-DO-POST-DELETE**************************************/
 		
 	}
 }
