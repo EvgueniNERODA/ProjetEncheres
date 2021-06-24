@@ -29,6 +29,7 @@ public interface UtilisateurDAO {
 
 	void updateUserById(Utilisateur utilisateur);
 
+	//méthode DELETE-BY-iD
+	void deleteUserById(Utilisateur utilisateur);
 
-	
 }

@@ -81,10 +81,22 @@
 
 		<div class="d-flex justify-content-center">
 			<input class="btn btn-outline-primary" type="submit" value="Enregistrer"> 
-			<a href="${pageContext.request.contextPath }/ServletMonProfil" class="btn btn-outline-primary">Annuler</a>
 		</div>
+		</form>
 		
-	</form>
+		<form action="${pageContext.request.contextPath }/ServletAccueil"
+			method="POST" name="supprimerProfil">
+			
+			<div class="d-flex justify-content-center">
+				<input class="btn btn-outline-primary" type="submit" value="Supprimer mon compte"> 
+			</div>
+			
+			<div class="col-md-6">	
+  				<label for="inputEmail4" class="form-label">Etes-vous sûr de vouloir supprimer ?</label>
+  				<input type="text" class="form-control" placeholder="Oui pour valider" name="confirmationDelete" required>
+			</div>
+		</form>
+		
 	<c:if test="${verifMail == true}">
     	Le le mail existe déjà!!!
 	</c:if>

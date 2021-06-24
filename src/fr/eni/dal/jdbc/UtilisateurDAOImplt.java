@@ -29,7 +29,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS WHERE pseudo=?";
 	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
-
+	private static final String DELETE_USER_BY_ID = "DELETE UTILISATEURS WHERE no_utilisateur=?";
 
 /*******************************************************METHODES-FINDUSER***************************************************************/
 /**
@@ -274,4 +274,24 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		}
 	}
 
+/*************************************************METHODES-UPDATE-USER-BY-ID***************************************************************/
+/**
+* Méthode pour supprimer un utilisateur déjà présent en BDD.
+* Cette méthode est utilisée lors de la suppression d'un compte dans la page modifProfil. 
+*/
+	@Override
+	public void deleteUserById(Utilisateur utilisateur) {
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE_USER_BY_ID);
+
+			pstmt.setInt(1, utilisateur.getNoUtilisateur());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

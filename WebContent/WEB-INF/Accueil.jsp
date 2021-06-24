@@ -13,6 +13,10 @@
 	<a href="${pageContext.request.contextPath }/ServletInscription">S'inscrire</a>
 	<a href="${pageContext.request.contextPath }/ServletConnexion">Se
 		connecter</a>
+		
+	<c:if test="${existeEnBdd == true}">
+    	Le compte a bien été supprimé
+	</c:if>
 
 </body>
 </html>

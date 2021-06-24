@@ -71,6 +71,13 @@ public class UtilisateurManager {
 		utilisateurDAO.updateUserById(utilisateur);
 }
 
+/******************************************METHODE-DELETE-USER-BY-ID***********************************************/
+	public void delete_by_id(Utilisateur utilisateur) {
+		UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+		utilisateurDAO.deleteUserById(utilisateur);
+	
+}
+
 
 
 

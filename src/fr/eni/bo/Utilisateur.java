@@ -29,6 +29,12 @@ public class Utilisateur {
 	public Utilisateur() {	
 	}
 	
+	
+	public Utilisateur(int noUtilisateur) {
+	this();
+	this.noUtilisateur = noUtilisateur;
+}
+
 /**
 *** Constructeur pour la vérification d'Email existant
 *** @param identifiant, motdepasse, emailExiste

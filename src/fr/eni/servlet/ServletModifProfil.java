@@ -33,6 +33,7 @@ public class ServletModifProfil extends HttpServlet {
 /**************************************************DO-POST*****************************************************************/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//On arrive dans la méthode post après avoir cliquer sur enregistrer sur ModfitProfil.jsp
 		request.setCharacterEncoding("UTF-8");
 		
 		String pseudo = "";
@@ -107,7 +108,6 @@ public class ServletModifProfil extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/ServletMonProfil");
 		rd.forward(request, response);
 		
-		/**********************************************METHODE-DO-POST-DELETE**************************************/
 		
 	}
 }
