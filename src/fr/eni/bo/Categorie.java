@@ -23,7 +23,7 @@ public class Categorie {
 	
 
 	public Categorie(int noCategorie, String libelle) {
-		super();
+		this();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
@@ -58,13 +58,16 @@ public List<Article> getListeArticles() {
 		this.listeArticles = listeArticles;
 	}
 
+
+
+	
+
 /***************************************************AFFICHAGE****************************************************/	
+	
 	@Override
 	public String toString() {
-		return "Categorie [noCotegorie=" + noCategorie + ", libelle=" + libelle + ", article=" + listeArticles
-				+ "]";
+		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
 	}
-	
 	
 	
 }
