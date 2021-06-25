@@ -14,7 +14,7 @@
 	<a href="${pageContext.request.contextPath }/ServletConnexion">Se
 		connecter</a>
 		
-	<c:if test="${existeEnBdd == true}">
+	<c:if test="${existeEnBdd == false}">
     	Le compte a bien été supprimé
 	</c:if>
 

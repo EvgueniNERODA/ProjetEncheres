@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.manager.StatusTransformer;
+
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
 
@@ -22,6 +24,7 @@ public class ServletAccueil extends HttpServlet {
 
 /**************************************************DO-GET*****************************************************************/	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		rd.forward(request, response);
 	}
@@ -35,31 +38,31 @@ public class ServletAccueil extends HttpServlet {
 		//On récupère la session
 		HttpSession session = request.getSession();
 		int idUtilisateur = (int)session.getAttribute("noUtilisateur");	
-		System.out.println(idUtilisateur);
-	/**********************************************METHODE-DO-POST-DELETE**************************************/
 		
-		Utilisateur utilisateur = new Utilisateur(idUtilisateur);
+	/**********************************************METHODE-DO-POST-UPDATE-DESACTIVE-USER**************************************/
+		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
-		//Variable pour affichage message compte supprimé
-		boolean existeEnBdd = true;
+		//On stocke l'utilisateur en session dans une nouvelle variable utilisateur.
+		Utilisateur utilisateur = utilisateurManager.find_user(idUtilisateur);
+				//Si Administrateur
+				//if(utilisateurManager.find_user(idUtilisateur).isAdministrateur() == true) {
+				//On fait un appel à une méthode Delete afin de supprimer l'utilisateur présent en BDD
+				//utilisateurManager.delete_by_id(utilisateurAdmin);}
+			
+		//On fait appel à une méthode Update qui désactive le compte de l'utilisateur en mettant son etat statut à false.
+		boolean nouveauStatut = false;
+		utilisateurManager.update_statut_user(utilisateur, nouveauStatut);
+		//On update le utilisateur avec le nouveau statut
+		utilisateurManager.update_by_id(utilisateur);
 		
-		//On fait un appel à une méthode Delete afin de supprimer l'utilisateur présent en BDD
-		utilisateurManager.delete_by_id(utilisateur);
-		
-		System.out.println(utilisateurManager.find_user(idUtilisateur));
-		//Vérifier que l'utilisateur à bien été supprimé 
-		if (utilisateurManager.find_user(idUtilisateur) == null) {
-			existeEnBdd = false;
-		}
-		
-		//Destruction de la session
+		//DESTRUCTION DE LA SESSION
 		session.invalidate();
 		
-		//Redirection vers la page d'acceuil avec affichage d'un message que l'utilisateur à bien été supprimé
-		request.setAttribute("existeEnBdd", existeEnBdd);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
-		rd.forward(request, response);
+		//REDIRECTION VERS LA PAGE D'ACCUEIL
+		response.sendRedirect("ServletAccueil");
+		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+		//rd.forward(request, response);
 	}
 
 }

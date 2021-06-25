@@ -32,4 +32,12 @@ public interface UtilisateurDAO {
 	//méthode DELETE-BY-iD
 	void deleteUserById(Utilisateur utilisateur);
 
+	//méthode UPDATE-STATUT-USER
+	void updateStatutUser(Utilisateur utilisateur, boolean nouveauStatut);
+
+	//méthode FIND-USER-BY-EMAIL-OR-PSEUDO
+	Utilisateur find_user_by_email_or_pseudo(String identifiant);
+
+
+
 }

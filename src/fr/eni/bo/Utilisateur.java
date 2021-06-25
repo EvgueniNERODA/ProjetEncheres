@@ -30,10 +30,24 @@ public class Utilisateur {
 	public Utilisateur() {	
 	}
 	
-	
+/**
+*** Constructeur pour passer un utilisateur à la BDD avec son id.
+*** @param identifiant, noUtilisateur.
+**/	
 	public Utilisateur(int noUtilisateur) {
-	this();
-	this.noUtilisateur = noUtilisateur;
+		this();
+		this.noUtilisateur = noUtilisateur;
+}
+
+/**
+*** Constructeur pour passer un utilisateur à la BDD avec son id et la valeur du statut.
+*** @param identifiant, statut.
+**/		
+	
+	public Utilisateur(int noUtilisateur, boolean statut) {
+		this();
+		this.noUtilisateur = noUtilisateur;
+		this.statut = statut;
 }
 
 /**
@@ -209,15 +223,17 @@ public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, 
 	public boolean isStatut() {
 			return statut;
 		}
-
-
+	
+	//Setters pour changer le statut utilisateur en inactif
+	public boolean isStatut(boolean nouveauStatut) {
+			statut = false;
+			return statut;
+	}
+	
 	public void setStatut(boolean statut) {
 		this.statut = statut;
 	}
-
-
 	
-
 
 /****************************************************AFFICHAGE*******************************************************/	
 		

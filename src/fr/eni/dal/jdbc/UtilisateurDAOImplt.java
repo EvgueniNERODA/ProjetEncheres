@@ -24,11 +24,13 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String FIND_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur=?";
 	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=? AND mot_de_passe =?";
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
+	private static final String FIND_USER_BY_EMAIL_OR_PSEUDO ="SELECT statut FROM UTILISATEURS WHERE email=? AND mot_de_passe=?";
 	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEURS WHERE email=?";
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS WHERE pseudo=?";
-	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
+	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, statut=? WHERE no_utilisateur=?";
+	private static final String UPDATE_STATUT_USER = "UPDATE UTILISATEURS SET statut=? WHERE no_utilisateur=?";
 	private static final String DELETE_USER_BY_ID = "DELETE UTILISATEURS WHERE no_utilisateur=?";
 
 /*******************************************************METHODES-FINDUSER***************************************************************/
@@ -57,6 +59,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				utilisateur.setCredit(rs.getInt("credit"));
 				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				utilisateur.setStatut(rs.getBoolean("statut"));
 			}
 		} catch (SQLException e) {
 			//TODO : handle exception
@@ -249,7 +252,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 /*************************************************METHODES-UPDATE-USER-BY-ID***************************************************************/
 /**
 * Méthode pour modifier un utilisateur déjà présent en BDD.
-* Cette méthode est utilisée lors de la modification d'un profif utilisateur. 
+* Cette méthode est utilisée lors de la modification d'un profil utilisateur. 
 */
 
 	
@@ -267,7 +270,8 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 			pstmt.setString(7, utilisateur.getCodePostal());
 			pstmt.setString(8, utilisateur.getVille());
 			pstmt.setString(9, utilisateur.getMotDePasse());
-			pstmt.setInt(10,utilisateur.getNoUtilisateur());
+			pstmt.setBoolean(10, utilisateur.isStatut());
+			pstmt.setInt(11,utilisateur.getNoUtilisateur());
 			pstmt.executeUpdate();
 			
 			
@@ -276,10 +280,11 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		}
 	}
 
-/*************************************************METHODES-UPDATE-USER-BY-ID***************************************************************/
+/*************************************************METHODES-DELETE-USER-BY-ID***************************************************************/
 /**
 * Méthode pour supprimer un utilisateur déjà présent en BDD.
-* Cette méthode est utilisée lors de la suppression d'un compte dans la page modifProfil. 
+* Cette méthode est utilisée lors de la suppression d'un compte dans la page modifProfil lorsqu'on est connecté
+* en tant qu'Administrateur. 
 */
 	@Override
 	public void deleteUserById(Utilisateur utilisateur) {
@@ -295,5 +300,66 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 			e.printStackTrace();
 		}
 	}
+	
+/*************************************************METHODES-UPDATE-STATUT-USER-BY-ID***************************************************************/
+/**
+* Méthode pour mettre le statut d'un utilisateur déjà présent en BDD en inactif.
+* Cette méthode est utilisée lors de la suppression d'un compte dans la page modifProfil lorsqu'on est pas connecté
+* en tant qu'administrateur. 
+*/
+	@Override
+	public void updateStatutUser(Utilisateur utilisateur, boolean nouveauStatut) {
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_STATUT_USER);
+		
+		pstmt.setInt(1, utilisateur.getNoUtilisateur());
+		pstmt.setBoolean(2, utilisateur.isStatut(nouveauStatut));
+	
+		pstmt.executeUpdate();
+		
+		}catch (SQLException e) {
+		e.printStackTrace();
+		}
+	}
+	
+	
+/*******************************************************METHODES-FIND-USER-BY-EMAIL-OR-PSEUDO***************************************************************/
+/**
+* Méthode pour afficher un l'utilisateur présent en BDD via son identifiant.
+* Cette méthode est utilisée pour lors de la vérification d'un profil actif ou inactif. 
+*/
+	@Override
+	public Utilisateur find_user_by_email_or_pseudo(String identifiant){
+		Utilisateur utilisateur = new Utilisateur();
+		
+		try (Connection cnx = JdbcTools.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(FIND_USER_BY_EMAIL_OR_PSEUDO);
+			pstmt.setString(1, identifiant);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				utilisateur.setStatut(rs.getBoolean("statut"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return utilisateur;
+	}
+	
+	
+	
 	
 }

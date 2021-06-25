@@ -39,22 +39,30 @@ public class ServletConnexion extends HttpServlet {
 		String identifiant = request.getParameter("identifiant");
 		String motDePasse = request.getParameter("motDePasse");
 		
-		// Verification si l'utilisateur existe en BDD
+		//_______________________________VERIFICATION SI L'UTILISATEUR EXISTE EN BDD_________________________________________
 		boolean existeEnBdd = false;
     	Utilisateur utilisateur = new Utilisateur();
     	request.setAttribute("identifiant", identifiant);
     	request.setAttribute("motDePasse", motDePasse);
     	
-    	// On vérifie si l'utilisateur existe avec son adresse mail
-    	if(identifiant.contains("@")) {
-    		utilisateur = new Utilisateur(identifiant,motDePasse,true);
-        	existeEnBdd = utilisateurManager.verifier(utilisateur);
-        // Sinon on vérifie que l'utilisateur existe avec un pseudo
-    	}else {
-    		utilisateur = new Utilisateur(identifiant,motDePasse,false); 
-    		existeEnBdd = utilisateurManager.verifier(utilisateur);	
+    		// On vérifie si l'utilisateur existe avec son adresse mail
+    		if(identifiant.contains("@")) {
+    			utilisateur = new Utilisateur(identifiant,motDePasse,true);
+    			existeEnBdd = utilisateurManager.verifier(utilisateur);
+    		// Sinon on vérifie que l'utilisateur existe avec un pseudo
+    		}else {
+    			utilisateur = new Utilisateur(identifiant,motDePasse,false); 
+    			existeEnBdd = utilisateurManager.verifier(utilisateur);	
+    		}
+    		
+    	//__________________________VERIFICATION SI UTILISATEUR EST INACTIF (COMPTE SUPPRIMÉ)_________________________________
+    	
+    	utilisateur = utilisateurManager.find_user_by_email_or_pseudo(identifiant);
+    	if(utilisateur.isStatut() == false) {
+    		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
     	}
-  
+    	
+    	
     	// Si l'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
     	//	avec la creation d'une session
     	if(existeEnBdd == true) {

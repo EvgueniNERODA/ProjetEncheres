@@ -41,7 +41,7 @@ public class UtilisateurManager {
 	
 	
 
-/*****************************************METHODE-SELECT ALL UTILISATEUR AVEC PESEUDO******************************/
+/*****************************************METHODE-SELECT ALL UTILISATEUR AVEC PSEUDO******************************/
 	
 	public Utilisateur selectAll(String pseudo) {
 		
@@ -76,6 +76,18 @@ public class UtilisateurManager {
 		UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
 		utilisateurDAO.deleteUserById(utilisateur);
 	
+}
+
+/******************************************METHODE-UPDATE-STATUT-USER-BY-ID
+ * @param nouveauStatut ***********************************************/
+	public void update_statut_user(Utilisateur utilisateur, boolean nouveauStatut) {
+	UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+	utilisateurDAO.updateStatutUser(utilisateur, nouveauStatut);
+}
+
+/******************************************METHODE-FIND-USER-BY-EMAIL-OR-PSEUDO***********************************************/	
+	public Utilisateur find_user_by_email_or_pseudo(String identifiant) {
+		return DAOFactory.getUtilisateurDAO().find_user_by_email_or_pseudo(identifiant);
 }
 
 
