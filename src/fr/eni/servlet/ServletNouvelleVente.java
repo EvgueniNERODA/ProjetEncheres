@@ -23,6 +23,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		CategorieManager manager = new CategorieManager();
 		//séléction des catégories présentes en BDD
 		manager.selectCategories ();
+		System.out.println(manager.selectCategories ());
 		
 		
 		//renvoi vers la page Nouvelle Vente

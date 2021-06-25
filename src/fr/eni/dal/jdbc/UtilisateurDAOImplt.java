@@ -26,7 +26,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
 	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEURS WHERE email=?";
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
-	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS WHERE pseudo=?";
 	private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
 	private static final String DELETE_USER_BY_ID = "DELETE UTILISATEURS WHERE no_utilisateur=?";
@@ -180,7 +180,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		return mailBdd;
 	}
 
-/*************************************************METHODES-INSERTNOUVELUTILISATEUR***************************************************************/
+/*************************************************METHODES-INSERTNOUVEL-UTILISATEUR***************************************************************/
 /**
 * Méthode pour inserer un nouvel utilisateur dans la BDD.
 * Cette méthode est utilisée lors de la création d'un utilisateur sur le site d'enchère. 
@@ -201,6 +201,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 			pstmt.setString(9, utilisateur.getMotDePasse());
 			pstmt.setInt(10, utilisateur.getCredit());
 			pstmt.setBoolean(11, utilisateur.isAdministrateur());
+			pstmt.setBoolean(12, utilisateur.isStatut());
 			
 			pstmt.executeUpdate();
 			
@@ -235,9 +236,10 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				utilisateur.setCredit(rs.getInt("credit"));
 				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				utilisateur.setStatut(rs.getBoolean("statut"));
 			}
 		} catch (SQLException e) {
-			//TODO : handle exception
+		
 			e.printStackTrace();
 		}
 		return utilisateur;

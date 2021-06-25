@@ -1,5 +1,7 @@
 package fr.eni.bll;
 
+import java.util.List;
+
 import fr.eni.bo.Categorie;
 import fr.eni.dal.DAOFactory;
 
@@ -16,7 +18,7 @@ public class CategorieManager {
 	}
 
 	/*****************************************METHODE-SELECT ALL UTILISATEUR AVEC PESEUDO******************************/
-	public Categorie selectCategories() {
+	public List selectCategories() {
 		
 		return DAOFactory.getCategorieDAO().selectCategories ();
 			

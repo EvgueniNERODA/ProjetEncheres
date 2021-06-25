@@ -20,6 +20,7 @@ public class Utilisateur {
 	private String ville;
 	private String motDePasse;
 	private int credit;
+	private boolean statut;
 	private boolean administrateur;
 	private List <Article> listeArticles;
 	private List <Enchere>  listeEnchere;
@@ -69,6 +70,7 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.credit = 100;
+		this.statut = true;
 		this.administrateur = false;
 		
 	}
@@ -202,15 +204,30 @@ public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, 
 		this.listeEnchere = listeEnchere;
 	}
 	
-/****************************************************AFFICHAGE*******************************************************/	
-		@Override
-		public String toString() {
-			return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-					+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
-					+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-					+ ", administrateur=" + administrateur + "]";
-		}
 	
+	
+	public boolean isStatut() {
+			return statut;
+		}
+
+
+	public void setStatut(boolean statut) {
+		this.statut = statut;
+	}
+
+
+	
+
+
+/****************************************************AFFICHAGE*******************************************************/	
+		
+	@Override
+	public String toString() {
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + ", statut="
+				+ statut + ", administrateur=" + administrateur + ", listeArticles=" + listeArticles + "]";
+	}
 	
 	
 }

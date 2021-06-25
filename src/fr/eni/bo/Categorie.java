@@ -10,7 +10,7 @@ import java.util.List;
  *
  */
 public class Categorie {
-	private int noCotegorie;
+	private int noCategorie;
 	private String libelle;
 	private List <Article> listeArticles;
 	
@@ -19,14 +19,24 @@ public class Categorie {
 	public Categorie() {
 		
 	}
+	
+	
+
+	public Categorie(int noCategorie, String libelle) {
+		super();
+		this.noCategorie = noCategorie;
+		this.libelle = libelle;
+	}
+
+
 
 /*************************************************GETTERS/SETTERS**************************************************/	
 	public int getNoCotegorie() {
-		return noCotegorie;
+		return noCategorie;
 	}
 
 	public void setNoCotegorie(int noCotegorie) {
-		this.noCotegorie = noCotegorie;
+		this.noCategorie = noCotegorie;
 	}
 
 	public String getLibelle() {
@@ -51,7 +61,7 @@ public List<Article> getListeArticles() {
 /***************************************************AFFICHAGE****************************************************/	
 	@Override
 	public String toString() {
-		return "Categorie [noCotegorie=" + noCotegorie + ", libelle=" + libelle + ", article=" + listeArticles
+		return "Categorie [noCotegorie=" + noCategorie + ", libelle=" + libelle + ", article=" + listeArticles
 				+ "]";
 	}
 	
