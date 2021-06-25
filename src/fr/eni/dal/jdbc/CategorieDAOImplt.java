@@ -12,10 +12,13 @@ import fr.eni.dal.JdbcTools;
 
 public class CategorieDAOImplt implements CategorieDAO {
 	
+	
+	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait, etat) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?) ";  
+	private static final String INSERT_NEW_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville) VALUES (?, ?, ?)";	
 	private static final String SELECT_ALL_CATEGORIES = "SELECT * FROM CATEGORIES";
 
 	
-	/*******************************************************METHODES-FINDUSER***************************************************************/
+	/*******************************************************METHODES-SELECTION-CATEGORIES***************************************************************/
 	/**
 	 * méthode de séléction de toutes les catégories présentes en BDD
 	 * retourne une liste de catégories

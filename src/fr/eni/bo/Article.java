@@ -153,6 +153,8 @@ public class Article {
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
 	}
+	
+	
 
 /***************************************************AFFICHAGE*********************************************************/
 	@Override

@@ -7,16 +7,27 @@ package fr.eni.bo;
  *
  */
 public class Retrait {
-
+	private int noRetrait;
 	private String rue;
-	private int code_Postal;
+	private String code_Postal;
 	private String ville;
 	private Article articleARetirer;
 	
 /*************************************************CONSTRUCTEURS****************************************************/	
-	public Retrait() {
+public Retrait() {
 		
-	}
+}
+
+
+
+public Retrait(String rue, String code_Postal, String ville) {
+	this();
+	this.rue = rue;
+	this.code_Postal = code_Postal;
+	this.ville = ville;
+}
+
+
 
 /*************************************************GETTERS/SETTERS**************************************************/	
 	public String getRue() {
@@ -27,11 +38,11 @@ public class Retrait {
 		this.rue = rue;
 	}
 
-	public int getCode_Postal() {
+	public String getCode_Postal() {
 		return code_Postal;
 	}
 
-	public void setCode_Postal(int code_Postal) {
+	public void setCode_Postal(String code_Postal) {
 		this.code_Postal = code_Postal;
 	}
 
@@ -50,6 +61,20 @@ public class Retrait {
 	public void setArticleARetirer(Article articleARetirer) {
 		this.articleARetirer = articleARetirer;
 	}
+	
+	
+
+public int getNoRetrait() {
+		return noRetrait;
+	}
+
+
+
+	public void setNoRetrait(int noRetrait) {
+		this.noRetrait = noRetrait;
+	}
+
+
 
 /*************************************************AFFICHAGE**************************************************/	
 	@Override
@@ -57,6 +82,10 @@ public class Retrait {
 		return "Retrait [rue=" + rue + ", code_Postal=" + code_Postal + ", ville=" + ville + ", articleARetirer="
 				+ articleARetirer + "]";
 	}
+
+
+
+
 	
 	
 	
