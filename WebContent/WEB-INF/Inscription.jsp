@@ -17,8 +17,9 @@
 <title>Mon profil</title>
 </head>
 
-<body class="p-3 mb-2 bg-white text-dark">
-	<div class="p-3 mb-2 bg-light text-dark">
+<body >
+<%@include file="./fragments/header.jsp" %>
+	<div class="container   p-3 mb-2 bg-light text-dark">
 
 	<h1 class="d-flex justify-content-center">Mon profil</h1>
 	<form action="${pageContext.request.contextPath }/ServletInscription" method="POST" name="inscription" class="row g-3">
@@ -79,13 +80,24 @@
 		
 	</form>
 	<c:if test="${verifMail == true}">
-    	Le le mail existe déjà!!!
+		<div class="alert alert-danger" role="alert">
+		 	 Le le mail existe déjà.
+		</div>
+    	
 	</c:if>
 	<c:if test="${verifPseudo == true}">
-    	Le pseudo existe déjà!!!
+		<div class="alert alert-danger" role="alert">
+			Le pseudo existe déjà!!!
+		</div>
+	
+    	
 	</c:if>
 	<c:if test="${verifPassword == true}">
-    	Veuillez saisir des mots de passe identiques.
+		<div class="alert alert-danger" role="alert">
+			Veuillez saisir des mots de passe identiques.
+		</div>
+	
+    	
 	</c:if>
 </div>
 

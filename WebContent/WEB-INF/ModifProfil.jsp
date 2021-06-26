@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="./inscription.css">
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -18,6 +18,7 @@
 </head>
 
 <body class="p-3 mb-2 bg-white text-dark">
+<%@include file="./fragments/header.jsp" %>
 	<div class="p-3 mb-2 bg-light text-dark">
 
 		<h1 class="d-flex justify-content-center">Modification du profil</h1>

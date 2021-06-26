@@ -31,11 +31,11 @@ public class Categorie {
 
 
 /*************************************************GETTERS/SETTERS**************************************************/	
-	public int getNoCotegorie() {
+	public int getNoCategorie() {
 		return noCategorie;
 	}
 
-	public void setNoCotegorie(int noCotegorie) {
+	public void setNoCategorie(int noCotegorie) {
 		this.noCategorie = noCotegorie;
 	}
 

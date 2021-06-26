@@ -18,19 +18,40 @@ public class Article {
 	private LocalDate dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
-	private boolean etatVente = false;
-	
+	private int etatVente = 0;
+	private int idUtilisateur = 0;
 	private Utilisateur utilisateur;
 	private List <Enchere> listeEncheres;
+
 	private Categorie categorie;
 	private Retrait retrait;
+	
 	
 /*************************************************CONSTRUCTEURS**************************************************/	
 	public Article() {
 		
 	}
+	
 
 	
+public Article( String nomArticle, String description, LocalDate dateDebutEncheres,
+		LocalDate dateFinEncheres, int miseAPrix, int idUtilisateur, 
+		 int idCatégorie, int noRetrait) {
+	this();
+	
+	this.nomArticle = nomArticle;
+	this.description = description;
+	this.dateDebutEncheres = dateDebutEncheres;
+	this.dateFinEncheres = dateFinEncheres;
+	this.miseAPrix = miseAPrix;
+	
+	this.etatVente = 1;
+	this.idCatégorie = idCatégorie;
+	this.noRetrait = noRetrait;
+}
+
+
+
 /*************************************************GETTERS/SETTERS************************************************/
 	public int getNoArticle() {
 		return noArticle;
@@ -102,12 +123,12 @@ public class Article {
 	}
 
 
-	public boolean isEtatVente() {
+	public int isEtatVente() {
 		return etatVente;
 	}
 
 
-	public void setEtatVente(boolean etatVente) {
+	public void setEtatVente(int etatVente) {
 		this.etatVente = etatVente;
 	}
 
@@ -155,6 +176,52 @@ public class Article {
 	}
 	
 	
+	
+	
+	
+	/////////////////////////////supprimer si non utilisé//////////////
+
+public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+
+
+	public void setIdUtilisateur(int idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
+	}
+
+
+
+	public int getIdCatégorie() {
+		return idCatégorie;
+	}
+
+
+
+	public void setIdCatégorie(int idCatégorie) {
+		this.idCatégorie = idCatégorie;
+	}
+
+
+
+	public int getNoRetrait() {
+		return noRetrait;
+	}
+
+
+
+	public void setNoRetrait(int noRetrait) {
+		this.noRetrait = noRetrait;
+	}
+
+
+
+	public int getEtatVente() {
+		return etatVente;
+	}
+
+
 
 /***************************************************AFFICHAGE*********************************************************/
 	@Override

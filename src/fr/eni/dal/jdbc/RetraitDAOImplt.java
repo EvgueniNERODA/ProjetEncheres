@@ -22,12 +22,10 @@ public class RetraitDAOImplt implements RetraitDAO {
 	 * 
 	 */
 	@Override
-	public void insertRetrait(Retrait retrait) {
+	public Retrait insertRetrait(Retrait retrait) {
 		try (Connection cnx = JdbcTools.getConnection()){
 			
-			try {
-				//on désactive l'auto commit
-				cnx.setAutoCommit(false);
+			
 			
 			PreparedStatement pstmnt = cnx.prepareStatement(INSERT_NEW_RETRAIT, PreparedStatement.RETURN_GENERATED_KEYS);
 			//1.on ajoute le retrait
@@ -38,11 +36,8 @@ public class RetraitDAOImplt implements RetraitDAO {
 			
 			pstmnt.executeUpdate();
 			
-			ResultSet rs = pstmnt.getGeneratedKeys();
 			
-			while (rs.next()) {
-				retrait.setNoRetrait(rs.getInt(1));
-				
+			/**	
 			//2. on ajoute l'article
 			
 			PreparedStatement preparedStatement = cnx.prepareStatement(INSERT_NEW_ARTICLE);
@@ -52,20 +47,17 @@ public class RetraitDAOImplt implements RetraitDAO {
 			preparedStatement.setInt(4, retrait.getArticleARetirer().getMiseAPrix());
 			preparedStatement.setInt(5, retrait.getArticleARetirer().getUtilisateur().getNoUtilisateur()); //TODO vérifier si l'id est le bon
 			preparedStatement.setInt(6, retrait.getArticleARetirer().getCategorie().getNoCotegorie()); //TODO vérifier si l'id est le bon
-			preparedStatement.setBoolean(7, retrait.getArticleARetirer().isEtatVente());
-
+			preparedStatement.setInt(7, retrait.getArticleARetirer().isEtatVente());
+*/
 			
 			
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		//on annule si il y a un problème
-		cnx.rollback();
+			
+		
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		return retrait;
 		
 	}
 

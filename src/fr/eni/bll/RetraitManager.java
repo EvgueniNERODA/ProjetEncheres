@@ -18,10 +18,10 @@ public class RetraitManager {
 	}
 
 	/******************************************METHODE-INSERTION-NOUVEAU-RETRAIT*************************************/
-	public void insertRetrait(Retrait retrait) {
+	public Retrait insertRetrait(Retrait retrait) {
 		
 		RetraitDAO retraitDAO = DAOFactory.getRetraitDAO();
-		retraitDAO.insertRetrait(retrait);
+		return retraitDAO.insertRetrait(retrait);
 	}
 	
 }

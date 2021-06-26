@@ -10,6 +10,6 @@ import fr.eni.bo.Retrait;
  */
 public interface RetraitDAO {
 
-	void insertRetrait(Retrait retrait);
+	Retrait insertRetrait(Retrait retrait);
 
 }

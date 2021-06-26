@@ -1,6 +1,7 @@
 package fr.eni.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.manager.StatusTransformer;
 
+import fr.eni.bll.CategorieManager;
 import fr.eni.bll.UtilisateurManager;
+import fr.eni.bo.Categorie;
 import fr.eni.bo.Utilisateur;
 
 /**
@@ -25,6 +28,20 @@ public class ServletAccueil extends HttpServlet {
 /**************************************************DO-GET*****************************************************************/	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		CategorieManager manager = new CategorieManager();
+		// séléction des catégories présentes en BDD
+		
+
+		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
+		System.out.println(listesCategories);
+		
+		int pos = listesCategories.indexOf("Ameublement");
+		System.out.println(pos);
+		request.setAttribute("listesCategories", listesCategories);
+		
+
+		// renvoi vers la page Accueil
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		rd.forward(request, response);
 	}
