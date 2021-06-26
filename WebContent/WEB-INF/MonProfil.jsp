@@ -15,21 +15,24 @@
 </head>
 <body>
 <%@include file="./fragments/header.jsp" %>
-	<div>
-		<p>Pseudo : ${utilisateur.pseudo }</p>
-		<p>Nom : ${utilisateur.nom }</p>
-		<p>Prénom : ${utilisateur.prenom }</p>
-		<p>Email : ${utilisateur.email }</p>
-		<p>Téléphone : ${utilisateur.telephone }</p>
-		<p>Rue : ${utilisateur.rue }</p>
-		<p>Code Postal : ${utilisateur.codePostal }</p>
-		<p>Ville : ${utilisateur.ville }</p>
-		<p>Crédit : ${utilisateur.credit }</p>
-	</div>
-	<div>
+	
+	<div class="container col-sm-4">
+	
+	<ul class="list-group">
+		  <li class="list-group-item">Nom : ${utilisateur.nom }</li>
+		  <li class="list-group-item">Pseudo : ${utilisateur.pseudo }</li>
+		  <li class="list-group-item">Prénom : ${utilisateur.prenom }</li>
+		  <li class="list-group-item">Email : ${utilisateur.email }</li>
+		  <li class="list-group-item">Téléphone : ${utilisateur.telephone }</li>
+		  <li class="list-group-item">Rue : ${utilisateur.rue }</li>
+		  <li class="list-group-item">Code Postal : ${utilisateur.codePostal }</li>
+		  <li class="list-group-item">Ville : ${utilisateur.ville }</li>
+		  <li class="list-group-item">Crédit : ${utilisateur.credit }</li>
+	</ul>
 
-		<a href="${pageContext.request.contextPath }/ServletModifProfil"><button>Modifier</button></a>
-
+<div class="d-flex justify-content-center">
+		<a href="${pageContext.request.contextPath }/ServletModifProfil" class="btn btn-primary" value="Modifier">Modifier</a>
+</div>
 
 
 

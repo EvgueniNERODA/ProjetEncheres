@@ -17,9 +17,9 @@
 <title>Mon profil</title>
 </head>
 
-<body class="p-3 mb-2 bg-white text-dark">
+<body >
 <%@include file="./fragments/header.jsp" %>
-	<div class="p-3 mb-2 bg-light text-dark">
+	<div class="container">
 
 		<h1 class="d-flex justify-content-center">Modification du profil</h1>
 		<form action="${pageContext.request.contextPath }/ServletModifProfil"
