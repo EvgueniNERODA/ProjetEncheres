@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
+import fr.eni.messages.LecteurMessage;
 import fr.eni.outils.BusinessException;
 
 /**
@@ -28,6 +29,7 @@ public class ServletConnexion extends HttpServlet {
 		//On passe dans la ServletConnexion depuis l'Accueil.jsp vers Connexion.jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		rd.forward(request, response);
+		
 	}
 
 /**************************************************DO-POST*****************************************************************/	
@@ -48,16 +50,34 @@ public class ServletConnexion extends HttpServlet {
     		// On vérifie si l'utilisateur existe avec son adresse mail
     		if(identifiant.contains("@")) {
     			utilisateur = new Utilisateur(identifiant,motDePasse,true);
-    			existeEnBdd = utilisateurManager.verifier(utilisateur);
+    			try {
+					existeEnBdd = utilisateurManager.verifier(utilisateur);
+				} catch (BusinessException e) {
+					
+					e.printStackTrace();
+					request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+				}
     		// Sinon on vérifie que l'utilisateur existe avec un pseudo
     		}else {
     			utilisateur = new Utilisateur(identifiant,motDePasse,false); 
-    			existeEnBdd = utilisateurManager.verifier(utilisateur);	
+    			try {
+					existeEnBdd = utilisateurManager.verifier(utilisateur);
+				} catch (BusinessException e) {
+					
+					e.printStackTrace();
+					request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+				}	
     		}
     		
     	//__________________________VERIFICATION SI UTILISATEUR EST INACTIF (COMPTE SUPPRIMÉ)_________________________________
     	
-    	utilisateur = utilisateurManager.find_user_by_email_or_pseudo(identifiant);
+    	try {
+			utilisateur = utilisateurManager.find_user_by_email_or_pseudo(identifiant);
+		} catch (BusinessException e) {
+			
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		}
     	if(utilisateur.isStatut() == false) {
     		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
     	}

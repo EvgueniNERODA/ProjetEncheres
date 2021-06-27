@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
+import fr.eni.outils.BusinessException;
 
 /**
  * Servlet implementation class ServletMonProfil
@@ -32,7 +33,13 @@ public class ServletMonProfil extends HttpServlet {
 		Utilisateur utilisateur = new Utilisateur();
 		HttpSession session = request.getSession();
 		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
-		utilisateur = utilisateurManager.find_user(idUtilisateur);
+		try {
+			utilisateur = utilisateurManager.find_user(idUtilisateur);
+		} catch (BusinessException e) {
+			
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		}
 	
 		//On envoie l'utilisateur vers MonProfil.jsp et on se redirige dessus
 		request.setAttribute("utilisateur", utilisateur);

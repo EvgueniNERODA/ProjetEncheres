@@ -14,6 +14,7 @@ import org.apache.tomcat.util.security.ConcurrentMessageDigest;
 
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
+import fr.eni.outils.BusinessException;
 
 /**
  * Servlet implementation class ServletModifProfil
@@ -84,25 +85,38 @@ public class ServletModifProfil extends HttpServlet {
 			rd.forward(request, response);
 
 		// Vérification si pseudo et mail existent en BDD
-			} else if (pseudo.equals(utilisateurManager.selectPseudo(pseudo))) {
-			verifPseudo = true;
-			request.setAttribute("verifPseudo", verifPseudo);
+			} else
+			try {
+				if (pseudo.equals(utilisateurManager.selectPseudo(pseudo))) {
+				verifPseudo = true;
+				request.setAttribute("verifPseudo", verifPseudo);
 
-			// redirection vers la page de modifProfil
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModifProfil.jsp");
-			rd.forward(request, response);
+				// redirection vers la page de modifProfil
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModifProfil.jsp");
+				rd.forward(request, response);
 
-			} else if (email.equals(utilisateurManager.selectMail(email))) {
-			verifMail = true;
-			request.setAttribute("verifMail", verifMail);
+				} else if (email.equals(utilisateurManager.selectMail(email))) {
+				verifMail = true;
+				request.setAttribute("verifMail", verifMail);
 
-			// redirection vers la page de modifProfil
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModifProfil.jsp");
-			rd.forward(request, response);
+				// redirection vers la page de modifProfil
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModifProfil.jsp");
+				rd.forward(request, response);
+				}
+			} catch (BusinessException e) {
+				
+				e.printStackTrace();
+				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 			}
 		
 		//On fait un appel à une méthode Update afin de modifier l'utilisateur présent en BDD
-		utilisateurManager.update_by_id(utilisateur);
+		try {
+			utilisateurManager.update_by_id(utilisateur);
+		} catch (BusinessException e) {
+			
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		}
 		
 		//Redirection vers la page monProfil avec affichage du profil modifié
 		RequestDispatcher rd = request.getRequestDispatcher("/ServletMonProfil");

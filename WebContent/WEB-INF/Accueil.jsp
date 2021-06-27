@@ -30,6 +30,11 @@
     <label for="categorie">Catégorie</label>
     <select class="form-control shadow-sm col-md-12" id="categorie" >
     
+    
+    		<option>Toutes</option> <!-- !!!!!!!!!!!!Ajouter une méthode pour sélectionner toutes les catégories!!!!!!!!!!! -->
+    		
+    		
+    		
       <c:forEach var ="liste" items="${listesCategories }">
       		<option name="categorie" value="${liste.noCategorie }">
       		${liste.libelle }

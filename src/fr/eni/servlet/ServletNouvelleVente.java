@@ -21,6 +21,7 @@ import fr.eni.bo.Categorie;
 import fr.eni.bo.Retrait;
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.RetraitDAO;
+import fr.eni.outils.BusinessException;
 
 /**
  * Servlet implementation class ServletNouvelleVente
@@ -53,7 +54,15 @@ public class ServletNouvelleVente extends HttpServlet {
 
 		// récupération de l'adresse du vendeur
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Utilisateur utilisateurEnCours = utilisateurManager.find_user(idUtilisateur);
+		Utilisateur utilisateurEnCours = new Utilisateur();
+				
+		try {
+			utilisateurEnCours = utilisateurManager.find_user(idUtilisateur);
+		} catch (BusinessException e) {
+			
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		}
 		System.out.println(utilisateurEnCours);
 		String rueDefaut = utilisateurEnCours.getRue();
 		String cpDefaut = utilisateurEnCours.getCodePostal();

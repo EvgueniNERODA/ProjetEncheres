@@ -17,6 +17,7 @@ import fr.eni.bll.CategorieManager;
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Categorie;
 import fr.eni.bo.Utilisateur;
+import fr.eni.outils.BusinessException;
 
 /**
  * Servlet implementation class ServletAccueil
@@ -61,7 +62,10 @@ public class ServletAccueil extends HttpServlet {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
 		//On stocke l'utilisateur en session dans une nouvelle variable utilisateur.
-		Utilisateur utilisateur = utilisateurManager.find_user(idUtilisateur);
+		Utilisateur utilisateur;
+		try {
+			utilisateur = utilisateurManager.find_user(idUtilisateur);
+		
 				//Si Administrateur
 				//if(utilisateurManager.find_user(idUtilisateur).isAdministrateur() == true) {
 				//On fait un appel à une méthode Delete afin de supprimer l'utilisateur présent en BDD
@@ -76,10 +80,17 @@ public class ServletAccueil extends HttpServlet {
 		//DESTRUCTION DE LA SESSION
 		session.invalidate();
 		
+		
+		} catch (BusinessException e) {
+			
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		}
+		
 		//REDIRECTION VERS LA PAGE D'ACCUEIL
-		response.sendRedirect("ServletAccueil");
-		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
-		//rd.forward(request, response);
+				response.sendRedirect("ServletAccueil");
+				//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+				//rd.forward(request, response);
 	}
 
 }
