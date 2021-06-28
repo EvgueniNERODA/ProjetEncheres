@@ -24,7 +24,7 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String FIND_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur=?";
 	private static final String FIND_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=? AND mot_de_passe =?";
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
-	private static final String FIND_USER_BY_EMAIL_OR_PSEUDO ="SELECT statut FROM UTILISATEURS WHERE email=? AND mot_de_passe=?";
+	private static final String FIND_USER_BY_EMAIL_OR_PSEUDO ="SELECT statut FROM UTILISATEURS WHERE email=? OR pseudo=?";
 	private static final String SELECT_BY_MAIL = "SELECT email FROM UTILISATEURS WHERE email=?";
 	private static final String SELECT_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT_NEW_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
@@ -329,27 +329,16 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 * Méthode pour afficher un l'utilisateur présent en BDD via son identifiant.
 * Cette méthode est utilisée pour lors de la vérification d'un profil actif ou inactif. 
 */
-	@Override
-	public Utilisateur find_user_by_email_or_pseudo(String identifiant){
-		Utilisateur utilisateur = new Utilisateur();
+	
+	public Utilisateur find_user_by_email_or_pseudo(Utilisateur utilisateur){
 		
 		try (Connection cnx = JdbcTools.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(FIND_USER_BY_EMAIL_OR_PSEUDO);
-			pstmt.setString(1, identifiant);
+			pstmt.setString(1, utilisateur.getEmail());
+			pstmt.setString(2, utilisateur.getPseudo());
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-				utilisateur.setPseudo(rs.getString("pseudo"));
-				utilisateur.setNom(rs.getString("nom"));
-				utilisateur.setPrenom(rs.getString("prenom"));
-				utilisateur.setEmail(rs.getString("email"));
-				utilisateur.setTelephone(rs.getString("telephone"));
-				utilisateur.setRue(rs.getString("rue"));
-				utilisateur.setCodePostal(rs.getString("code_postal"));
-				utilisateur.setVille(rs.getString("ville"));
-				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-				utilisateur.setCredit(rs.getInt("credit"));
-				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				
 				utilisateur.setStatut(rs.getBoolean("statut"));
 			}
 		} catch (SQLException e) {
