@@ -50,13 +50,18 @@
 		<a href="/motDePasseOublie">Mot de passe oublié</a>
 	</div>
 
-	<c:forEach var ="code" items="${listeCodesErreur }">
-		
-	<div class="alert alert-danger" role="alert">
-  	${LecteurMessage.getMessageErreur(code) }
-	</div>
+<c:if test="${!empty listeCodesErreur}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Erreur!</strong>
+            <ul>
+                <c:forEach var="code" items="${listeCodesErreur}">
+                    <li>${LecteurMessage.getMessageErreur(code)}</li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
 
-	</c:forEach>
+	
 
 	<c:if test="${existeEnBdd == false}">
 	
