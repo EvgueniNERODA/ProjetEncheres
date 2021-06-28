@@ -33,17 +33,13 @@ public class UtilisateurManager {
 		
 		// Validation des données
 				BusinessException be = new BusinessException();
-				validationPseudo(utilisateur.getPseudo(), be);
-				validationNom(utilisateur.getNom(), be);
-				validationPrenom(utilisateur.getPrenom(), be);
-				validationEmail(utilisateur.getEmail(), be);
-				validationTelephone(utilisateur.getTelephone(), be);
-				validationRue(utilisateur.getRue(), be);
-				validationCp(utilisateur.getCodePostal(), be);
-				validationVille(utilisateur.getVille(), be);
+				if (utilisateur.getPseudo() != null) {
+					validationPseudo(utilisateur.getPseudo(), be);
+				}else {
+					validationEmail(utilisateur.getEmail(), be);
+				}
 				validationPassword(utilisateur.getMotDePasse(), be);
-				validationPseudo(utilisateur.getPseudo(), be);
-				
+	
 				if (be.hasErreurs()) {
 					throw be;
 				}

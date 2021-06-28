@@ -71,16 +71,16 @@ public class ServletConnexion extends HttpServlet {
     		
     	//__________________________VERIFICATION SI UTILISATEUR EST INACTIF (COMPTE SUPPRIMÉ)_________________________________
     	
-    	try {
-			utilisateur = utilisateurManager.find_user_by_email_or_pseudo(identifiant);
-		} catch (BusinessException e) {
-			
-			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-		}
-    	if(utilisateur.isStatut() == false) {
+    	//try {
+			//utilisateur = utilisateurManager.find_user_by_email_or_pseudo(identifiant);
+//		} catch (BusinessException e) {
+	//		
+		//e.printStackTrace();
+			//request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		//}
+    	//if(utilisateur.isStatut() == false) {
     		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
-    	}
+    	//}
     	
     	
     	// Si l'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
@@ -90,8 +90,6 @@ public class ServletConnexion extends HttpServlet {
     		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
     		
     		response.sendRedirect("./ServletAccueilConnecte");
-    		//RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
-        	//rd.forward(request, response);
     		
     		
         // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
