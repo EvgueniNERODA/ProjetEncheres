@@ -236,13 +236,10 @@ public class UtilisateurManager {
 			}
 		}
 	
-	private void validationUtilisateur (Utilisateur utilisateur, BusinessException be) {
-		if (utilisateur == null) {
-			be.ajouterErreur(CodesErreurBll.UTILISATEUR_OBJET_NULL);
-		}
+	
 		
 		
-	}
+	
 
 	private void validationNom (String nom, BusinessException be) {
 		if (nom == null || nom.isEmpty() || nom.length() > 30) {

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Utilisateur;
+import fr.eni.messages.LecteurMessage;
+import fr.eni.outils.BusinessException;
 
 /**
  * Servlet implementation class ServletInscription vérifie si le pseudo et le
@@ -60,6 +62,9 @@ public class ServletInscription extends HttpServlet {
 		rue = request.getParameter("rue");
 		ville = request.getParameter("ville");
 		confirmPassword = request.getParameter("conf");
+		
+		
+
 
 		try {
 			UtilisateurManager manager = new UtilisateurManager();
@@ -110,8 +115,12 @@ public class ServletInscription extends HttpServlet {
 			
 			}
 
-		} catch (Exception e) {
+		} catch (BusinessException e) {
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 			e.printStackTrace();
+			// redirection vers la page d'inscription
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
+			rd.forward(request, response);
 		}
 
 	}
