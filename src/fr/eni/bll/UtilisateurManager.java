@@ -201,7 +201,6 @@ public class UtilisateurManager {
 		validationCp(utilisateur.getCodePostal(), be);
 		validationVille(utilisateur.getVille(), be);
 		validationPassword(utilisateur.getMotDePasse(), be);
-		validationPseudo(utilisateur.getPseudo(), be);
 		
 		if (be.hasErreurs()) {
 			throw be;
@@ -214,17 +213,22 @@ public class UtilisateurManager {
 	
 	/******************************************METHODE-FIND-USER-BY-EMAIL-OR-PSEUDO
 	 * @throws BusinessException ***********************************************/	
-	public Utilisateur find_user_by_email_or_pseudo(String identifiant) throws BusinessException {
+	public Utilisateur find_user_by_email_or_pseudo(Utilisateur utilisateur) throws BusinessException {
 		
 		// Validation des données
 				BusinessException be = new BusinessException();
-				validationPseudo(identifiant, be); //TODO vérifier
+				
+				if (utilisateur.getPseudo() != null) {
+					validationPseudo(utilisateur.getPseudo(), be);
+				}else {
+					validationEmail(utilisateur.getEmail(), be);
+				}
 				
 				if (be.hasErreurs()) {
 					throw be;
 				}
 		
-		return DAOFactory.getUtilisateurDAO().find_user_by_email_or_pseudo(identifiant);
+		return DAOFactory.getUtilisateurDAO().find_user_by_email_or_pseudo(utilisateur);
 }
 	
 	/*****************************************************************************************************************************/
@@ -298,5 +302,6 @@ public class UtilisateurManager {
 			be.ajouterErreur(CodesErreurBll.UTILISATEUR_NO_UTILISATEUR_ERREUR);
 		}
 	}
+
 	
 }

@@ -36,7 +36,7 @@ public interface UtilisateurDAO {
 	void updateStatutUser(Utilisateur utilisateur, boolean nouveauStatut);
 
 	//méthode FIND-USER-BY-EMAIL-OR-PSEUDO
-	Utilisateur find_user_by_email_or_pseudo(String identifiant);
+	Utilisateur find_user_by_email_or_pseudo(Utilisateur utilisateur);
 
 
 

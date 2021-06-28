@@ -63,23 +63,27 @@ public class ServletConnexion extends HttpServlet {
     			try {
 					existeEnBdd = utilisateurManager.verifier(utilisateur);
 				} catch (BusinessException e) {
-					
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 				}	
     		}
     		
     	//__________________________VERIFICATION SI UTILISATEUR EST INACTIF (COMPTE SUPPRIMÉ)_________________________________
+    	Utilisateur utilisateurStatut = new Utilisateur();
+    	try {
+			utilisateurStatut = utilisateurManager.find_user_by_email_or_pseudo(utilisateur);
+			System.out.println(utilisateurStatut);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+		}
     	
-    	//try {
-			//utilisateur = utilisateurManager.find_user_by_email_or_pseudo(identifiant);
-//		} catch (BusinessException e) {
-	//		
-		//e.printStackTrace();
-			//request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-		//}
-    	if(utilisateur.isStatut() == false) {
+    	
+    	if(utilisateurStatut.isStatut() == false) {
     		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
+    		//response.sendRedirect("ServletAccueil");
+    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+        	rd.forward(request, response);
     	}
     	
     	
@@ -88,8 +92,9 @@ public class ServletConnexion extends HttpServlet {
     	if(existeEnBdd == true) {
     		HttpSession session = request.getSession();
     		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
-    		
-    		response.sendRedirect("./ServletAccueilConnecte");
+    		RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
+        	rd.forward(request, response);
+    		//response.sendRedirect("./ServletAccueilConnecte");
     		
     		
         // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
