@@ -33,8 +33,18 @@ public class UtilisateurManager {
 		
 		// Validation des données
 				BusinessException be = new BusinessException();
+<<<<<<< HEAD
 				validationEmail(utilisateur.getEmail(), be);
 				
+=======
+				if (utilisateur.getPseudo() != null) {
+					validationPseudo(utilisateur.getPseudo(), be);
+				}else {
+					validationEmail(utilisateur.getEmail(), be);
+				}
+				validationPassword(utilisateur.getMotDePasse(), be);
+	
+>>>>>>> branch 'main' of https://github.com/EvgueniNERODA/ProjetEncheres
 				if (be.hasErreurs()) {
 					throw be;
 				}
