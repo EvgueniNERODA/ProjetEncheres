@@ -78,9 +78,9 @@ public class ServletConnexion extends HttpServlet {
 		//e.printStackTrace();
 			//request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 		//}
-    	//if(utilisateur.isStatut() == false) {
+    	if(utilisateur.isStatut() == false) {
     		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
-    	//}
+    	}
     	
     	
     	// Si l'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 

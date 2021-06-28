@@ -34,13 +34,13 @@ public class UtilisateurManager {
 		// Validation des données
 				BusinessException be = new BusinessException();
 
-				
 
 				if (utilisateur.getPseudo() != null) {
 					validationPseudo(utilisateur.getPseudo(), be);
 				}else {
 					validationEmail(utilisateur.getEmail(), be);
 				}
+
 				
 				if (be.hasErreurs()) {
 					throw be;
