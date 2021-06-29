@@ -35,9 +35,9 @@ public class ArticleManager {
 		validationMontantPrix(nouvelArticle.getMiseAPrix(), be);
 		validationNomArticle(nouvelArticle.getNomArticle(), be);
 		validationDescriptionArticle(nouvelArticle.getDescription(), be);
-		validationCPVendeur(nouvelArticle.getUtilisateur().getCodePostal(), be);
-		validationRueVendeur(nouvelArticle.getUtilisateur().getRue(), be);
-		validationVilleVendeur(nouvelArticle.getUtilisateur().getVille(), be);
+		validationCPVendeur(nouvelArticle.getRetrait().getCode_Postal(), be);
+		validationRueVendeur(nouvelArticle.getRetrait().getRue(), be);
+		validationVilleVendeur(nouvelArticle.getRetrait().getVille(), be);
 
 		if (be.hasErreurs()) {
 			throw be;
@@ -86,19 +86,19 @@ public class ArticleManager {
 	
 	private void validationRueVendeur(String rue, BusinessException be) {
 		if (rue == null || rue.isEmpty() || rue.length() > 30) {
-			be.ajouterErreur(CodesErreurBll.ARTICLE_DESCRIPTION_ERREUR);
+			be.ajouterErreur(CodesErreurBll.ARTICLE_RUE_ERREUR);
 		}
 	}
 	
 	private void validationCPVendeur(String cp, BusinessException be) {
 		if (cp == null || cp.isEmpty() || cp.length() > 10) {
-			be.ajouterErreur(CodesErreurBll.ARTICLE_DESCRIPTION_ERREUR);
+			be.ajouterErreur(CodesErreurBll.ARTICLE_CP_ERREUR);
 		}
 	}
 	
 	private void validationVilleVendeur(String ville, BusinessException be) {
 		if (ville == null || ville.isEmpty() || ville.length() > 30) {
-			be.ajouterErreur(CodesErreurBll.ARTICLE_DESCRIPTION_ERREUR);
+			be.ajouterErreur(CodesErreurBll.ARTICLE_VILLE_ERREUR);
 		}
 	}
 

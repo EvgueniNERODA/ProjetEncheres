@@ -75,6 +75,9 @@ public class ServletNouvelleVente extends HttpServlet {
 		miseAPrix = Integer.valueOf(request.getParameter("prixInitial"));
 		dateDebutEnchere = LocalDate.parse(request.getParameter("dateDebut"));
 		dateFinEnchere = LocalDate.parse(request.getParameter("dateFin"));
+		rue = request.getParameter("rue");
+		codePostal = request.getParameter("cp");
+		ville = request.getParameter("ville");
 
 		// création instance catégorie
 		Categorie novelleCategorie = new Categorie(categorie);
@@ -118,6 +121,7 @@ public class ServletNouvelleVente extends HttpServlet {
 			Article nouvelArticle = new Article(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix,
 					utilisateurEnCours, novelleCategorie, nouveauRetrait);
 
+					
 			manager.inserNouvelArticle(nouvelArticle);
 
 			//rediréctin vers la page d'accueil en mode connecté

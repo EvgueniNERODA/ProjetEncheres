@@ -62,8 +62,9 @@
   	</div>
   	
   	
-  	<label>Retrait</label>
-  	<span id="retrait" class="rounded border border ">
+  	
+  	<fieldset id="retrait" class="rounded border border ">
+  	<legend>Retrait</legend>
   
   		<div class="col-md-12">	
   				<label class="form-label">Rue</label>
@@ -71,7 +72,7 @@
   		</div>
   		<div class="col-md-12">	
   				<label class="form-label">Code postal</label>
-  				<input type="text" class="form-control shadow-sm"   name="cp" placeholder="${cpDefaut }">
+  				<input type="text" class="form-control shadow-sm"   name="cp" placeholder="${cpDefaut}">
   		</div>
   		<div class="col-md-12">	
   				<label  class="form-label">Ville</label>
@@ -83,7 +84,7 @@
   	<div class="d-flex justify-content-center">
 			<input class="btn btn-outline-primary m-1 p-2" type="submit" value="Enregistrer"> 
 			<a href="${pageContext.request.contextPath }/ServletAccueilConnecte" class="btn btn-outline-primary m-1">  Annuler  </a>
-	</span>
+	</fieldset>
 
 </form>
 

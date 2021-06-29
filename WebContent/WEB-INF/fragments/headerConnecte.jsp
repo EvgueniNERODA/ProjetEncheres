@@ -13,7 +13,7 @@
 </head>
 <body >
 
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-light " style="background-color: #e3f2fd;">
   
 	
 	<a class="btn" href="${pageContext.request.contextPath }/ServletBoutonAccueil"><button class="btn"><i class="fa fa-home"></i></button>LE
