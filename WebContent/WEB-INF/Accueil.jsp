@@ -73,13 +73,27 @@
 
 
 
+	1
+
+
+	<c:if test="${compteSuppr == true}">
+ 		<div class="alert alert-danger" role="alert">
+  			Le compte a bien été supprimé.
+		</div>
+    </c:if>
+    
+    <c:if test="${sessionDeconnecte == true}">
+ 		<div class="alert alert-danger" role="alert">
+  			La session à expirée.
+		</div>
+    </c:if>
+    
+    <c:if test="${compteInactif == true}">
+ 		<div class="alert alert-danger" role="alert">
+  			Ce compte est inactif, veuillez contacter un administrateur.
+		</div>
+    </c:if>
 	
-
-
-
-	<c:if test="${existeEnBdd == false}">
-    	Le compte a bien été supprimé
-	</c:if>
 
 </body>
 </html>
