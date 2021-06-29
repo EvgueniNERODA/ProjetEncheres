@@ -23,13 +23,15 @@ public class ServletDeconnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		HttpSession session = request.getSession();
+		//______________________________________________RECUPERATION SESSION________________________________________________
 		
-		if (session.getAttribute("noUtilisateur") != null) {
+		HttpSession session = request.getSession(false);
+				
+			//Destruction de la session
 			session.invalidate();
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
-        	rd.forward(request, response);
-		}
+			//redirection vers ServletAccueil
+			response.sendRedirect("./ServletAccueil");
+		
 	}
 
 /**************************************************DO-POST*****************************************************************/

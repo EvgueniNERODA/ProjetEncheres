@@ -19,7 +19,7 @@
 </head>
 
 <body >
-<%@include file="./fragments/header.jsp" %>
+<%@include file="./fragments/headerConnecte.jsp" %>
 	<div class="container">
 
 		<h1 class="d-flex justify-content-center">Modification du profil</h1>

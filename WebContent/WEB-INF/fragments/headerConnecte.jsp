@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	
-<title>Insert title here</title>
+<title>HeaderConnecte</title>
 
 </head>
 <body >
@@ -19,22 +19,21 @@
 	<a class="btn" href="${pageContext.request.contextPath }/ServletBoutonAccueil"><button class="btn"><i class="fa fa-home"></i></button>LE
 				COIN QU'EST BON</a>
 	
-	
-	
+
 	  	<div class="form-inline">
 		    <ul class="nav justify-content-end mr-auto mt-2 mt-lg-0">
 		  <li class="nav-item">
-		    <a href="${pageContext.request.contextPath }/ServletInscription" class="nav-link active" >S'inscrire</a>
+		    <a href="${pageContext.request.contextPath }/ServletDeconnexion" class="nav-link active" >Deconnection</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="${pageContext.request.contextPath }/ServletConnexion">Se connecter</a>
+		    <a class="nav-link" href="${pageContext.request.contextPath }/ServletMonProfil">Mon Profil</a>
 		  </li>
-		
+		  <li class="nav-item">
+		    <a class="nav-link" href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre un article</a>
+		  </li>
 			</ul>
 	  	</div>
 		
-	
-
 </nav>
 
 

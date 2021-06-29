@@ -16,17 +16,10 @@
 
 
 <body>
-<%@include file="./fragments/header.jsp"%>
+<%@include file="./fragments/headerConnecte.jsp"%>
 <div class="container  ">
 	<h1 class="d-flex justify-content-center">Liste ds enchères</h1>
 
-	<a href="${pageContext.request.contextPath }/ServletDeconnexion">Deconnection</a>
-	<a href="${pageContext.request.contextPath }//ServletMonProfil">Mon
-		Profil</a>
-		
-	<a href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre Un Article</a>
-		</div>
-		
 		
 		<div class="container">
 <h3>Filtres</h3>

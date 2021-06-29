@@ -28,6 +28,7 @@
 		  <li class="list-group-item">Rue : ${utilisateur.rue }</li>
 		  <li class="list-group-item">Code Postal : ${utilisateur.codePostal }</li>
 		  <li class="list-group-item">Ville : ${utilisateur.ville }</li>
+		  <li class="list-group-item">Crédit : ${utilisateur.credit }</li>
 	</ul>
 
 <div class="d-flex justify-content-center">
