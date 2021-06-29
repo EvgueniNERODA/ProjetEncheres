@@ -64,7 +64,7 @@
 
 	
 
-	<c:if test="${existeEnBdd == false}">
+	<c:if test="${mdpIdentifiant = false}">
 	
 
  <div class="alert alert-danger" role="alert">

@@ -99,11 +99,11 @@ public class ServletConnexion extends HttpServlet {
  
         	// Sinon on redirige sur Connexion.jsp avec un message d'erreur "mauvais mdp ou identifiant inconnu"
     		}else {
-    			request.setAttribute("existeEnBdd", existeEnBdd);
-    			
-    			//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
-    			//rd.forward(request, response);
-    			response.sendRedirect("./ServletConnexion");
+    			boolean mdpIdentifiant = false;
+    			request.setAttribute("mdpIdentifiant", mdpIdentifiant);
+    			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
+    			rd.forward(request, response);
+    			//response.sendRedirect("./ServletConnexion");
     		}
     }
 

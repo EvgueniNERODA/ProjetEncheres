@@ -41,8 +41,7 @@ public class ServletProfilUtilisateur extends HttpServlet {
 			try {
 				//Selectionner l'enchere (avec les infos du vendeur)
 				//Selectionner le vendeur et retourner ses infos
-				int idUtilisateur = (int) session.getAttribute("noUtilisateur");
-				utilisateur = utilisateurManager.find_user(idUtilisateur);
+				
 				//redirection vers ProfilUtilisateur.jsp
 				request.setAttribute("utilisateur", utilisateur);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ProfilUtilisateur.jsp");
