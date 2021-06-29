@@ -28,23 +28,37 @@ public class ServletMonProfil extends HttpServlet {
 /**************************************************DO-GET*****************************************************************/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//On arrive dans la ServletMonProfil depuis l'AccueilConnecte.jsp 
-		//On récupère la session en cours 
-		Utilisateur utilisateur = new Utilisateur();
-		HttpSession session = request.getSession();
-		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
-		try {
-			utilisateur = utilisateurManager.find_user(idUtilisateur);
-		} catch (BusinessException e) {
+	//------------------> On arrive dans la ServletMonProfil depuis l'AccueilConnecte.jsp <--------------------------//
+		
+		
+	//______________________________________________RECUPERATION SESSION________________________________________________
+	
+		HttpSession session = request.getSession(false);
+		
+	//________________________________________VERIFICATION UTILISATEUR CONNECTÉ_________________________________________
+		if (session != null) {
+					
+			try {
+				int idUtilisateur = (int) session.getAttribute("noUtilisateur");
+				utilisateur = utilisateurManager.find_user(idUtilisateur);
+				//redirection vers MonProfil.jsp
+				request.setAttribute("utilisateur", utilisateur);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/MonProfil.jsp");
+				rd.forward(request, response);
+			} catch (BusinessException e) {
 			
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			}
+
+		}else {
+			//redirection vers Accueil.jsp
+			boolean sessionDeconnecte = true;
+			request.setAttribute("sessionDeconnecte", sessionDeconnecte);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+			rd.forward(request, response);
 		}
-	
-		//On envoie l'utilisateur vers MonProfil.jsp et on se redirige dessus
-		request.setAttribute("utilisateur", utilisateur);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/MonProfil.jsp");
-		rd.forward(request, response);
+		
 	}
 
 /**************************************************DO-POST*****************************************************************/	

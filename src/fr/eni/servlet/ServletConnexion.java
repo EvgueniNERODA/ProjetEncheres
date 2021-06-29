@@ -72,7 +72,7 @@ public class ServletConnexion extends HttpServlet {
     	Utilisateur utilisateurStatut = new Utilisateur();
     	try {
 			utilisateurStatut = utilisateurManager.find_user_by_email_or_pseudo(utilisateur);
-			System.out.println(utilisateurStatut);
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
@@ -81,29 +81,30 @@ public class ServletConnexion extends HttpServlet {
     	
     	if(utilisateurStatut.isStatut() == false) {
     		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
-    		//response.sendRedirect("ServletAccueil");
+    		boolean compteInactif = true;
+    		request.setAttribute("compteInactif", compteInactif);
     		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
         	rd.forward(request, response);
+        	
     	}
     	
-    	
-    	// Si l'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
+    	//__________________________VERIFICATION SI UTILISATEUR EST ACTIF _____________________________________________________
+    	// L'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
     	//	avec la creation d'une session
     	if(existeEnBdd == true) {
     		HttpSession session = request.getSession();
     		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
-    		RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
-        	rd.forward(request, response);
-    		//response.sendRedirect("./ServletAccueilConnecte");
+    		response.sendRedirect("./ServletAccueilConnecte");
     		
-    		
-        // Sinon on redirige sur Connexion.jsp avec un message d'erreur 
-        //(mauvais mdp ou identifiant inconnu)
-    	}else {
-    		request.setAttribute("existeEnBdd", existeEnBdd);
-    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
-        	rd.forward(request, response);
-    	}
+ 
+        	// Sinon on redirige sur Connexion.jsp avec un message d'erreur "mauvais mdp ou identifiant inconnu"
+    		}else {
+    			request.setAttribute("existeEnBdd", existeEnBdd);
+    			
+    			//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
+    			//rd.forward(request, response);
+    			response.sendRedirect("./ServletConnexion");
+    		}
     }
 
 }
