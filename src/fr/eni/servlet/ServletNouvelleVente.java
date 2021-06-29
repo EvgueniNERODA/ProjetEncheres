@@ -24,6 +24,7 @@ import fr.eni.bo.Retrait;
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.RetraitDAO;
 import fr.eni.outils.BusinessException;
+import jdk.nashorn.internal.ir.BreakableNode;
 
 /**
  * Servlet implementation class ServletNouvelleVente
@@ -41,43 +42,14 @@ public class ServletNouvelleVente extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
-
-		request.setAttribute("listesCategories", listesCategories);
-
-		// On récupère la session
-		HttpSession session = request.getSession();
-		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
-
-		// récupération de l'adresse du vendeur
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Utilisateur utilisateurEnCours = new Utilisateur();
-
-		try {
-			utilisateurEnCours = utilisateurManager.find_user(idUtilisateur);
-		} catch (BusinessException e) {
-
-			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-		}
-
-		// récupération de l'adresse du vendeur
-		String rueDefaut = utilisateurEnCours.getRue();
-		String cpDefaut = utilisateurEnCours.getCodePostal();
-		String villeDefaut = utilisateurEnCours.getVille();
-
-		request.setAttribute("rueDefaut", rueDefaut);
-		request.setAttribute("cpDefaut", cpDefaut);
-		request.setAttribute("villeDefaut", villeDefaut);
-
-		// renvoi vers la page Nouvelle Vente
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/NouvelleVente.jsp");
-		rd.forward(request, response);
+		
+		chargementCategorieEtAdresse(request, response);
+	
 
 	}
 
 	/**
-	 * méthode DoPost récupères les information saisies par le vendeur les vérifie et insère un
+	 * méthode DoPost récupère les information saisies par le vendeur les vérifie et insère un
 	 * nouvel article
 	 * 
 	 */
@@ -152,10 +124,66 @@ public class ServletNouvelleVente extends HttpServlet {
 			session.setAttribute("noUtilisateur", utilisateurEnCours.getNoUtilisateur());
 			response.sendRedirect("./ServletAccueilConnecte");
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (BusinessException be) {
+			
+			be.printStackTrace();
+			request.setAttribute("listeCodesErreur", be.getListeCodesErreur());
+			
+			
+			//revoi vers la Jsp avec les catégories et l'adresse du vendeur chargées
+		
+			
+			chargementCategorieEtAdresse(request, response);
 		}
 
+		
+	}
+	
+	
+	/**
+	 * 
+	 * Méthode permettant de charger les catégories des articles et l'adresse de l'utilisateur connecté vers la Jsp
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	
+	private void chargementCategorieEtAdresse (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
+
+		request.setAttribute("listesCategories", listesCategories);
+
+		// On récupère la session
+		HttpSession session = request.getSession();
+		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
+
+		// récupération de l'adresse du vendeur
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		Utilisateur utilisateurEnCours = new Utilisateur();
+
+		try {
+			utilisateurEnCours = utilisateurManager.find_user(idUtilisateur);
+		} catch (BusinessException e) {
+
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			
+		}
+
+		// récupération de l'adresse du vendeur
+		String rueDefaut = utilisateurEnCours.getRue();
+		String cpDefaut = utilisateurEnCours.getCodePostal();
+		String villeDefaut = utilisateurEnCours.getVille();
+
+		request.setAttribute("rueDefaut", rueDefaut);
+		request.setAttribute("cpDefaut", cpDefaut);
+		request.setAttribute("villeDefaut", villeDefaut);
+		
+
+		// renvoi vers la page Nouvelle Vente
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/NouvelleVente.jsp");
+		rd.forward(request, response);
 	}
 
 }

@@ -49,8 +49,8 @@
 		    <input type="file" class="form-control-file shadow-sm" id="photo" name="photo">
 	</div>
 	<div  class="col-md-12">
-		<label for="prix" class="form-label">Mise à prix</label>
-  		<input type="number" class="form-control shadow-sm" placeholder="Mise à prix" name="prixInitial"   id="prix" name="prix" >
+		<label for="prix" class="form-label" >Mise à prix</label>
+  		<input type="number" class="form-control shadow-sm" placeholder="Mise à prix" name="prixInitial"   id="prix" name="prix" min="0" >
   	</div>
 	<div  class="col-md-12">
 		<label for="dateDebut" class="form-label">Début de l'enchère</label>
@@ -87,6 +87,18 @@
 
 </form>
 
+	
+
 </div>
+<c:if test="${!empty listeCodesErreur}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Erreur!</strong>
+            <ul>
+                <c:forEach var="code" items="${listeCodesErreur}">
+                	<li> ${LecteurMessage.getMessageErreur(code)}</li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
 </body>
 </html>
