@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.bo.Article;
+import fr.eni.bo.Categorie;
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.ArticleDAO;
 import fr.eni.dal.JdbcTools;
@@ -20,7 +21,8 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	
 	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait, etat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 	private static final String INSERT_NEW_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville) VALUES (?, ?, ?)";
-
+	
+	private static final String SELECT_ARTICLES_SELON_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=? AND  etat=2";
 	
 	
 	@Override
@@ -65,8 +67,23 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			e.printStackTrace();
 		}
 		
+	}
+
+
+	@Override
+	public void selectArticlesSelonCategorie(Categorie categorie) {
+		try (Connection cnx = JdbcTools.getConnection()) {
+			
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_ARTICLES_SELON_CATEGORIE);
+			psmt.setInt(1, categorie.getNoCategorie());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}  
 
+	
 	
 	
 }

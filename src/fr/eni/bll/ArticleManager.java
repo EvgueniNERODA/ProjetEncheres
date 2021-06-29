@@ -3,6 +3,7 @@ package fr.eni.bll;
 import java.time.LocalDate;
 
 import fr.eni.bo.Article;
+import fr.eni.bo.Categorie;
 import fr.eni.dal.ArticleDAO;
 import fr.eni.dal.DAOFactory;
 import fr.eni.outils.BusinessException;
@@ -46,7 +47,16 @@ public class ArticleManager {
 		articleDAO.insertNouvelArticle(nouvelArticle);
 
 	}
-
+	/*************************************************
+	 * METHODE-SELECTION-ARTICLES-SELON-CATEGORIE
+	 ************************************************/
+	private void selectArticlesSelonCategorie(Categorie categorie) {
+		
+		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
+		articleDAO.selectArticlesSelonCategorie(categorie);
+	}
+	
+	
 	/*************************************************
 	 * VALIDATIONS
 	 ************************************************/

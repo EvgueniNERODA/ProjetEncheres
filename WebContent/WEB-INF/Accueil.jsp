@@ -29,16 +29,16 @@
     <div >
     
     <label for="categorie">Catégorie</label>
-    <select class="form-control shadow-sm col-md-4" id="categorie" >
+    <select class="form-control shadow-sm col-md-4" id="categorie" name="categorie">
     
     
-    		<option>Toutes</option> <!-- !!!!!!!!!!!!Ajouter une méthode pour sélectionner toutes les catégories!!!!!!!!!!! -->
+    		<option value="5">Toutes</option>
     		
     		
     		
-      <c:forEach var ="liste" items="${listesCategories }">
-      		<option name="categorie" value="${liste.noCategorie }">
-      		${liste.libelle }
+       <c:forEach var ="liste" items="${listesCategories }">
+      		<option  value="${liste.getNoCategorie()}">
+      		${liste.getLibelle()}
       		
       		</option>
       </c:forEach>
