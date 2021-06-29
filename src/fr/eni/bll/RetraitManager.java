@@ -17,11 +17,5 @@ public class RetraitManager {
 
 	}
 
-	/******************************************METHODE-INSERTION-NOUVEAU-RETRAIT*************************************/
-	public Retrait insertRetrait(Retrait retrait) {
-		
-		RetraitDAO retraitDAO = DAOFactory.getRetraitDAO();
-		return retraitDAO.insertRetrait(retrait);
-	}
 	
 }

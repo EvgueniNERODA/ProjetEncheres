@@ -21,15 +21,15 @@
 
 <div class="container">
 <h3>Filtres</h3>
-  <form class="form-inline col-sm-3">
-    <input class="form-control mr-sm-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search">
+  <form class="form-inline col-md-3">
+    <input class="form-control mr-md-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search">
   
     
     
     <div >
     
     <label for="categorie">Catégorie</label>
-    <select class="form-control shadow-sm col-md-12" id="categorie" >
+    <select class="form-control shadow-sm col-md-4" id="categorie" >
     
     
     		<option>Toutes</option> <!-- !!!!!!!!!!!!Ajouter une méthode pour sélectionner toutes les catégories!!!!!!!!!!! -->

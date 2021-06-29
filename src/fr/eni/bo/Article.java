@@ -31,24 +31,31 @@ public class Article {
 	public Article() {
 		
 	}
-	
 
-	
-public Article( String nomArticle, String description, LocalDate dateDebutEncheres,
-		LocalDate dateFinEncheres, int miseAPrix, int idUtilisateur, 
-		 int idCatégorie, int noRetrait) {
+
+public Article(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+		int miseAPrix,Utilisateur utilisateur, Categorie categorie, Retrait retrait) {
 	this();
-	
 	this.nomArticle = nomArticle;
 	this.description = description;
 	this.dateDebutEncheres = dateDebutEncheres;
 	this.dateFinEncheres = dateFinEncheres;
 	this.miseAPrix = miseAPrix;
 	
-	this.etatVente = 1;
-	this.idCatégorie = idCatégorie;
-	this.noRetrait = noRetrait;
+	this.etatVente = etatVente = 1;
+	this.utilisateur = utilisateur;
+	this.categorie = categorie;
+	this.retrait = retrait;
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -193,27 +200,7 @@ public int getIdUtilisateur() {
 
 
 
-	public int getIdCatégorie() {
-		return idCatégorie;
-	}
-
-
-
-	public void setIdCatégorie(int idCatégorie) {
-		this.idCatégorie = idCatégorie;
-	}
-
-
-
-	public int getNoRetrait() {
-		return noRetrait;
-	}
-
-
-
-	public void setNoRetrait(int noRetrait) {
-		this.noRetrait = noRetrait;
-	}
+	
 
 
 
@@ -222,15 +209,20 @@ public int getIdUtilisateur() {
 	}
 
 
+	
+
+
 
 /***************************************************AFFICHAGE*********************************************************/
+	
 	@Override
 	public String toString() {
 		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + "]";
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", idUtilisateur="
+				+ idUtilisateur + ", utilisateur=" + utilisateur + ", listeEncheres=" + listeEncheres + ", categorie="
+				+ categorie + ", retrait=" + retrait + "]";
 	}
-	
 	
 	
 }

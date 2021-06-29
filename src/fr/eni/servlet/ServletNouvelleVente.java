@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+
 import fr.eni.bll.ArticleManager;
 import fr.eni.bll.CategorieManager;
 import fr.eni.bll.RetraitManager;
@@ -30,46 +32,40 @@ import fr.eni.outils.BusinessException;
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * méthode DO GET récupère uen liste de catégories et les affiche dans le
+	 * sélécteur de la page Nouvelle vente récupère l'adresse du vendeur et
+	 * l'affiche par défaut
+	 * 
+	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CategorieManager manager = new CategorieManager();
-		// séléction des catégories présentes en BDD
-
 		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
-		System.out.println(listesCategories);
-		
-		int pos = listesCategories.indexOf("Ameublement");
-		System.out.println(pos);
+
 		request.setAttribute("listesCategories", listesCategories);
-		
 
 		// On récupère la session
 		HttpSession session = request.getSession();
-		//int idUtilisateur = (int) session.getAttribute("noUtilisateur");
-		//System.out.println(idUtilisateur);
-		
-		int idUtilisateur = 2;
-		
-		
+		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
 
 		// récupération de l'adresse du vendeur
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateurEnCours = new Utilisateur();
-				
+
 		try {
 			utilisateurEnCours = utilisateurManager.find_user(idUtilisateur);
 		} catch (BusinessException e) {
-			
+
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 		}
-		System.out.println(utilisateurEnCours);
+
+		// récupération de l'adresse du vendeur
 		String rueDefaut = utilisateurEnCours.getRue();
 		String cpDefaut = utilisateurEnCours.getCodePostal();
 		String villeDefaut = utilisateurEnCours.getVille();
 
-		System.out.println(utilisateurEnCours);
-		
 		request.setAttribute("rueDefaut", rueDefaut);
 		request.setAttribute("cpDefaut", cpDefaut);
 		request.setAttribute("villeDefaut", villeDefaut);
@@ -80,55 +76,86 @@ public class ServletNouvelleVente extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * méthode DoPost récupères les information saisies par le vendeur les vérifie et insère un
+	 * nouvel article
+	 * 
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
+		// initialisation des variables
 		String nomArticle = "";
 		String description = "";
-		int categorie = 0;
+		Integer categorie = 0;
 		int miseAPrix = 0;
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		String rue = "";
-		String codePostal ="";
+		String codePostal = "";
 		String ville = "";
-		
-		
-		//récupération saisie utilisateur
+
+		// récupération saisie utilisateur
 		nomArticle = request.getParameter("nom");
 		description = request.getParameter("description");
-		categorie =  Integer.valueOf(request.getParameter("categorie")) ;
+		categorie = Integer.valueOf(request.getParameter("categorie"));
 		miseAPrix = Integer.valueOf(request.getParameter("prixInitial"));
 		dateDebutEnchere = LocalDate.parse(request.getParameter("dateDebut"));
 		dateFinEnchere = LocalDate.parse(request.getParameter("dateFin"));
-		rue = request.getParameter("rue");
-		codePostal = request.getParameter("cp");
-		ville = request.getParameter("ville");
-		
-		
-		System.out.println(categorie);
-		
-		//On récupère la session
-				HttpSession session = request.getSession();
-				int idUtilisateur = (int)session.getAttribute("noUtilisateur");	
-		
-		//insertion du nouvel article
+
+		// création instance catégorie
+		Categorie novelleCategorie = new Categorie(categorie);
+		novelleCategorie.setNoCategorie(categorie);
+
+		// On récupère la session
+		HttpSession session = request.getSession();
+		int idUtilisateur = (int) session.getAttribute("noUtilisateur");
+
+		// récupération de l'adresse du vendeur
+		Utilisateur utilisateurEnCours = new Utilisateur();
+
 		try {
-		//insertion retrait
-			RetraitManager retraitManager = new RetraitManager();
-			Retrait nouveauRetrait = new Retrait(rue, codePostal, ville);
-			retraitManager.insertRetrait(nouveauRetrait).getNoRetrait();
-			
-			System.out.println(nouveauRetrait.getNoRetrait());
-						
-			
-			ArticleManager manager = new ArticleManager();
-			Article nouvelArticle = new Article(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, idUtilisateur, categorie, nouveauRetrait.getNoRetrait());
-		} catch (Exception e) {
-			
+			utilisateurEnCours = UtilisateurManager.getInstance().find_user(idUtilisateur);
+		} catch (BusinessException e) {
+
+			e.printStackTrace();
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 		}
+
+		// remplissage des champs d'adresse si le vendeur n'a rien renseigné
+		if (rue.isEmpty()) {
+			rue = utilisateurEnCours.getRue();
+		}
+		if (codePostal.isEmpty()) {
+			codePostal = utilisateurEnCours.getCodePostal();
+		}
+		if (ville.isEmpty()) {
+			ville = utilisateurEnCours.getVille();
+		}
+
 		
-		
+		try {
+
+			// création nouveau Retrait
+
+			Retrait nouveauRetrait = new Retrait(rue, codePostal, ville);
+
+			// insertion du nouvel article
+			ArticleManager manager = new ArticleManager();
+			Article nouvelArticle = new Article(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix,
+					utilisateurEnCours, novelleCategorie, nouveauRetrait);
+
+			manager.inserNouvelArticle(nouvelArticle);
+
+			//rediréctin vers la page d'accueil en mode connecté
+			session.setAttribute("noUtilisateur", utilisateurEnCours.getNoUtilisateur());
+			response.sendRedirect("./ServletAccueilConnecte");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

@@ -108,7 +108,7 @@ public class ServletInscription extends HttpServlet {
 				//select de l'utilisateur qui vient d'être crée					
 				int noUtilisateur = manager.selectAll(pseudo).getNoUtilisateur();
 				
-				//ouverture de la session
+				//redirection vers la page accueil en mode connecté
 				session.setAttribute("noUtilisateur", noUtilisateur);
 				response.sendRedirect("./ServletAccueilConnecte");
 				

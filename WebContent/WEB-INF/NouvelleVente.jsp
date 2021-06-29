@@ -33,11 +33,11 @@
 	</div>
 	<div >
     <label for="categorie">Catégorie</label>
-    <select class="form-control shadow-sm col-md-12" id="categorie" >
+    <select class="form-control shadow-sm col-md-12" id="categorie" name="categorie" >
     
       <c:forEach var ="liste" items="${listesCategories }">
-      		<option name="categorie" value="${liste.noCategorie }">
-      		${liste.libelle }
+      		<option  value="${liste.getNoCategorie()}">
+      		${liste.getLibelle()}
       		
       		</option>
       </c:forEach>
@@ -61,25 +61,29 @@
   		<input type="date" class="form-control shadow-sm"  id="dateFin" name="dateFin" >
   	</div>
   	
-  	<div id="retrait">
+  	
+  	<label>Retrait</label>
+  	<span id="retrait" class="rounded border border ">
+  
   		<div class="col-md-12">	
-  				<label for="rue" class="form-label">Rue</label>
-  				<input type="text" class="form-control shadow-sm"   name="rue" value="${rueDefaut }">
+  				<label class="form-label">Rue</label>
+  				<input type="text" class="form-control shadow-sm"   name="rue" placeholder="${rueDefaut }">
   		</div>
   		<div class="col-md-12">	
-  				<label for="code_postal" class="form-label">Code postal</label>
-  				<input type="text" class="form-control shadow-sm"   name="cp" value="${cpDefaut }">
+  				<label class="form-label">Code postal</label>
+  				<input type="text" class="form-control shadow-sm"   name="cp" placeholder="${cpDefaut }">
   		</div>
   		<div class="col-md-12">	
-  				<label for="ville" class="form-label">Ville</label>
-  				<input type="text" class="form-control shadow-sm"   name="ville" value="${villeDefaut }">
+  				<label  class="form-label">Ville</label>
+  				<input type="text" class="form-control shadow-sm"   name="ville" placeholder="${villeDefaut }">
   		</div>
+  		<br>
   	</div>
   	
   	<div class="d-flex justify-content-center">
 			<input class="btn btn-outline-primary m-1 p-2" type="submit" value="Enregistrer"> 
 			<a href="${pageContext.request.contextPath }/ServletAccueilConnecte" class="btn btn-outline-primary m-1">  Annuler  </a>
-	</div>
+	</span>
 
 </form>
 

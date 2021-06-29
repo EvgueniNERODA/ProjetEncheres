@@ -2,11 +2,14 @@ package fr.eni.dal;
 
 import java.util.List;
 
+import fr.eni.bo.Article;
 import fr.eni.bo.Utilisateur;
 
 
 
 public interface ArticleDAO {
+
+	void insertNouvelArticle(Article nouvelArticle);
 
 	
 			

@@ -1,5 +1,9 @@
 package fr.eni.bll;
 
+import fr.eni.bo.Article;
+import fr.eni.dal.ArticleDAO;
+import fr.eni.dal.DAOFactory;
+
 public class ArticleManager {
 
 /*************************************************CREATION-SINGLETON************************************************/
@@ -10,6 +14,12 @@ public class ArticleManager {
 			instance = new ArticleManager();
 		return instance;
 
+	}
+
+	public void inserNouvelArticle(Article nouvelArticle) {
+		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
+		articleDAO.insertNouvelArticle (nouvelArticle);
+		
 	}
 	
 	

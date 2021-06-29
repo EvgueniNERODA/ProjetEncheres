@@ -17,7 +17,7 @@
 <body>
 <%@include file="./fragments/header.jsp" %>
 	
-	<div class="container col-sm-4">
+	<div class="container col-md-4 bg-light text-dark">
 	
 	<ul class="list-group">
 		  <li class="list-group-item">Nom : ${utilisateur.nom }</li>

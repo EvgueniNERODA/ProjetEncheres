@@ -22,11 +22,26 @@ public class Categorie {
 	
 	
 
-	public Categorie(int noCategorie, String libelle) {
+	public Categorie(String libelle) {
 		this();
-		this.noCategorie = noCategorie;
+		
 		this.libelle = libelle;
 	}
+
+
+
+public Categorie(int noCategorie, String libelle) {
+	this();
+	this.noCategorie = noCategorie;
+	this.libelle=libelle;
+	}
+
+
+
+public Categorie(Integer categorie) {
+	this();
+	this.noCategorie = noCategorie;
+}
 
 
 
