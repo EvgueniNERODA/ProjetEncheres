@@ -36,8 +36,7 @@ public class ServletAccueil extends HttpServlet {
 		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
 		System.out.println(listesCategories);
 		
-		int pos = listesCategories.indexOf("Ameublement");
-		System.out.println(pos);
+		
 		request.setAttribute("listesCategories", listesCategories);
 		
 

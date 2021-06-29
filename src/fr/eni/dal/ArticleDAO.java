@@ -12,7 +12,8 @@ public interface ArticleDAO {
 
 	void insertNouvelArticle(Article nouvelArticle);
 
-	void selectArticlesSelonCategorie (Categorie categorie);
+	List <Article> selectArticlesSelonCategorie (Article articleARechercher);
+
 	
 
 	

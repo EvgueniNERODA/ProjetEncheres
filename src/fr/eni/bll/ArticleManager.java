@@ -1,6 +1,7 @@
 package fr.eni.bll;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import fr.eni.bo.Article;
 import fr.eni.bo.Categorie;
@@ -50,10 +51,10 @@ public class ArticleManager {
 	/*************************************************
 	 * METHODE-SELECTION-ARTICLES-SELON-CATEGORIE
 	 ************************************************/
-	private void selectArticlesSelonCategorie(Categorie categorie) {
+	private List<Article> selectArticlesSelonCategorie(Article articleARechercher) {
 		
 		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
-		articleDAO.selectArticlesSelonCategorie(categorie);
+		return articleDAO.selectArticlesSelonCategorie(articleARechercher);
 	}
 	
 	

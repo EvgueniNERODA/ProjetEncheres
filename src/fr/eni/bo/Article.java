@@ -50,13 +50,11 @@ public Article(String nomArticle, String description, LocalDate dateDebutEnchere
 
 
 
-
-
-
-
-
-
-
+public Article(String nomArticle, int no_categorie) {
+	this();
+	this.nomArticle = nomArticle;
+	this.no_categorie = categorie.getNoCategorie();
+}
 
 
 /*************************************************GETTERS/SETTERS************************************************/

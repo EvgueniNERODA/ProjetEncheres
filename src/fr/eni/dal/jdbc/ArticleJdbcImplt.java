@@ -22,7 +22,8 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait, etat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 	private static final String INSERT_NEW_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville) VALUES (?, ?, ?)";
 	
-	private static final String SELECT_ARTICLES_SELON_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=? AND  etat=2";
+	private static final String SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND no_categorie=? AND  etat=2";
+
 	
 	
 	@Override
@@ -71,16 +72,28 @@ public class ArticleJdbcImplt implements ArticleDAO {
 
 
 	@Override
-	public void selectArticlesSelonCategorie(Categorie categorie) {
+	public List <Article> selectArticlesSelonCategorie(Article articleArechercher) {
+		List<Article> listeDesArticles = new ArrayList<>();
 		try (Connection cnx = JdbcTools.getConnection()) {
 			
-			PreparedStatement psmt = cnx.prepareStatement(SELECT_ARTICLES_SELON_CATEGORIE);
-			psmt.setInt(1, categorie.getNoCategorie());
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE);
+			psmt.setInt(1, articleArechercher.getCategorie().getNoCategorie());
+			psmt.setString(2, articleArechercher.getNomArticle());
+								
+			ResultSet rs = psmt.executeQuery();
 			
-		} catch (Exception e) {
+			while (rs.next()) {
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"));
+				listeDesArticles.add(new Article(rs.getString("nom_article"), categorie,);
+			}
+			
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
+			//TODO gestion des erreurs
 		}
 		
+		return article;
 	}  
 
 	
