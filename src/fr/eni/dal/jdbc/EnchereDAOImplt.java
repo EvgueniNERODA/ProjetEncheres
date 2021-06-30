@@ -42,7 +42,7 @@ public class EnchereDAOImplt implements EnchereDAO{
 				enchere.setNo_enchere(rs.getInt("no_enchere"));
 				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
 				enchere.setMontant_enchere(rs.getInt("montant_enchere"));
-				enchere.setUtilisateurs(rs.getUtilisateurs("pseudo"));
+				
 				
 				list.add(enchere);
 			}

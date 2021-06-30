@@ -18,7 +18,7 @@ public class CategorieManager {
 	}
 
 	/*****************************************METHODE-SELECT ALL UTILISATEUR AVEC PESEUDO******************************/
-	public List selectCategories() {
+	public List<Categorie> selectCategories() {
 		
 		return DAOFactory.getCategorieDAO().selectCategories ();
 			

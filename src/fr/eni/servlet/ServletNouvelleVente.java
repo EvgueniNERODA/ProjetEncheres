@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+
 
 import fr.eni.bll.ArticleManager;
 import fr.eni.bll.CategorieManager;
@@ -24,7 +24,7 @@ import fr.eni.bo.Retrait;
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.RetraitDAO;
 import fr.eni.outils.BusinessException;
-import jdk.nashorn.internal.ir.BreakableNode;
+
 
 /**
  * Servlet implementation class ServletNouvelleVente

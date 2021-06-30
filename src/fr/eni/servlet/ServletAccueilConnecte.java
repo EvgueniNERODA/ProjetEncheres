@@ -32,6 +32,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 		
 		listesArticles = articleManager.selectAllArticles();
 		System.out.println(listesArticles);
+		request.setAttribute("listeArticles", listesArticles);
 		
 				
 		//Passer la liste d'enchere en parametre à la jsp
