@@ -139,8 +139,8 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	public List<Article> selectAllArticles() {
 		
 		List<Article> listeArticles = new ArrayList<>();
-		Utilisateur utilisateur = new Utilisateur();
-		Article article = new Article();
+	
+		
 		
 		try (Connection cnx = JdbcTools.getConnection()){
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_ALL_ARTICLES);
@@ -148,7 +148,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			ResultSet rs = psmt.executeQuery();
 			
 			while (rs.next()) {
-
+				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
 				
 				listeArticles.add(new Article(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
 				
