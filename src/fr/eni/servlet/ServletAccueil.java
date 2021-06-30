@@ -79,6 +79,10 @@ public class ServletAccueil extends HttpServlet {
 			
 		}
 		System.out.println(listesArticles);
+		
+		request.setAttribute("listesArticles", listesArticles);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+		rd.forward(request, response);
 	}
 
 	
