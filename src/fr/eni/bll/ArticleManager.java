@@ -59,12 +59,22 @@ public class ArticleManager {
 	}
 	
 	/*************************************************
-	 * METHODE-SELECTION-TOUS-LES-ARTICLES
+	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-MOT-CLE
 	 ************************************************/	
 	public List<Article> selectAllArticles(Article articleARechercher) {
 		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
-		return DAOFactory.getArticleDAO().selectAllArticles(articleARechercher);
+		return DAOFactory.getArticleDAO().selectAllArticlesByMotCle(articleARechercher);
 		
+		
+	}
+	
+	
+	/*************************************************
+	 * METHODE-SELECTION-TOUS-LES-ARTICLES
+	 ************************************************/	
+	public List<Article> selectAllArticles() {
+		
+		return DAOFactory.getArticleDAO().selectAllArticles();
 		
 	}
 	

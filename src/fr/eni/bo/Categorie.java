@@ -40,7 +40,7 @@ public Categorie(int noCategorie, String libelle) {
 
 public Categorie(Integer categorie) {
 	this();
-	this.noCategorie = noCategorie;
+	this.noCategorie = categorie;
 }
 
 

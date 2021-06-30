@@ -21,9 +21,9 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	
 	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait, etat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 	private static final String INSERT_NEW_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville) VALUES (?, ?, ?)";
-	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ?  AND  etat=2";
+	private static final String SELECT_ALL_ARTICLES_BY_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ?  AND  etat=2";
 	private static final String SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND no_categorie=? AND  etat=2";
-
+	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE etat=2";
 	
 	
 	@Override
@@ -100,12 +100,12 @@ public class ArticleJdbcImplt implements ArticleDAO {
 
 	
 	@Override
-	public List<Article> selectAllArticles(Article articleArechercher) {
+	public List<Article> selectAllArticlesByMotCle(Article articleArechercher) {
 		
 		List<Article> listeArticles = new ArrayList<>();
 		
 		try (Connection cnx = JdbcTools.getConnection()){
-			PreparedStatement psmt = cnx.prepareStatement(SELECT_ALL_ARTICLES);
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_ALL_ARTICLES_BY_MOT_CLE);
 			psmt.setString(1, articleArechercher.getNomArticle());
 			
 			ResultSet rs = psmt.executeQuery();
@@ -122,7 +122,34 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		return listeArticles;
 	}  
 
+	@Override
+	public List<Article> selectAllArticles() {
+		
+		List<Article> listeArticles = new ArrayList<>();
+		Utilisateur utilisateur = new Utilisateur();
+		Article article = new Article();
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_ALL_ARTICLES);
 	
-	
+			ResultSet rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				article.setNomArticle(rs.getString("nom_article"));
+				article.setNomArticle(rs.getString("nom_article"));
+				article.setMiseAPrix(rs.getInt("prix_initial"));
+				article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				article.setUtilisateur(utilisateur);
+				
+				listeArticles.add(article);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listeArticles;
+	} 
 	
 }

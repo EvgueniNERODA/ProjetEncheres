@@ -1,6 +1,8 @@
 package fr.eni.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.bll.ArticleManager;
 import fr.eni.bll.EnchereManager;
 import fr.eni.bll.UtilisateurManager;
+import fr.eni.bo.Article;
 import fr.eni.bo.Enchere;
 
 /**
@@ -23,6 +27,11 @@ public class ServletAccueilConnecte extends HttpServlet {
 /**************************************************DO-GET*****************************************************************/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Récupérer toutes les enchères en BDD
+		ArticleManager articleManager = new ArticleManager();
+		List<Article> listesArticles = new ArrayList<>();
+		
+		listesArticles = articleManager.selectAllArticles();
+		System.out.println(listesArticles);
 		
 				
 		//Passer la liste d'enchere en parametre à la jsp
