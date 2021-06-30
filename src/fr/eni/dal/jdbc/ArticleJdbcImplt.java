@@ -82,10 +82,12 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		try (Connection cnx = JdbcTools.getConnection()) {
 			
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE);
-			psmt.setInt(1, articleArechercher.getCategorie().getNoCategorie());
 			String nomArtitle = "%"+articleArechercher.getNomArticle()+"%" ;
+			psmt.setString(1,  nomArtitle);
+			psmt.setInt(2, articleArechercher.getCategorie().getNoCategorie());
 			
-			psmt.setString(2,  nomArtitle);
+			
+			
 								
 			ResultSet rs = psmt.executeQuery();
 			
@@ -130,7 +132,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(listeArticles);
+		
 		return listeArticles;
 	}  
 

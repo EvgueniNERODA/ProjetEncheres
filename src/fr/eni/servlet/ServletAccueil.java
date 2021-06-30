@@ -40,9 +40,11 @@ public class ServletAccueil extends HttpServlet {
 		//ajout de la liste de catégories à la requète
 		request.setAttribute("listesCategories", listesCategories);
 		
-		
-		
-		
+		//sélection de tous les articles par défaut
+		List<Article> listesArticles = new ArrayList<>();
+		ArticleManager articleManager = new ArticleManager();
+		listesArticles  = articleManager.selectAllArticles();
+		request.setAttribute("listesArticles", listesArticles);
 
 		// renvoi vers la page Accueil
 		String compteSupprime = request.getParameter("compteSupprime");
@@ -58,11 +60,18 @@ public class ServletAccueil extends HttpServlet {
 
 	//_______________________________________AFFICHAGE ARTICLES___________________________________________
 		
+		// sélection des catégories présentes en BDD
+		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();	
+				
+		//ajout de la liste de catégories à la requète
+		request.setAttribute("listesCategories", listesCategories);
+		
+		
 		
 		//récupération de la saisie de l'utilisateur
 		ArticleManager articleManager = new ArticleManager();
 		int categorie = Integer.valueOf(request.getParameter("categorie"));
-		categorie = 5;
+		
 		//cration instance catégorie avec noCatagorie
 		Categorie nouvelleCategorie = new Categorie(categorie);
 		String nomArticle = request.getParameter("recherche");
@@ -78,7 +87,7 @@ public class ServletAccueil extends HttpServlet {
 			listesArticles = articleManager.selectArticlesSelonCategorie (article);
 			
 		}
-		System.out.println(listesArticles);
+	
 		
 		request.setAttribute("listesArticles", listesArticles);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");

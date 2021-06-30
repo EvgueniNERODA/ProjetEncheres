@@ -45,13 +45,15 @@
       
     </select>
 	</div>
-	  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+	<span><button class="btn btn-outline-success my-4 my-sm-4 btn-lg" type="submit">Rechercher</button></span>
+	  
   </form>
   
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-  <div class="col">
+<div class="row row-cols-1 row-cols-md-3 g-4">
+ 
   	 <c:forEach var ="liste" items="${listesArticles }">
+  	  <div class="col">
     <div class="card">
       
       <div class="card-body">
@@ -61,11 +63,12 @@
          <p class="card-text">Vendeur  : ${liste.getUtilisateur().getPseudo()}</p>
       </div>
      </div>
+     </div>
      <br>
      </c:forEach>
   
-</div>
 
+</div>
 
 
 	
