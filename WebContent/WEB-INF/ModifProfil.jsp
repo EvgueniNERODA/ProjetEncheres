@@ -86,7 +86,7 @@
 		</div>
 		</form>
 		
-		<form action="${pageContext.request.contextPath }/ServletAccueil"
+		<form action="${pageContext.request.contextPath }/ServletDesinscription"
 			method="POST" name="supprimerProfil">
 			
 			<div class="d-flex justify-content-center">
