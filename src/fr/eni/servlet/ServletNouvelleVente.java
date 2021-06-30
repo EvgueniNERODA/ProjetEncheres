@@ -156,6 +156,7 @@ public class ServletNouvelleVente extends HttpServlet {
 	private void chargementCategorieEtAdresse (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
 
+		
 		request.setAttribute("listesCategories", listesCategories);
 
 		// On récupère la session

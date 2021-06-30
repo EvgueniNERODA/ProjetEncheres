@@ -50,10 +50,22 @@ public Article(String nomArticle, String description, LocalDate dateDebutEnchere
 
 
 
-public Article(String nomArticle, int no_categorie) {
+
+
+public Article(String nomArticle, Categorie categorie, int miseAPrix, LocalDate dateFinEncheres, Utilisateur utilisateur) {
 	this();
 	this.nomArticle = nomArticle;
-	this.no_categorie = categorie.getNoCategorie();
+	this.categorie = categorie;
+	this.miseAPrix = miseAPrix;
+	this.dateFinEncheres = dateFinEncheres;
+	this.utilisateur = utilisateur;
+}
+
+
+public Article(String nomArticle, Categorie categorie) {
+	this();
+	this.nomArticle = nomArticle;
+	this.categorie = categorie;
 }
 
 

@@ -46,15 +46,26 @@ public class ArticleManager {
 		}
 		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
 		articleDAO.insertNouvelArticle(nouvelArticle);
+		
 
 	}
 	/*************************************************
 	 * METHODE-SELECTION-ARTICLES-SELON-CATEGORIE
 	 ************************************************/
-	private List<Article> selectArticlesSelonCategorie(Article articleARechercher) {
+	public List<Article> selectArticlesSelonCategorie(Article articleARechercher) {
 		
 		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
-		return articleDAO.selectArticlesSelonCategorie(articleARechercher);
+		return DAOFactory.getArticleDAO().selectArticlesSelonCategorie(articleARechercher);
+	}
+	
+	/*************************************************
+	 * METHODE-SELECTION-TOUS-LES-ARTICLES
+	 ************************************************/	
+	public List<Article> selectAllArticles(Article articleARechercher) {
+		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
+		return DAOFactory.getArticleDAO().selectAllArticles(articleARechercher);
+		
+		
 	}
 	
 	
@@ -112,5 +123,7 @@ public class ArticleManager {
 			be.ajouterErreur(CodesErreurBll.ARTICLE_VILLE_ERREUR);
 		}
 	}
+
+	
 
 }

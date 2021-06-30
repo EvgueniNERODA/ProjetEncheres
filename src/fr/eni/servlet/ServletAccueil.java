@@ -1,6 +1,8 @@
 package fr.eni.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.manager.StatusTransformer;
 
+import fr.eni.bll.ArticleManager;
 import fr.eni.bll.CategorieManager;
 import fr.eni.bll.UtilisateurManager;
+import fr.eni.bo.Article;
 import fr.eni.bo.Categorie;
 import fr.eni.bo.Utilisateur;
 import fr.eni.outils.BusinessException;
@@ -30,14 +34,14 @@ public class ServletAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		CategorieManager manager = new CategorieManager();
-		// séléction des catégories présentes en BDD
+		// sélection des catégories présentes en BDD
+		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();	
 		
-
-		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();
-		System.out.println(listesCategories);
-		
-		
+		//ajout de la liste de catégories à la requète
 		request.setAttribute("listesCategories", listesCategories);
+		
+		
+		
 		
 
 		// renvoi vers la page Accueil
@@ -55,11 +59,14 @@ public class ServletAccueil extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		
 	//______________________________________________RECUPERATION SESSION________________________________________________
 		
 		HttpSession session = request.getSession(false);
 		
 		int idUtilisateur = (int)session.getAttribute("noUtilisateur");	
+		
+		
 		
 	//________________________________________________UPDATE-DESACTIVE-USER______________________________________________
 		
@@ -95,6 +102,31 @@ public class ServletAccueil extends HttpServlet {
 		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		//rd.forward(request, response);
 		response.sendRedirect("./ServletAccueil");
+		
+	//_______________________________________AFFICHAGE ARTICLES___________________________________________
+		
+		
+		//récupération de la saisie de l'utilisateur
+		ArticleManager articleManager = new ArticleManager();
+		int categorie = Integer.valueOf(request.getParameter("categorie"));
+		//cration instance catégorie avec noCatagorie
+		Categorie nouvelleCategorie = new Categorie(categorie);
+		String nomArticle = request.getParameter("recherche");
+		//création instance article avec nomArticle et Catégorie
+		Article article = new Article(nomArticle, nouvelleCategorie);
+		System.out.println(nomArticle);
+		
+		List<Article> listesArticles = new ArrayList<>();
+		
+		if (categorie == 5) {
+			listesArticles = articleManager.selectAllArticles(article);
+		}else {
+			listesArticles = articleManager.selectArticlesSelonCategorie (article);
+			
+		}
+		System.out.println(listesArticles);
 	}
 
+	
+	
 }

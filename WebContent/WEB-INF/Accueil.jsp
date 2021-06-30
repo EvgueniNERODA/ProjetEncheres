@@ -21,8 +21,8 @@
 
 <div class="container">
 <h3>Filtres</h3>
-  <form class="form-inline col-md-3">
-    <input class="form-control mr-md-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search" nom="recherche">
+  <form class="form-inline col-md-3" action="${pageContext.request.contextPath }/ServletAccueil" method="POST">
+    <input class="form-control mr-md-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
   
     
     

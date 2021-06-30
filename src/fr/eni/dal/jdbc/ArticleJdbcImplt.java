@@ -21,7 +21,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	
 	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait, etat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 	private static final String INSERT_NEW_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville) VALUES (?, ?, ?)";
-	
+	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ?  AND  etat=2";
 	private static final String SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND no_categorie=? AND  etat=2";
 
 	
@@ -84,7 +84,8 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			
 			while (rs.next()) {
 				Categorie categorie = new Categorie(rs.getInt("no_categorie"));
-				listeDesArticles.add(new Article(rs.getString("nom_article"), categorie,);
+				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
+				listeDesArticles.add(new Article(rs.getString("nom_article"), categorie, rs.getInt("prix_initial"), rs.getDate("date_fin_encheres").toLocalDate(), utilisateur ));
 			}
 			
 			
@@ -93,7 +94,32 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			//TODO gestion des erreurs
 		}
 		
-		return article;
+		return listeDesArticles;
+	}
+
+
+	
+	@Override
+	public List<Article> selectAllArticles(Article articleArechercher) {
+		
+		List<Article> listeArticles = new ArrayList<>();
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_ALL_ARTICLES);
+			psmt.setString(1, articleArechercher.getNomArticle());
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"));
+				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
+				listeArticles.add(new Article(rs.getString("nom_article"), categorie, rs.getInt("prix_initial"), rs.getDate("date_fin_encheres").toLocalDate(), utilisateur ));
+			}
+			
+		} catch (SQLException e) {
+			//TODO gestion des erreurs
+		}
+		return listeArticles;
 	}  
 
 	
