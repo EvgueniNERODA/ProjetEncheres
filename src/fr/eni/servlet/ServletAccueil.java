@@ -59,7 +59,7 @@ public class ServletAccueil extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		
+	/**	
 	//______________________________________________RECUPERATION SESSION________________________________________________
 		
 		HttpSession session = request.getSession(false);
@@ -102,13 +102,14 @@ public class ServletAccueil extends HttpServlet {
 		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		//rd.forward(request, response);
 		response.sendRedirect("./ServletAccueil");
-		
+	*/	
 	//_______________________________________AFFICHAGE ARTICLES___________________________________________
 		
 		
 		//récupération de la saisie de l'utilisateur
 		ArticleManager articleManager = new ArticleManager();
 		int categorie = Integer.valueOf(request.getParameter("categorie"));
+		categorie = 5;
 		//cration instance catégorie avec noCatagorie
 		Categorie nouvelleCategorie = new Categorie(categorie);
 		String nomArticle = request.getParameter("recherche");
