@@ -39,7 +39,7 @@ public class ServletBoutonAccueil extends HttpServlet {
 					//redirection vers AccueilConnecte.jsp
 					boolean compteConnecte = false;
 					request.setAttribute("compteConnecte", compteConnecte);
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueilConnecte");
 					rd.forward(request, response);
 				} catch (ServletException e) {
 				
@@ -48,7 +48,7 @@ public class ServletBoutonAccueil extends HttpServlet {
 
 				}else {
 				//redirection vers Accueil.jsp
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
 				rd.forward(request, response);
 				}
 			
