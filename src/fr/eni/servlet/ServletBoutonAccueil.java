@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.session.StandardSessionFacade;
+
 import fr.eni.outils.BusinessException;
 
 /**
@@ -23,13 +25,13 @@ public class ServletBoutonAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		//---------------> On arrive dans ServletBBoutonAcceuil avec un clique sur le bouton home <-------------------//
+		//---------------> On arrive dans ServletBoutonAcceuil avec un clique sur le bouton home <-------------------//
 		
 		
 		//______________________________________________RECUPERATION SESSION________________________________________________
-		
-			HttpSession session = request.getSession(false);
 			
+			HttpSession session = request.getSession(false);
+			System.out.println(session);
 		//________________________________________VERIFICATION UTILISATEUR CONNECTÉ_________________________________________
 			if (session != null) {
 						
@@ -41,14 +43,14 @@ public class ServletBoutonAccueil extends HttpServlet {
 					rd.forward(request, response);
 				} catch (ServletException e) {
 				
-				e.printStackTrace();
+					e.printStackTrace();
 				}
 
-			}else {
+				}else {
 				//redirection vers Accueil.jsp
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 				rd.forward(request, response);
-			}
+				}
 			
 		}
 	

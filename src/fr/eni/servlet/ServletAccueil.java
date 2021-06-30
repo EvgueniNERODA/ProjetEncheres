@@ -1,7 +1,7 @@
 package fr.eni.servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.manager.StatusTransformer;
+
 
 import fr.eni.bll.ArticleManager;
 import fr.eni.bll.CategorieManager;
-import fr.eni.bll.UtilisateurManager;
+
 import fr.eni.bo.Article;
 import fr.eni.bo.Categorie;
-import fr.eni.bo.Utilisateur;
-import fr.eni.outils.BusinessException;
+
+
 
 /**
  * Servlet implementation class ServletAccueil
@@ -33,7 +33,7 @@ public class ServletAccueil extends HttpServlet {
 /**************************************************DO-GET*****************************************************************/	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		CategorieManager manager = new CategorieManager();
+		
 		// sélection des catégories présentes en BDD
 		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();	
 		
@@ -45,9 +45,9 @@ public class ServletAccueil extends HttpServlet {
 		
 
 		// renvoi vers la page Accueil
-		String compteSupprime = request.getParameter("compteSupprime");
-		boolean compteSuppr = Boolean.valueOf(compteSupprime).booleanValue();
-		request.setAttribute("compteSuppr", compteSuppr);
+		HttpSession session = request.getSession(false);
+		System.out.println(session);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		rd.forward(request, response);
 	}

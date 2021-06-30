@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +97,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//TODO gestion des erreurs
+			
 		}
 		System.out.println(listeDesArticles);
 		return listeDesArticles;
@@ -149,7 +148,6 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			while (rs.next()) {
 				
 				utilisateur.setPseudo(rs.getString("pseudo"));
-				article.setNomArticle(rs.getString("nom_article"));
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setMiseAPrix(rs.getInt("prix_initial"));
 				article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
