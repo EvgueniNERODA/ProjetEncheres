@@ -14,9 +14,9 @@ public interface ArticleDAO {
 
 	List <Article> selectArticlesSelonCategorie (Article articleARechercher);
 
-	List<Article> selectAllArticles(Article articleARechercher);
+	List<Article> selectAllArticlesByMotCle(Article articleARechercher);
 
-	
+	List<Article> selectAllArticles();
 
 	
 			
