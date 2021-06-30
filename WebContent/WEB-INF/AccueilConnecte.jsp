@@ -17,55 +17,58 @@
 
 <body>
 <%@include file="./fragments/headerConnecte.jsp"%>
-<div class="container  ">
-	<h1 class="d-flex justify-content-center">Liste ds enchères</h1>
+<h1 class="d-flex justify-content-center">Liste des enchères</h1>
 
-		
-		<div class="container">
+
+<div class="container">
 <h3>Filtres</h3>
-  <form class="form-inline col-sm-3">
-    <input class="form-control mr-sm-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search">
+  <form class="form-inline col-md-3" action="${pageContext.request.contextPath }/ServletAccueilConnecte" method="POST">
+    <input class="form-control mr-md-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
   
     
     
     <div >
     
     <label for="categorie">Catégorie</label>
-    <select class="form-control shadow-sm col-md-12" id="categorie" >
+    <select class="form-control shadow-sm col-md-4" id="categorie" name="categorie">
     
-      <c:forEach var ="liste" items="${listesCategories }">
-      		<option name="categorie" value="${liste.noCategorie }">
-      		${liste.libelle }
+    
+    		<option value="5">Toutes</option>
+    		
+    		
+    		
+       <c:forEach var ="liste" items="${listesCategories }">
+      		<option  value="${liste.getNoCategorie()}">
+      		${liste.getLibelle()}
       		
       		</option>
       </c:forEach>
       
     </select>
 	</div>
-	  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+	<span><button class="btn btn-outline-success my-4 my-sm-4 btn-lg" type="submit">Rechercher</button></span>
+	  
   </form>
   
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-  <div class="col">
+<div class="row row-cols-1 row-cols-md-3 g-4">
+ 
+  	 <c:forEach var ="liste" items="${listesArticles }">
+  	  <div class="col">
     <div class="card">
-      <img src="..." class="card-img-top" alt="...">
+      
       <div class="card-body">
-        <h5 class="card-title">Article...</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h5 class="card-title">${liste.nomArticle}</h5>
+        <p class="card-text">Prix : ${liste.miseAPrix} points</p>
+        <p class="card-text">Fin de l'enchère  : ${liste.dateFinEncheres}</p>
+         <p class="card-text">Vendeur  : <a href="${pageContext.request.contextPath }/ServletProfilUtilisateur">${liste.getUtilisateur().getPseudo()}</a></p>
       </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Article...</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
+     </div>
+     </div>
+     <br>
+     </c:forEach>
   
+
 </div>
 		
 </body>

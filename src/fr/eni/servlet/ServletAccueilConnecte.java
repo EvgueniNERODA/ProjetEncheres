@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.bll.ArticleManager;
+import fr.eni.bll.CategorieManager;
 import fr.eni.bll.EnchereManager;
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Article;
+import fr.eni.bo.Categorie;
 import fr.eni.bo.Enchere;
 
 /**
@@ -26,14 +28,18 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 /**************************************************DO-GET*****************************************************************/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Récupérer toutes les enchères en BDD
-		ArticleManager articleManager = new ArticleManager();
+		
+		// sélection des catégories présentes en BDD
+		List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();	
+				
+		//ajout de la liste de catégories à la requète
+		request.setAttribute("listesCategories", listesCategories);
+				
+		//sélection de tous les articles par défaut
 		List<Article> listesArticles = new ArrayList<>();
-		
-		listesArticles = articleManager.selectAllArticles();
-		System.out.println(listesArticles);
-		request.setAttribute("listeArticles", listesArticles);
-		
+		ArticleManager articleManager = new ArticleManager();
+		listesArticles  = articleManager.selectAllArticles();
+		request.setAttribute("listesArticles", listesArticles);
 				
 		//Passer la liste d'enchere en parametre à la jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");

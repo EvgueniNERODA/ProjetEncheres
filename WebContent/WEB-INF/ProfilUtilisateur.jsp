@@ -21,7 +21,7 @@
 	
 	<ul class="list-group">
 		  <li class="list-group-item">Nom : ${utilisateur.nom }</li>
-		  <li class="list-group-item">Pseudo : ${utilisateur.pseudo }</li>
+		  <li class="list-group-item">Pseudo : ${liste.getUtilisateur().getPseudo()}</li>
 		  <li class="list-group-item">Prénom : ${utilisateur.prenom }</li>
 		  <li class="list-group-item">Email : ${utilisateur.email }</li>
 		  <li class="list-group-item">Téléphone : ${utilisateur.telephone }</li>
