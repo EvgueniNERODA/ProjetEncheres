@@ -77,7 +77,7 @@ public class ServletAccueil extends HttpServlet {
 		String nomArticle = request.getParameter("recherche");
 		//création instance article avec nomArticle et Catégorie
 		Article article = new Article(nomArticle, nouvelleCategorie);
-		System.out.println(nomArticle);
+		
 		
 		List<Article> listesArticles = new ArrayList<>();
 		
@@ -85,6 +85,9 @@ public class ServletAccueil extends HttpServlet {
 			listesArticles = articleManager.selectAllArticles(article);
 		}else {
 			listesArticles = articleManager.selectArticlesSelonCategorie (article);
+		for (Article article2 : listesArticles) {
+			System.out.println(article2);
+		}
 			
 		}
 	

@@ -52,17 +52,18 @@
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
  
+ 	
   	 <c:forEach var ="liste" items="${listesArticles }">
   	  <div class="col">
-    <div class="card">
+   		 <div class="card">
       
-      <div class="card-body">
-        <h5 class="card-title">${liste.nomArticle}</h5>
-        <p class="card-text">Prix : ${liste.miseAPrix} points</p>
-        <p class="card-text">Fin de l'enchère  : ${liste.dateFinEncheres}</p>
-         <p class="card-text">Vendeur  : ${liste.getUtilisateur().getPseudo()}</p>
-      </div>
-     </div>
+     		 <div class="card-body">
+        		<h5 class="card-title">${liste.nomArticle}</h5>
+       			<p class="card-text">Prix : ${liste.miseAPrix} points</p>
+       			<p class="card-text">Fin de l'enchère  : ${liste.dateFinEncheres}</p>
+         		<p class="card-text">Vendeur  : ${liste.getUtilisateur().getPseudo()}</p>
+      		</div>
+    	 </div>
      </div>
      <br>
      </c:forEach>
