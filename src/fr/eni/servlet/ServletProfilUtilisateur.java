@@ -46,10 +46,10 @@ public class ServletProfilUtilisateur extends HttpServlet {
 				request.setAttribute("utilisateur", utilisateur);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ProfilUtilisateur.jsp");
 				rd.forward(request, response);
-			} catch (BusinessException e) {
+			} catch (Exception e) {
 				
 			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			
 			}
 
 		}else {

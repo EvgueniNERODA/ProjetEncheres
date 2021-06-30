@@ -14,7 +14,7 @@ import fr.eni.bo.Categorie;
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.ArticleDAO;
 import fr.eni.dal.JdbcTools;
-import sun.security.mscapi.CKeyPairGenerator.RSA;
+
 
 
 public class ArticleJdbcImplt implements ArticleDAO {
@@ -89,7 +89,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 								
 			ResultSet rs = psmt.executeQuery();
 			
-			while (rs.next()) {
+			while (rs.next()) { 
 				Categorie categorie = new Categorie(rs.getInt("no_categorie"));
 				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
 				listeDesArticles.add(new Article(rs.getString("nom_article"), categorie, rs.getInt("prix_initial"), rs.getDate("date_fin_encheres").toLocalDate(), utilisateur ));

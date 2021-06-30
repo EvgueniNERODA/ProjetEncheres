@@ -6,6 +6,6 @@ import fr.eni.bo.Categorie;
 
 public interface CategorieDAO {
 
-	List selectCategories();
+	List<Categorie> selectCategories();
 
 }

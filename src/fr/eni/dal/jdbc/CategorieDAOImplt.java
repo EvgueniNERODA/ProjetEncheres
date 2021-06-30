@@ -24,7 +24,7 @@ public class CategorieDAOImplt implements CategorieDAO {
 	 * retourne une liste de catégories
 	 */
 	@Override
-	public List selectCategories() {
+	public List<Categorie> selectCategories() {
 		List<Categorie> listeCategories = new ArrayList();
 		try (Connection cnx = JdbcTools.getConnection()) {
 			Statement statement = cnx.createStatement();
