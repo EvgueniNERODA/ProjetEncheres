@@ -38,9 +38,9 @@ public Categorie(int noCategorie, String libelle) {
 
 
 
-public Categorie(Integer categorie) {
+public Categorie(int categorie) {
 	this();
-	this.noCategorie = noCategorie;
+	this.noCategorie = categorie;
 }
 
 
