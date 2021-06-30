@@ -33,7 +33,7 @@ public class ServletBoutonAccueil extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			System.out.println(session);
 		//________________________________________VERIFICATION UTILISATEUR CONNECTÉ_________________________________________
-			if (session != null) {
+			if (session != null && session.getAttribute("noUtilisateur") != null) {
 						
 				try {
 					//redirection vers AccueilConnecte.jsp
