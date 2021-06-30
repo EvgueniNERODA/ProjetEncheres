@@ -26,11 +26,17 @@ public class ServletDeconnexion extends HttpServlet {
 		//______________________________________________RECUPERATION SESSION________________________________________________
 		
 		HttpSession session = request.getSession(false);
-				
+		
+		if(session != null) {
 			//Destruction de la session
 			session.invalidate();
+			response.sendRedirect("./ServletAccueil");
+		}else {
 			//redirection vers ServletAccueil
 			response.sendRedirect("./ServletAccueil");
+		}
+		
+			
 		
 	}
 
