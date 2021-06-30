@@ -69,6 +69,22 @@ public Article(String nomArticle, Categorie categorie) {
 }
 
 
+
+
+public Article(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+		int miseAPrix, int prixVente, Utilisateur utilisateur) {
+	super();
+	this.nomArticle = nomArticle;
+	this.description = description;
+	this.dateDebutEncheres = dateDebutEncheres;
+	this.dateFinEncheres = dateFinEncheres;
+	this.miseAPrix = miseAPrix;
+	this.prixVente = prixVente;
+	
+	this.utilisateur = utilisateur;
+}
+
+
 /*************************************************GETTERS/SETTERS************************************************/
 	public int getNoArticle() {
 		return noArticle;

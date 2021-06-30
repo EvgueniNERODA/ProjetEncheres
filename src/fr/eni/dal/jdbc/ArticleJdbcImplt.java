@@ -27,7 +27,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 
 
 	
-	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE etat=2";
+	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, description, date_debut_encheres, prix_vente   FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur WHERE etat=2";
 
 	
 	
@@ -150,19 +150,16 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			
 			while (rs.next()) {
 				
-				utilisateur.setPseudo(rs.getString("pseudo"));
-				article.setNomArticle(rs.getString("nom_article"));
-				article.setNomArticle(rs.getString("nom_article"));
-				article.setMiseAPrix(rs.getInt("prix_initial"));
-				article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-				article.setUtilisateur(utilisateur);
 				
-				listeArticles.add(article);
+				listeArticles.add(new Article(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
+				
+				
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return listeArticles;
 	} 
 	
