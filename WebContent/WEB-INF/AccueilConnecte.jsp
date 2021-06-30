@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ page import="fr.eni.messages.LecteurMessage" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +24,7 @@
 <div class="container">
 <h3>Filtres</h3>
   <form class="form-inline col-md-3" action="${pageContext.request.contextPath }/ServletAccueilConnecte" method="POST">
-    <input class="form-control mr-md-2" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
+    <input class="form-control mr-md-2 shadow-sm" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
   
     
     
@@ -55,12 +56,15 @@
  
   	 <c:forEach var ="liste" items="${listesArticles }">
   	  <div class="col">
-    <div class="card">
+    <div class="card shadow-sm bg-light">
       
       <div class="card-body">
         <h5 class="card-title">${liste.nomArticle}</h5>
         <p class="card-text">Prix : ${liste.miseAPrix} points</p>
-        <p class="card-text">Fin de l'enchère  : ${liste.dateFinEncheres}</p>
+        <p class="card-text">Fin de l'enchère  : 
+       			<fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+				<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
+				</p>
          <p class="card-text">Vendeur  : <a href="${pageContext.request.contextPath }/ServletProfilUtilisateur">${liste.getUtilisateur().getPseudo()}</a></p>
       </div>
      </div>
