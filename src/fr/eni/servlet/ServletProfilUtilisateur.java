@@ -44,7 +44,8 @@ public class ServletProfilUtilisateur extends HttpServlet {
 				
 				//redirection vers ProfilUtilisateur.jsp
 				String pseudo = request.getParameter("pseudo");
-				System.out.println(pseudo);
+				utilisateur = utilisateurManager.selectAll(pseudo);
+				request.setAttribute("utilisateur", utilisateur);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ProfilUtilisateur.jsp");
 				rd.forward(request, response);
 			} catch (Exception e) {

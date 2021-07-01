@@ -47,9 +47,7 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("listesArticles", listesArticles);
 
 		// renvoi vers la page Accueil
-		HttpSession session = request.getSession(false);
-		System.out.println(session);
-		
+	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		rd.forward(request, response);
 	}
