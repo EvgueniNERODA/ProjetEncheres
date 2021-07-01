@@ -43,7 +43,8 @@ public class ServletProfilUtilisateur extends HttpServlet {
 				//Selectionner le vendeur et retourner ses infos
 				
 				//redirection vers ProfilUtilisateur.jsp
-				request.setAttribute("utilisateur", utilisateur);
+				String pseudo = request.getParameter("pseudo");
+				System.out.println(pseudo);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ProfilUtilisateur.jsp");
 				rd.forward(request, response);
 			} catch (Exception e) {
@@ -66,7 +67,7 @@ public class ServletProfilUtilisateur extends HttpServlet {
 
 /**************************************************DO-POST*****************************************************************/	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

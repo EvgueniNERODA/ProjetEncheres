@@ -7,4 +7,13 @@
   <session-config>
     <session-timeout>1</session-timeout>
   </session-config>
+  
+  <servlet>
+    <servlet-name>JSPProfilUtilisateur</servlet-name>
+    <jsp-file>/WEB-INF/ProfilUtilisateur.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPProfilUtilisateur</servlet-name>
+    <url-pattern>/ProfilUtilisateur</url-pattern>
+  </servlet-mapping>
 </web-app>

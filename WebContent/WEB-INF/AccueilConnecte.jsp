@@ -61,7 +61,11 @@
         <h5 class="card-title">${liste.nomArticle}</h5>
         <p class="card-text">Prix : ${liste.miseAPrix} points</p>
         <p class="card-text">Fin de l'enchère  : ${liste.dateFinEncheres}</p>
-         <p class="card-text">Vendeur  : <a href="${pageContext.request.contextPath }/ServletProfilUtilisateur">${liste.getUtilisateur().getPseudo()}</a></p>
+        <p class="card-text">Vendeur  : <a href="${pageContext.request.contextPath }/ProfilUtilisateur">${liste.getUtilisateur().getPseudo()}</a></p>
+         <form action="${pageContext.request.contextPath }/ProfilUtilisateur">
+         <input type="hidden" name="pseudo" value="${liste.getUtilisateur().getPseudo()}">
+         <input type="submit">
+        </form>
       </div>
      </div>
      </div>
