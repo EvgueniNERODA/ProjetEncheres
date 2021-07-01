@@ -32,6 +32,12 @@ public class ArticleJdbcImplt implements ArticleDAO {
 
 	private static final String SELECT_ARTICLE_BY_ID ="SELECT * FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur JOIN RETRAITS ON ARTICLES_VENDUS.no_retrait=RETRAITS.no_retrait JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE no_article=?";
 	
+	
+	
+	/**************************************************METHODE-INSERTION-NOUVEL-ARTICLE*******************************************************/
+
+	
+	
 	@Override
 	public void insertNouvelArticle(Article nouvelArticle) {
 		try (Connection cnx = JdbcTools.getConnection()){
@@ -76,6 +82,11 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		
 	}
 
+	
+	
+	
+	/**************************************************METHODE-SELECTION-ARTICLES-SELON-CATEGORIE*******************************************************/
+
 
 	@Override
 	public List <Article> selectArticlesSelonCategorie(Article articleArechercher) {
@@ -113,7 +124,12 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		
 		return listeDesArticles;
 	}
+	
+	
+	
+	
 
+	/************************************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-MOT-CLE*******************************************************/
 
 	
 	@Override
@@ -152,6 +168,12 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		return listeArticles;
 	}  
 
+	
+	
+	/************************************************** METHODE-SELECTION-TOUS-LES-ARTICLES*******************************************************/
+
+	
+	
 	@Override
 	public List<Article> selectAllArticles() {
 		
@@ -189,7 +211,8 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	}
 
 
-	
+	/************************************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-CATEGORIE*******************************************************/
+
 	
 	@Override
 	public List<Article> selectArticlesByUserAndCategorie(Article articleARechercher) {
@@ -254,5 +277,82 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		
 		return listeArticle;
 	}
+
 	
+	
+	
+	/************************************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-DATE-DEBUT-VENTE*******************************************************/
+
+
+	@Override
+	public List<Article> selectByUserAndDateDebutEnchere(Article articleSansCategorie) {
+		List<Article> listeArticles = new ArrayList<>();
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement psmt = cnx.prepareStatement(SLECT_ARTICLES_BY_USER_AND_CATEGORIES);
+			String nomArtitle = "%"+articleSansCategorie.getNomArticle()+"%" ;
+			psmt.setString(1,  nomArtitle);
+			psmt.setInt(2, articleSansCategorie.getUtilisateur().getNoUtilisateur());
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				//condition d'affichages des ventes en fonction de la date de début de l'enchère et de la date de fin de l'enchere
+
+				if (rs.getDate("date_debut_encheres").toLocalDate().isAfter((LocalDate.now()))) {
+					
+						Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"), rs.getInt("no_utilisateur"));
+						listeArticles.add(new Article(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
+					
+					
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		return listeArticles;
+	
+}
+
+	
+	/**************************************************METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-DATE-FIN-VENTE*******************************************************/
+
+	@Override
+	public List<Article> selectByUserAndDateFinEnchere(Article articleSansCategorie) {
+		List<Article> listeArticles = new ArrayList<>();
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement psmt = cnx.prepareStatement(SLECT_ARTICLES_BY_USER_AND_CATEGORIES);
+			String nomArtitle = "%"+articleSansCategorie.getNomArticle()+"%" ;
+			psmt.setString(1,  nomArtitle);
+			psmt.setInt(2, articleSansCategorie.getUtilisateur().getNoUtilisateur());
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				//condition d'affichages des ventes en fonction de la date de début de l'enchère et de la date de fin de l'enchere
+
+				if (rs.getDate("date_fin_encheres").toLocalDate().isBefore((LocalDate.now()))) {
+					
+						Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"), rs.getInt("no_utilisateur"));
+						listeArticles.add(new Article(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
+					
+					
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		return listeArticles;
+	}
 }

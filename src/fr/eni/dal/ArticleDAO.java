@@ -25,4 +25,12 @@ public interface ArticleDAO {
 
 	List<Article> selectArticleById(int idArticle);
 
+	List<Article> selectByUserAndDateDebutEnchere(Article articleSansCategorie);
+
+	List<Article> selectByUserAndDateFinEnchere(Article articleSansCategorie);
+
+
+	
+			
+
 }

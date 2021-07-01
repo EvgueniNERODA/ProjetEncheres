@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.bo.Article;
-import fr.eni.bo.Categorie;
 import fr.eni.dal.ArticleDAO;
 import fr.eni.dal.DAOFactory;
 import fr.eni.outils.BusinessException;
@@ -86,7 +85,23 @@ public class ArticleManager {
 		return DAOFactory.getArticleDAO().selectArticleById(idArticle);
 	}
 	
-/************************************************** VALIDATIONS *****************************************************************/
+
+/********************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-DATE-DEBUT-VENTE****************************/	
+	
+	public List<Article> selectByUserAndDateDebutEnchere(Article articleSansCategorie) {
+		
+		return DAOFactory.getArticleDAO().selectByUserAndDateDebutEnchere(articleSansCategorie);
+	}
+	
+/*********************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-DATE-FIN-VENTE*****************************/	
+	
+	public List<Article> selectByUserAndDateFinEnchere(Article articleSansCategorie) {
+		
+		return DAOFactory.getArticleDAO().selectByUserAndDateFinEnchere(articleSansCategorie);
+	}
+	
+/************************************************** VALIDATIONS *****************************************************************/	
+	
 	private void validationDateDuJOur(LocalDate dateDebutVente, BusinessException be) {
 		if (dateDebutVente.isBefore(LocalDate.now())) {
 			be.ajouterErreur(CodesErreurBll.ARTICLE_DATE_ERREUR);
@@ -139,5 +154,9 @@ public class ArticleManager {
 		}
 	}
 
+
+	
+
+	
 
 }
