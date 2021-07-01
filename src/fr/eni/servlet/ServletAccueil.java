@@ -86,11 +86,7 @@ public class ServletAccueil extends HttpServlet {
 		}else {
 			listesArticles = articleManager.selectArticlesSelonCategorie (article);
 		
-			//for (Article article2 : listesArticles) {
-			//System.out.println(article2);
 			
-		//}
-			//listesArticles.get(5);
 		}
 	
 		
