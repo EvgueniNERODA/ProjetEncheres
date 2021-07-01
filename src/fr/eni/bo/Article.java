@@ -69,7 +69,7 @@ public Article(String nomArticle, Categorie categorie) {
 
 
 
-public Article(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+public Article(int noArticle,String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 		int miseAPrix, int prixVente, Utilisateur utilisateur) {
 	super();
 	this.nomArticle = nomArticle;

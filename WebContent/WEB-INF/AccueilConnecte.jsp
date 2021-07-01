@@ -48,7 +48,20 @@
       </c:forEach>
       
     </select>
+    
 	</div>
+	<div class="form-group">
+    <label class="control-label col-md-5">Create a</label>
+    <div class="col-md-7">
+        <label class="radio-inline control-label">
+            <input checked="checked" id="TaskLog_TaskTypeId" name="TaskLog.TaskTypeId" type="radio" value="2"> Task
+        </label>
+        <label class="radio-inline control-label">
+            <input id="TaskLog_TaskTypeId" name="TaskLog.TaskTypeId" type="radio" value="1"> Note
+        </label>
+    </div>
+</div>
+	
 	<span><button class="btn btn-outline-success my-4 my-sm-4 btn-lg" type="submit">Rechercher</button></span>
 	  
   </form>
@@ -71,6 +84,8 @@
 		<form action="${pageContext.request.contextPath }/ProfilUtilisateur">
          <input type="hidden" name="pseudo" value="${liste.getUtilisateur().getPseudo()}">
          <input type="submit">
+         
+         
         </form>
       </div>
      </div>
