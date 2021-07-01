@@ -34,6 +34,8 @@
 		  </li>
 		  <li class="list-group-item">Retrait : ${listeDeLarticle[0].retrait.rue } ${listeDeLarticle[0].retrait.code_Postal  } ${listeDeLarticle[0].retrait.ville  }</li>
 		  <li class="list-group-item">Vendeur : ${listeDeLarticle[0].utilisateur.pseudo }</li>
+		  <c:out value="${id}"></c:out>
+		  <p><p/>
 	</ul>
 	
 	<c:if test="${testVendeur == true}">
@@ -42,6 +44,8 @@
 		  <div class="card-body">
 		  <p class="card-text">Ma proposition : <input type="number" name="montantPropose" min="10" max="5000"></p>
 		  <input type="submit" value="Encherir" class="btn btn-outline-primary">
+		  <input value="${id}" name="id">
+		  
 		  </div>
 	</form>
 	

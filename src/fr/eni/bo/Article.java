@@ -105,6 +105,12 @@ public Article(Utilisateur utilisateur, String nomArticle) {
 }
 
 
+public Article(int idArticle) {
+	this();
+	this.noArticle = idArticle;
+}
+
+
 /*************************************************GETTERS/SETTERS************************************************/
 	public int getNoArticle() {
 		return noArticle;
