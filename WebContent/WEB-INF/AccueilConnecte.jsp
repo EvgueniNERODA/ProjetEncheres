@@ -24,7 +24,7 @@
 <div class="container">
 <h3>Filtres</h3>
 <br>
-  <form class="form-inline col-md-3" action="${pageContext.request.contextPath }/ServletAccueilConnecte" method="POST">
+  <form class="form-inline col-md-5" action="${pageContext.request.contextPath }/ServletAccueilConnecte" method="POST">
     <input class="form-control mr-md-2 shadow-sm" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
     
   
@@ -50,17 +50,92 @@
     </select>
     
 	</div>
-	<div class="form-group">
-    <label class="control-label col-md-5">Create a</label>
-    <div class="col-md-7">
-        <label class="radio-inline control-label">
-            <input checked="checked" id="TaskLog_TaskTypeId" name="TaskLog.TaskTypeId" type="radio" value="2"> Task
-        </label>
-        <label class="radio-inline control-label">
-            <input id="TaskLog_TaskTypeId" name="TaskLog.TaskTypeId" type="radio" value="1"> Note
-        </label>
-    </div>
+	
+	
+	<div class="form-check">
+	<input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1" onchange="changeThis(this)">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio1
+  </label>
+	</div>
+	
+<div class="form-check">
+	<input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2" onchange="changeThis(this)">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio2
+  </label>
+	</div>
+
+<div class = "container ">
+  <div class="row  form-switch">
+  
+   
+    <fieldset class="col-sm-6 ">
+      <label>
+        <input id="check1" class="form-check-input" type="checkbox" name="encheres_ouvertes"  disabled onclick="document.getElementById('form').submit();"/>
+        <span class="form-check-label" for="flexSwitchCheckChecked">Enchères ouvertes</span>
+      </label>
+    </fieldset>
+    <fieldset class="col-sm-6">
+      <label>
+        <input  id="check5"  class="form-check-input" type="checkbox" name="mes_ventes_en_cours" disabled/>
+        <span>Mes ventes en cours</span>
+      </label>
+    </fieldset>
+     <fieldset class="col-sm-6 ">
+      <label>
+        <input id="check2"  class="form-check-input" type="checkbox" name="mes_encheres" disabled/>
+        <span class="form-check-label" for="flexSwitchCheckChecked">Mes enchères</span>
+      </label>
+    </fieldset>
+    <fieldset class="col-sm-6">
+      <label>
+        <input  id="check4" class="form-check-input" type="checkbox" name="ventes_non_debutees" disabled/>
+        <span>Ventes non débutées</span>
+      </label>
+    </fieldset>
+     <fieldset class="col-sm-6 ">
+      <label>
+        <input  id="check3"  class="form-check-input" type="checkbox" name="mes_encheres_remportees" disabled/>
+        <span class="form-check-label" for="flexSwitchCheckChecked">Mes enchères remportées</span>
+      </label>
+    </fieldset>
+    <fieldset class="col-sm-6">
+      <label>
+        <input  id="check6"  class="form-check-input" type="checkbox" name="ventes_terminees" disabled/>
+        <span>Ventes terminées</span>
+      </label>
+    </fieldset>
+  </div>
 </div>
+<script>
+
+	function changeThis(sender) {
+		if (document.getElementById('radio1').checked) {
+		document.getElementById("check1").removeAttribute('disabled');
+		document.getElementById("check2").removeAttribute('disabled');
+		document.getElementById("check3").removeAttribute('disabled');
+		document.getElementById("check4").disabled = true;
+		document.getElementById("check5").disabled = true;
+		document.getElementById("check6").disabled = true;
+		
+		
+	}else if (document.getElementById('radio2').checked){
+		document.getElementById("check4").removeAttribute('disabled');
+		document.getElementById("check5").removeAttribute('disabled');
+		document.getElementById("check6").removeAttribute('disabled');
+		document.getElementById("check1").disabled = true;
+		document.getElementById("check2").disabled = true;
+		document.getElementById("check3").disabled = true;
+	}
+
+	}
+
+
+
+		
+		
+	</script>
 	
 	<span><button class="btn btn-outline-success my-4 my-sm-4 btn-lg" type="submit">Rechercher</button></span>
 	  

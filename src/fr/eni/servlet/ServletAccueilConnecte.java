@@ -40,6 +40,7 @@ public class ServletAccueilConnecte extends HttpServlet {
 		ArticleManager articleManager = new ArticleManager();
 		listesArticles  = articleManager.selectAllArticles();
 		request.setAttribute("listesArticles", listesArticles);
+	
 				
 		//Passer la liste d'enchere en parametre à la jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
@@ -74,18 +75,73 @@ public class ServletAccueilConnecte extends HttpServlet {
 			
 			List<Article> listesArticles = new ArrayList<>();
 			
+			//filtes
+			String encheresOuvertes = request.getParameter("encheres_ouvertes");
+			String mesVentesEnCours = request.getParameter("mes_ventes_en_cours");
+			String mesEncheres = request.getParameter("mes_encheres");
+			String ventesNonDebutees = request.getParameter("ventes_non_debutees");
+			String mesEncheresRemportees = request.getParameter("mes_encheres_remportees");
+			String ventesTerminees = request.getParameter("ventes_terminees");
+			
 			if (categorie == 5) {
+				
+				if (encheresOuvertes!= null) {
+					System.out.println(1);
+				} 
+				if (mesVentesEnCours != null) {
+					System.out.println(3);
+				}
+				if (mesEncheres!= null) {
+					System.out.println(3);
+				} 
+				if (ventesNonDebutees!= null) {
+					System.out.println(4);
+				} 
+				if (mesEncheresRemportees!= null) {
+					System.out.println(5);
+				} 
+				if(ventesTerminees!= null) {
+					System.out.println(6);
+				} else {
 				listesArticles = articleManager.selectAllArticles(article);
+				}
 			}else {
+				if (encheresOuvertes!= null) {
+					System.out.println(1);
+				} 
+				if (mesVentesEnCours != null) {
+					System.out.println(3);
+				}
+				if (mesEncheres!= null) {
+					System.out.println(3);
+				} 
+				if (ventesNonDebutees!= null) {
+					System.out.println(4);
+				} 
+				if (mesEncheresRemportees!= null) {
+					System.out.println(5);
+				} 
+				if(ventesTerminees!= null) {
+					System.out.println(6);
+				} else {
 				listesArticles = articleManager.selectArticlesSelonCategorie (article);
 			
 				
 			}
-		
 			
+			}
+			
+			
+			
+			
+	
 			request.setAttribute("listesArticles", listesArticles);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
 			rd.forward(request, response);
 	}
 
+	
 }
+	
+
+			
