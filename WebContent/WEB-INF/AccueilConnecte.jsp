@@ -55,13 +55,13 @@
   
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
- 
+ 	
   	 <c:forEach var ="liste" items="${listesArticles }">
   	  <div class="col">
     <div class="card shadow-sm bg-light">
       
       <div class="card-body">
-        <h5 class="card-title">${liste.nomArticle}</h5>
+      	<a href="${pageContext.request.contextPath }/ServletPageEncherir?id=${liste.no_Article}" class="card-title text-dark">${liste.nomArticle}</a>
         <p class="card-text">Prix : ${liste.miseAPrix} points</p>
         <p class="card-text">Fin de l'enchère  : 
        	<fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
