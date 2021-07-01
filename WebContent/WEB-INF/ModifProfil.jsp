@@ -24,7 +24,7 @@
 
 		<h1 class="d-flex justify-content-center">Modification du profil</h1>
 		<form action="${pageContext.request.contextPath }/ServletModifProfil"
-			method="POST" name="modifProfil" class="form-control">
+			method="POST" name="modifProfil" class="form">
 
 
 
@@ -81,6 +81,7 @@
   				<input type="password" class="form-control" placeholder="Confirmation" name="confirmPassword" required>
 		</div>
 
+<br>
 		<div class="d-flex justify-content-center">
 			<input class="btn btn-outline-primary" type="submit" value="Enregistrer"> 
 		</div>

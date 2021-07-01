@@ -31,10 +31,12 @@
 		  <li class="list-group-item">Fin de l'enchère: 
 		  <fmt:parseDate value="${listeDeLarticle[0].dateFinEncheres }" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
 		  <fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
-		 </li>
+		  </li>
 		  <li class="list-group-item">Retrait : ${listeDeLarticle[0].retrait.rue } ${listeDeLarticle[0].retrait.code_Postal  } ${listeDeLarticle[0].retrait.ville  }</li>
 		  <li class="list-group-item">Vendeur : ${listeDeLarticle[0].utilisateur.pseudo }</li>
 	</ul>
+	
+	<c:if test="${testVendeur == true}">
 	
 	<form action="${pageContext.request.contextPath }/ServletPageEncherir" method="post">
 		  <div class="card-body">
@@ -42,6 +44,11 @@
 		  <input type="submit" value="Encherir">
 		  </div>
 	</form>
+	
+	</c:if>
+	
+	
+	
 		  
 	</div>
 

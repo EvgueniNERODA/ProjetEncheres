@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.coyote.InputBuffer;
 
@@ -29,8 +30,21 @@ public class ServletPageEncherir extends HttpServlet {
 		
 		ArticleManager articleManager = new ArticleManager();
 		int idArticle = Integer.parseInt(request.getParameter("id"));
-		System.out.println(idArticle);
+		
 		List<Article> listeDeLarticle = articleManager.selectArticleById(idArticle);
+		
+		
+		//test idEncherisseur pour savoir si c'est le vendeur ou l'acquéreur qui consulte l'article
+		boolean testVendeur = false ;
+		HttpSession session = request.getSession();
+		int idEncherisseur = (int) session.getAttribute("noUtilisateur");
+		int idVendeur = listeDeLarticle.get(0).getUtilisateur().getNoUtilisateur();
+		if (idEncherisseur != idVendeur) {
+			testVendeur = true;
+		}
+		
+		request.setAttribute("testVendeur", testVendeur);
+		
 		request.setAttribute("listeDeLarticle", listeDeLarticle);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/PageEncherir.jsp");
 		rd.forward(request, response);
@@ -39,8 +53,8 @@ public class ServletPageEncherir extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		
 	}
 
 }

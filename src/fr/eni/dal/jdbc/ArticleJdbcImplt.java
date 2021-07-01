@@ -264,7 +264,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			ResultSet rs = psmt.executeQuery();
 			
 			while (rs.next()) {
-				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
+				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"), rs.getInt("no_utilisateur"));
 				Categorie categorie = new Categorie(rs.getString("libelle"));
 				Retrait retrait = new Retrait(rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
 				listeArticle.add(new Article(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), utilisateur, categorie, retrait ));
