@@ -62,10 +62,19 @@ public class ArticleManager {
 	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-MOT-CLE
 	 ************************************************/	
 	public List<Article> selectAllArticles(Article articleARechercher) {
-		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
+		
 		return DAOFactory.getArticleDAO().selectAllArticlesByMotCle(articleARechercher);
 		
 		
+	}
+	
+	/*************************************************************
+	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-CATEGORIE
+	 *************************************************************/	
+	
+	public List<Article> selectArticlesByUserAndCategorie(Article articleARechercher) {
+		// TODO Auto-generated method stub
+		return DAOFactory.getArticleDAO().selectArticlesByUserAndCategorie(articleARechercher);
 	}
 	
 	
@@ -133,6 +142,8 @@ public class ArticleManager {
 			be.ajouterErreur(CodesErreurBll.ARTICLE_VILLE_ERREUR);
 		}
 	}
+
+	
 
 	
 

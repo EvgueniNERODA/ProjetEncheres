@@ -83,6 +83,27 @@ public Article(int noArticle,String nomArticle, String description, LocalDate da
 }
 
 
+public Article(Utilisateur utilisateur, String nomArticle, Categorie categorie) {
+	this();
+	this.utilisateur = utilisateur;
+	this.nomArticle = nomArticle;
+	this.categorie = categorie;
+		
+	
+}
+
+
+
+
+
+public Article(Utilisateur utilisateur, String nomArticle) {
+	this();
+	this.utilisateur = utilisateur;
+	this.nomArticle = nomArticle;
+	
+}
+
+
 /*************************************************GETTERS/SETTERS************************************************/
 	public int getNoArticle() {
 		return noArticle;

@@ -55,14 +55,14 @@
 	<div class="form-check">
 	<input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1" onchange="changeThis(this)">
   <label class="form-check-label" for="flexRadioDefault1">
-    Default radio1
+    Achats
   </label>
 	</div>
 	
 <div class="form-check">
 	<input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2" onchange="changeThis(this)">
   <label class="form-check-label" for="flexRadioDefault1">
-    Default radio2
+    Mes ventes
   </label>
 	</div>
 

@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import fr.eni.bll.ArticleManager;
 import fr.eni.bll.CategorieManager;
@@ -18,6 +20,7 @@ import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Article;
 import fr.eni.bo.Categorie;
 import fr.eni.bo.Enchere;
+import fr.eni.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletAccueilConnecte
@@ -51,6 +54,8 @@ public class ServletAccueilConnecte extends HttpServlet {
 /**************************************************DO-POST*****************************************************************/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		int idUtilisateurEnCours = (int) session.getAttribute("noUtilisateur");
 
 		//_______________________________________AFFICHAGE ARTICLES___________________________________________
 			
@@ -66,11 +71,15 @@ public class ServletAccueilConnecte extends HttpServlet {
 			ArticleManager articleManager = new ArticleManager();
 			int categorie = Integer.valueOf(request.getParameter("categorie"));
 			
+			//création instance utilisateur avec utilisateur en cours
+			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			Utilisateur utilisateurEnCours = new Utilisateur(idUtilisateurEnCours);
+			
 			//cration instance catégorie avec noCatagorie
 			Categorie nouvelleCategorie = new Categorie(categorie);
 			String nomArticle = request.getParameter("recherche");
 			//création instance article avec nomArticle et Catégorie
-			Article article = new Article(nomArticle, nouvelleCategorie);
+			Article article = new Article(utilisateurEnCours, nomArticle, nouvelleCategorie);
 			
 			
 			List<Article> listesArticles = new ArrayList<>();
@@ -84,12 +93,14 @@ public class ServletAccueilConnecte extends HttpServlet {
 			String ventesTerminees = request.getParameter("ventes_terminees");
 			
 			if (categorie == 5) {
-				
+				Article articleSansCategorie = new Article(utilisateurEnCours, nomArticle);
 				if (encheresOuvertes!= null) {
+					listesArticles = articleManager.selectAllArticles(articleSansCategorie);
 					System.out.println(1);
 				} 
 				if (mesVentesEnCours != null) {
-					System.out.println(3);
+					listesArticles = articleManager.selectArticlesByUserAndCategorie (articleSansCategorie);
+					System.out.println(2);
 				}
 				if (mesEncheres!= null) {
 					System.out.println(3);
@@ -102,27 +113,27 @@ public class ServletAccueilConnecte extends HttpServlet {
 				} 
 				if(ventesTerminees!= null) {
 					System.out.println(6);
-				} else {
+				} if(ventesTerminees== null&&encheresOuvertes== null&&mesVentesEnCours == null&&mesEncheres== null&&ventesNonDebutees== null&&mesEncheresRemportees== null) {
 				listesArticles = articleManager.selectAllArticles(article);
 				}
 			}else {
 				if (encheresOuvertes!= null) {
-					System.out.println(1);
+					System.out.println(7);
 				} 
 				if (mesVentesEnCours != null) {
-					System.out.println(3);
+					System.out.println(8);
 				}
 				if (mesEncheres!= null) {
-					System.out.println(3);
+					System.out.println(9);
 				} 
 				if (ventesNonDebutees!= null) {
-					System.out.println(4);
+					System.out.println(10);
 				} 
 				if (mesEncheresRemportees!= null) {
-					System.out.println(5);
+					System.out.println(11);
 				} 
 				if(ventesTerminees!= null) {
-					System.out.println(6);
+					System.out.println(12);
 				} else {
 				listesArticles = articleManager.selectArticlesSelonCategorie (article);
 			

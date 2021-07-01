@@ -24,7 +24,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 
 	private static final String SELECT_ALL_ARTICLES_BY_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie, date_debut_encheres, description, prix_vente,  no_article FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? ";
 	private static final String SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie,date_debut_encheres, description, prix_vente, no_article FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND no_categorie=? ";
-
+	private static final String SLECT_ARTICLES_BY_USER_AND_CATEGORIES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie,date_debut_encheres, description, prix_vente, no_article, u.no_utilisateur FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND u.no_utilisateur=?";
 
 	
 	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, description, date_debut_encheres, prix_vente, date_debut_encheres, description, prix_vente, no_article   FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur ";
@@ -183,6 +183,45 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return listeArticles;
+	}
+
+
+	
+	
+	@Override
+	public List<Article> selectArticlesByUserAndCategorie(Article articleARechercher) {
+		List<Article> listeArticles = new ArrayList<>();
+		
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement psmt = cnx.prepareStatement(SLECT_ARTICLES_BY_USER_AND_CATEGORIES);
+			String nomArtitle = "%"+articleARechercher.getNomArticle()+"%" ;
+			psmt.setString(1,  nomArtitle);
+			psmt.setInt(2, articleARechercher.getUtilisateur().getNoUtilisateur());
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				//condition d'affichages des ventes en fonction de la date de début de l'enchère et de la date de fin de l'enchere
+
+				if (rs.getDate("date_debut_encheres").toLocalDate().isBefore((LocalDate.now())) || rs.getDate("date_debut_encheres").toLocalDate().isEqual(((LocalDate.now())))) {
+					
+					//si la date de fin de l'enchère est postérieure à la date du jour on ajoute à la liste
+					if (rs.getDate("date_fin_encheres").toLocalDate().isAfter(LocalDate.now()) || rs.getDate("date_fin_encheres").toLocalDate().isEqual(LocalDate.now())) {
+						Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"), rs.getInt("no_utilisateur"));
+						listeArticles.add(new Article(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
+					}
+					
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
 		
 		return listeArticles;
 	} 

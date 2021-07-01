@@ -67,6 +67,11 @@ public class Utilisateur {
 	public Utilisateur(String pseudo) {
 		this.pseudo = pseudo;
 	}
+	
+	public Utilisateur(String pseudo, int noUtilisateur) {
+		this.pseudo = pseudo;
+		this.noUtilisateur = noUtilisateur;
+	}
 
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
