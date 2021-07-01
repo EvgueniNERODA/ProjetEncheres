@@ -71,7 +71,8 @@ public Article(String nomArticle, Categorie categorie) {
 
 public Article(int noArticle,String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 		int miseAPrix, int prixVente, Utilisateur utilisateur) {
-	super();
+	this();
+	this.noArticle = noArticle;
 	this.nomArticle = nomArticle;
 	this.description = description;
 	this.dateDebutEncheres = dateDebutEncheres;

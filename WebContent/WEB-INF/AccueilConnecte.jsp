@@ -74,7 +74,7 @@
     <div class="card shadow-sm bg-light">
       
       <div class="card-body">
-      	<a href="${pageContext.request.contextPath }/ServletPageEncherir?id=${liste.no_Article}" class="card-title text-dark">${liste.nomArticle}</a>
+      	<a href="${pageContext.request.contextPath }/ServletPageEncherir?id=${liste.noArticle}" class="card-title text-dark">${liste.nomArticle}</a>
         <p class="card-text">Prix : ${liste.miseAPrix} points</p>
         <p class="card-text">Fin de l'enchère  : 
        	<fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
