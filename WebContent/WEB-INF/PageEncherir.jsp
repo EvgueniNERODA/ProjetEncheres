@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="fr.eni.messages.LecteurMessage" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -27,7 +28,10 @@
 		  <li class="list-group-item">Catégorie : ${listeDeLarticle[0].categorie.libelle }</li>
 		  <li class="list-group-item">Meilleure offre : </li>
 		  <li class="list-group-item">Mise à prix : ${listeDeLarticle[0].miseAPrix }</li>
-		  <li class="list-group-item">Fin de l'enchère: ${listeDeLarticle[0].dateFinEncheres }</li>
+		  <li class="list-group-item">Fin de l'enchère: 
+		  <fmt:parseDate value="${listeDeLarticle[0].dateFinEncheres }" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+		  <fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
+		 </li>
 		  <li class="list-group-item">Retrait : ${listeDeLarticle[0].retrait.rue } ${listeDeLarticle[0].retrait.code_Postal  } ${listeDeLarticle[0].retrait.ville  }</li>
 		  <li class="list-group-item">Vendeur : ${listeDeLarticle[0].utilisateur.pseudo }</li>
 	</ul>
