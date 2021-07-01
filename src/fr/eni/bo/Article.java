@@ -18,7 +18,7 @@ public class Article {
 	private LocalDate dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
-	private int etatVente = 0;
+	
 	private int idUtilisateur = 0;
 	private Utilisateur utilisateur;
 	private List <Enchere> listeEncheres;
@@ -41,8 +41,6 @@ public Article(String nomArticle, String description, LocalDate dateDebutEnchere
 	this.dateDebutEncheres = dateDebutEncheres;
 	this.dateFinEncheres = dateFinEncheres;
 	this.miseAPrix = miseAPrix;
-	
-	this.etatVente = etatVente = 1;
 	this.utilisateur = utilisateur;
 	this.categorie = categorie;
 	this.retrait = retrait;
@@ -156,15 +154,6 @@ public Article(String nomArticle, String description, LocalDate dateDebutEnchere
 	}
 
 
-	public int isEtatVente() {
-		return etatVente;
-	}
-
-
-	public void setEtatVente(int etatVente) {
-		this.etatVente = etatVente;
-	}
-
 
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -230,10 +219,6 @@ public int getIdUtilisateur() {
 
 
 
-	public int getEtatVente() {
-		return etatVente;
-	}
-
 
 	
 
@@ -245,7 +230,7 @@ public int getIdUtilisateur() {
 	public String toString() {
 		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", idUtilisateur="
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + ", idUtilisateur="
 				+ idUtilisateur + ", utilisateur=" + utilisateur + ", listeEncheres=" + listeEncheres + ", categorie="
 				+ categorie + ", retrait=" + retrait + "]";
 	}

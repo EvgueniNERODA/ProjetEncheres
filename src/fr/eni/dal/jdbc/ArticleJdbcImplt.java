@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +19,15 @@ import fr.eni.dal.JdbcTools;
 
 public class ArticleJdbcImplt implements ArticleDAO {
 	
-	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait, etat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+	private static final String INSERT_NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie, no_retrait) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
 	private static final String INSERT_NEW_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville) VALUES (?, ?, ?)";
 
-	private static final String SELECT_ALL_ARTICLES_BY_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? ";
-	private static final String SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND no_categorie=? ";
+	private static final String SELECT_ALL_ARTICLES_BY_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie, date_debut_encheres FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? ";
+	private static final String SELECT_ARTICLES_SELON_CATEGORIE_ET_MOT_CLE = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, no_categorie,date_debut_encheres FROM ARTICLES_VENDUS AS a INNER JOIN UTILISATEURS AS u ON a.no_utilisateur=u.no_utilisateur  WHERE lower(nom_article) LIKE ? AND no_categorie=? ";
 
 
 	
-	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, description, date_debut_encheres, prix_vente   FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur ";
+	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, description, date_debut_encheres, prix_vente, date_debut_encheres   FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur ";
 
 	
 	
@@ -61,7 +62,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			pstmtArticle.setInt(6, nouvelArticle.getUtilisateur().getNoUtilisateur());
 			pstmtArticle.setInt(7, nouvelArticle.getCategorie().getNoCategorie());
 			pstmtArticle.setInt(8, nouvelArticle.getRetrait().getNoRetrait());
-			pstmtArticle.setInt(9, nouvelArticle.isEtatVente());
+			
 			
 			pstmtArticle.executeUpdate();
 			
@@ -91,11 +92,12 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			ResultSet rs = psmt.executeQuery();
 			
 			while (rs.next()) { 
+				if (rs.getDate("date_debut_encheres").toLocalDate().isBefore((LocalDate.now())) || rs.getDate("date_debut_encheres").toLocalDate().isEqual(((LocalDate.now())))) {
 				Categorie categorie = new Categorie(rs.getInt("no_categorie"));
 				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
 				listeDesArticles.add(new Article(rs.getString("nom_article"), categorie, rs.getInt("prix_initial"), rs.getDate("date_fin_encheres").toLocalDate(), utilisateur ));
 			}
-			
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,11 +125,14 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			ResultSet rs = psmt.executeQuery();
 			
 			while (rs.next()) {
+				
+				if (rs.getDate("date_debut_encheres").toLocalDate().isBefore((LocalDate.now())) || rs.getDate("date_debut_encheres").toLocalDate().isEqual(((LocalDate.now())))) {
+				
 				Categorie categorie = new Categorie(rs.getInt("no_categorie"));
 				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
 				listeArticles.add(new Article(rs.getString("nom_article"), categorie, rs.getInt("prix_initial"), rs.getDate("date_fin_encheres").toLocalDate(), utilisateur ));
 			}
-			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -148,9 +153,13 @@ public class ArticleJdbcImplt implements ArticleDAO {
 			ResultSet rs = psmt.executeQuery();
 			
 			while (rs.next()) {
-				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
 				
-				listeArticles.add(new Article(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
+				if (rs.getDate("date_debut_encheres").toLocalDate().isBefore((LocalDate.now())) || rs.getDate("date_debut_encheres").toLocalDate().isEqual(((LocalDate.now())))) {
+					Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
+					
+					listeArticles.add(new Article(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), utilisateur ));
+					
+				}
 				
 				
 			}
