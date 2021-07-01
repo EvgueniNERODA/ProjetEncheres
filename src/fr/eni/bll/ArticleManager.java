@@ -96,6 +96,28 @@ public class ArticleManager {
 		return DAOFactory.getArticleDAO().selectArticleById(idArticle);
 	}
 	
+	/*************************************************************
+	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-DATE-DEBUT-VENTE
+	 *************************************************************/	
+	
+	public List<Article> selectByUserAndDateDebutEnchere(Article articleSansCategorie) {
+		
+		return DAOFactory.getArticleDAO().selectByUserAndDateDebutEnchere(articleSansCategorie);
+	}
+	
+	/*************************************************************
+	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-DATE-FIN-VENTE
+	 *************************************************************/	
+	
+	public List<Article> selectByUserAndDateFinEnchere(Article articleSansCategorie) {
+		
+		return DAOFactory.getArticleDAO().selectByUserAndDateFinEnchere(articleSansCategorie);
+	}
+	
+	
+	
+	
+	
 	/*************************************************
 	 * VALIDATIONS
 	 ************************************************/
@@ -150,6 +172,10 @@ public class ArticleManager {
 			be.ajouterErreur(CodesErreurBll.ARTICLE_VILLE_ERREUR);
 		}
 	}
+
+	
+
+	
 
 	
 

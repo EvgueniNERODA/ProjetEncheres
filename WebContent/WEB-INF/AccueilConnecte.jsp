@@ -50,21 +50,21 @@
     </select>
     
 	</div>
+	<br>
 	
-	
-	<div class="form-check">
-	<input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1" onchange="changeThis(this)">
-  <label class="form-check-label" for="flexRadioDefault1">
-    Achats
+	<div class="btn-group" aria-label="Basic radio toggle button group">
+	<input  type="radio"  id="btnradio1" onchange="changeThis(this)"  class="btn-check " name="btnradio"   >
+  <label class="btn btn-outline-primary " for="btnradio1">
+         Achats
   </label>
-	</div>
-	
-<div class="form-check">
-	<input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2" onchange="changeThis(this)">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <input  type="radio"  id="btnradio2" onchange="changeThis(this)" class="btn-check" name="btnradio"  >
+  <label class="btn btn-outline-primary" for="btnradio2">
     Mes ventes
   </label>
+  
+  
 	</div>
+	
 
 <div class = "container ">
   <div class="row  form-switch">
@@ -111,22 +111,28 @@
 <script>
 
 	function changeThis(sender) {
-		if (document.getElementById('radio1').checked) {
+		if (document.getElementById('btnradio1').checked) {
 		document.getElementById("check1").removeAttribute('disabled');
 		document.getElementById("check2").removeAttribute('disabled');
 		document.getElementById("check3").removeAttribute('disabled');
 		document.getElementById("check4").disabled = true;
 		document.getElementById("check5").disabled = true;
 		document.getElementById("check6").disabled = true;
+		document.getElementById("check4").checked = false;
+		document.getElementById("check5").checked = false;
+		document.getElementById("check6").checked = false;
 		
 		
-	}else if (document.getElementById('radio2').checked){
+	}else if (document.getElementById('btnradio2').checked){
 		document.getElementById("check4").removeAttribute('disabled');
 		document.getElementById("check5").removeAttribute('disabled');
 		document.getElementById("check6").removeAttribute('disabled');
 		document.getElementById("check1").disabled = true;
 		document.getElementById("check2").disabled = true;
 		document.getElementById("check3").disabled = true;
+		document.getElementById("check1").checked = false;
+		document.getElementById("check2").checked = false;
+		document.getElementById("check3").checked = false;
 	}
 
 	}

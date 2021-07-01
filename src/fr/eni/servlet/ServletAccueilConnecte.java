@@ -105,13 +105,13 @@ public class ServletAccueilConnecte extends HttpServlet {
 					System.out.println(3);
 				} 
 				if (ventesNonDebutees!= null) {
-					System.out.println(4);
+					listesArticles = articleManager.selectByUserAndDateDebutEnchere (articleSansCategorie);
 				} 
 				if (mesEncheresRemportees!= null) {
 					System.out.println(5);
 				} 
 				if(ventesTerminees!= null) {
-					System.out.println(6);
+					listesArticles = articleManager.selectByUserAndDateFinEnchere (articleSansCategorie);
 				} if(ventesTerminees== null&&encheresOuvertes== null&&mesVentesEnCours == null&&mesEncheres== null&&ventesNonDebutees== null&&mesEncheresRemportees== null) {
 				listesArticles = articleManager.selectAllArticles(article);
 				}

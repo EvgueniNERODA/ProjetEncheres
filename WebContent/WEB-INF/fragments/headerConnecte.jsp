@@ -13,23 +13,23 @@
 </head>
 <body >
 
-<nav class="navbar navbar-light " style="background-color: #e3f2fd;">
+<nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
   
 	
-	<a class="btn" href="${pageContext.request.contextPath }/ServletBoutonAccueil"><button class="btn"><i class="fa fa-home"></i></button>LE
+	<a class="btn text-white" href="${pageContext.request.contextPath }/ServletBoutonAccueil"><button class="btn"><i class="fa fa-home"></i></button>LE
 				COIN QU'EST BON</a>
 	
 
 	  	<div class="form-inline">
 		    <ul class="nav justify-content-end mr-auto mt-2 mt-lg-0">
 		  <li class="nav-item">
-		    <a href="${pageContext.request.contextPath }/ServletDeconnexion" class="nav-link active" >Deconnection</a>
+		    <a href="${pageContext.request.contextPath }/ServletDeconnexion" class="nav-link active text-white" >Deconnection</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="${pageContext.request.contextPath }/ServletMonProfil">Mon Profil</a>
+		    <a class="nav-link text-white" href="${pageContext.request.contextPath }/ServletMonProfil">Mon Profil</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre un article</a>
+		    <a class="nav-link text-white" href="${pageContext.request.contextPath }/ServletNouvelleVente">Vendre un article</a>
 		  </li>
 			</ul>
 	  	</div>
