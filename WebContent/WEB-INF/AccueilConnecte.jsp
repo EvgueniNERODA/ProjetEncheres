@@ -23,8 +23,10 @@
 
 <div class="container">
 <h3>Filtres</h3>
+<br>
   <form class="form-inline col-md-3" action="${pageContext.request.contextPath }/ServletAccueilConnecte" method="POST">
     <input class="form-control mr-md-2 shadow-sm" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
+    
   
     
     
