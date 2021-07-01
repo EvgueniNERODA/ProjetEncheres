@@ -49,8 +49,43 @@ public class ServletAccueilConnecte extends HttpServlet {
 
 /**************************************************DO-POST*****************************************************************/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+
+		//_______________________________________AFFICHAGE ARTICLES___________________________________________
+			
+			// sélection des catégories présentes en BDD
+			List<Categorie> listesCategories = CategorieManager.getInstance().selectCategories();	
+					
+			//ajout de la liste de catégories à la requète
+			request.setAttribute("listesCategories", listesCategories);
+			
+			
+			
+			//récupération de la saisie de l'utilisateur
+			ArticleManager articleManager = new ArticleManager();
+			int categorie = Integer.valueOf(request.getParameter("categorie"));
+			
+			//cration instance catégorie avec noCatagorie
+			Categorie nouvelleCategorie = new Categorie(categorie);
+			String nomArticle = request.getParameter("recherche");
+			//création instance article avec nomArticle et Catégorie
+			Article article = new Article(nomArticle, nouvelleCategorie);
+			
+			
+			List<Article> listesArticles = new ArrayList<>();
+			
+			if (categorie == 5) {
+				listesArticles = articleManager.selectAllArticles(article);
+			}else {
+				listesArticles = articleManager.selectArticlesSelonCategorie (article);
+			
+				
+			}
+		
+			
+			request.setAttribute("listesArticles", listesArticles);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");
+			rd.forward(request, response);
 	}
 
 }
