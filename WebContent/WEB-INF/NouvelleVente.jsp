@@ -63,7 +63,7 @@
   	
   	
   	
-  	<fieldset id="retrait" class="rounded border border ">
+  	<fieldset id="retrait" class="rounded border border bg-light">
   	<legend>Retrait</legend>
   
   		<div class="col-md-12">	
