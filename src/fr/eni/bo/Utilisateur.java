@@ -63,16 +63,27 @@ public class Utilisateur {
 		this.motDePasse = motdepasse;
 	}
 
-	
+/**
+*** Constructeur Utilisateur avec pseudo
+*** @param pseudo
+**/	
 	public Utilisateur(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	
+
+/**
+*** Constructeur Utilisateur avec pseudo et noUtilisateur
+*** @param pseudo noUtilisateur
+**/
 	public Utilisateur(String pseudo, int noUtilisateur) {
 		this.pseudo = pseudo;
 		this.noUtilisateur = noUtilisateur;
 	}
 
+/**
+*** Constructeur Utilisateur avec pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse
+*** @param pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse
+**/
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse
@@ -93,6 +104,11 @@ public class Utilisateur {
 		this.administrateur = false;
 		
 	}
+	
+/**
+*** Constructeur Utilisateur avec noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse
+*** @param noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse
+**/
 
 public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse) {
@@ -219,11 +235,9 @@ public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, 
 		return listeEnchere;
 	}
 
-	public void setListeEnchere(Enchere enchere) {
-		this.listeEnchere = listeEnchere;
+	public void setListeEnchere(List<Enchere> enchere) {
+		this.listeEnchere = enchere;
 	}
-	
-	
 	
 	public boolean isStatut() {
 			return statut;

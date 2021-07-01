@@ -64,13 +64,10 @@
 
 	
 
-	<c:if test="${mdpIdentifiant = false}">
-	
-
- <div class="alert alert-danger" role="alert">
-  Le compte n'existe pas ou le mot de passe est incorrect.
-</div>
-    	
+	<c:if test="${mdpIdentifiant == false}">
+ 	<div class="alert alert-danger" role="alert">
+  	Le compte n'existe pas ou le mot de passe est incorrect.
+	</div>
 	</c:if>
 	
 </div>

@@ -17,50 +17,74 @@ import fr.eni.outils.BusinessException;
 
 /**
  * Servlet implementation class ServletConnexion
+ * 
+ * Cette classe permet la redirection vers la page de connexion.jsp dans la méthode DO-GET
+ * 
+ * Cette classe permet la vérification de l'identifiant/mdp de l'utilisateur, son statut (actif/inactif) et 
+ * les differentes redirections selon les cas dans la méthode DO-POST.
  */
 @WebServlet("/ServletConnexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
 	private static UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
+	
+	
    
 /**************************************************DO-GET*****************************************************************/
+	//----------------------->On arrive dans le DO-GET ServletConnexion depuis Accueil.jsp-----------------------------//
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//On passe dans la ServletConnexion depuis l'Accueil.jsp vers Connexion.jsp
+		
+	//______________________________________REDIRECTION VERS CONNEXION.JSP____________________________________________
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		rd.forward(request, response);
 		
 	}
+	
+	
 
-/**************************************************DO-POST*****************************************************************/	
+/**************************************************DO-POST*****************************************************************/
+	//----------------------->On arrive dans le DO-POST ServletConnexion depuis Connexion.jsp---------------------------//
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// On récupère l'identifiant(mail ou pseudo) et le mdp de Connexion.jsp
 		request.setCharacterEncoding("UTF-8");
-		
-		// On récupère l'identifiant(mail ou pseudo) et le mdp de Connexion.jsp 
 		String identifiant = request.getParameter("identifiant");
 		String motDePasse = request.getParameter("motDePasse");
 		
-		//_______________________________VERIFICATION SI L'UTILISATEUR EXISTE EN BDD_________________________________________
+		//___________________________________VERIFICATION SI L'UTILISATEUR EXISTE EN BDD___________________________________
 		boolean existeEnBdd = false;
     	Utilisateur utilisateur = new Utilisateur();
-    	request.setAttribute("identifiant", identifiant);
-    	request.setAttribute("motDePasse", motDePasse);
+    	//request.setAttribute("identifiant", identifiant);
+    	//request.setAttribute("motDePasse", motDePasse);
     	
-    		// On vérifie si l'utilisateur existe avec son adresse mail
+    		//Si l'utilisateur existe avec son adresse mail
     		if(identifiant.contains("@")) {
+    			
+    			//Constructeur qui prend en paramètre un emailExistant à true
     			utilisateur = new Utilisateur(identifiant,motDePasse,true);
+    			
     			try {
+    				//Méthode qui renvoie un booléen true si l'utilisateur existe en BDD.
 					existeEnBdd = utilisateurManager.verifier(utilisateur);
 				} catch (BusinessException e) {
-					
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 				}
-    		// Sinon on vérifie que l'utilisateur existe avec un pseudo
+    			
+    		// Si identifiant ne contient pas de "@", on vérifie que l'utilisateur existe avec un pseudo
     		}else {
+    			
+    			//Constructeur qui prend en paramètre un emailExistant à false
     			utilisateur = new Utilisateur(identifiant,motDePasse,false); 
+    			
     			try {
+    				//Même méthode qui renvoie un booléen true si l'utilisateur existe en BDD mais cette fois ci en prenant 
+    				//en compte un pseudo.
 					existeEnBdd = utilisateurManager.verifier(utilisateur);
 				} catch (BusinessException e) {
 					e.printStackTrace();
@@ -68,43 +92,51 @@ public class ServletConnexion extends HttpServlet {
 				}	
     		}
     		
+    		// Sinon on redirige sur Connexion.jsp avec un message d'erreur "mauvais mdp ou identifiant inconnu"
+			if (existeEnBdd == false) {
+				boolean mdpIdentifiant = false;
+				request.setAttribute("mdpIdentifiant", mdpIdentifiant);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
+				rd.forward(request, response);
+			
+			}
+    		
+    		
     	//__________________________VERIFICATION SI UTILISATEUR EST INACTIF (COMPTE SUPPRIMÉ)_________________________________
     	Utilisateur utilisateurStatut = new Utilisateur();
-    	try {
-			utilisateurStatut = utilisateurManager.find_user_by_email_or_pseudo(utilisateur);
-			
-		} catch (BusinessException e) {
-			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-		}
     	
+    		try {
+    			//Méthode renvoyant un boolean du statut utilisateur
+    			utilisateurStatut = utilisateurManager.find_user_by_email_or_pseudo(utilisateur);
+    		} catch (BusinessException e) {
+    			e.printStackTrace();
+    			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+    		}
     	
-    	if(utilisateurStatut.isStatut() == false) {
-    		//On refuse l'accès et on redirige sur la page connection avec message d'erreur "ce compte est inactif"
-    		boolean compteInactif = true;
-    		request.setAttribute("compteInactif", compteInactif);
-    		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
-        	rd.forward(request, response);
-        	
+    		//Si le statut de l'utilisateur est faux. 
+    		if(utilisateurStatut.isStatut() == false) {
+    			// l'attribut "compteInactif" est récupéré par la JSP pour afficher un message d'erreur à l'utilisateur.
+    			boolean compteInactif = true;
+    			request.setAttribute("compteInactif", compteInactif);
+    			//Refus accès et redirection vers connection.jsp
+    			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
+    			rd.forward(request, response);
+        	}
+    		
+    	
+    	//___________________________________REDIRECTION SERVLET ACCUEIL-CONNECTE _____________________________________________
+    	//	Utilisateur existe en BDD(existeEnBDD = true)
+    	//	Utilisateur actif (utilisateurStatut.isStatut = true)
+    	
+    	if(existeEnBdd == true) {
+    		//Creation session
+    		HttpSession session = request.getSession();
+    		//Set numero Utilisateur à la session
+    		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
+    		//Redirection vers ServletAccueilConnecte
+    		response.sendRedirect("./ServletAccueilConnecte");
     	}
     	
-    	//__________________________VERIFICATION SI UTILISATEUR EST ACTIF _____________________________________________________
-    	// L'utiliateur existe bien en BDD, on redirige l'utilisateur vers la page d'acceuil (version connecté) 
-    	//	avec la creation d'une session
-    	if(existeEnBdd == true) {
-    		HttpSession session = request.getSession();
-    		session.setAttribute("noUtilisateur", utilisateur.getNoUtilisateur());
-    		response.sendRedirect("./ServletAccueilConnecte");
-    		
- 
-        	// Sinon on redirige sur Connexion.jsp avec un message d'erreur "mauvais mdp ou identifiant inconnu"
-    		}else {
-    			boolean mdpIdentifiant = false;
-    			request.setAttribute("mdpIdentifiant", mdpIdentifiant);
-    			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
-    			rd.forward(request, response);
-    			//response.sendRedirect("./ServletConnexion");
-    		}
     }
 
 }

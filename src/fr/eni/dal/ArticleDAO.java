@@ -5,8 +5,11 @@ import java.util.List;
 import fr.eni.bo.Article;
 import fr.eni.bo.Categorie;
 import fr.eni.bo.Utilisateur;
-
-
+/**
+ * 
+ * Interface ArticleDAO pour le DesignPattern DAO
+ *
+ */
 
 public interface ArticleDAO {
 
@@ -18,12 +21,8 @@ public interface ArticleDAO {
 
 	List<Article> selectAllArticles();
 
-
 	List<Article> selectArticlesByUserAndCategorie(Article articleARechercher);
 
 	List<Article> selectArticleById(int idArticle);
 
-
-	
-			
 }

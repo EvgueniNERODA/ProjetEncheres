@@ -33,6 +33,8 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 	private static final String UPDATE_STATUT_USER = "UPDATE UTILISATEURS SET statut=? WHERE no_utilisateur=?";
 	private static final String DELETE_USER_BY_ID = "DELETE UTILISATEURS WHERE no_utilisateur=?";
 
+	
+	
 /*******************************************************METHODES-FINDUSER***************************************************************/
 /**
 * Méthode pour afficher un l'utilisateur présent en BDD via son no_utilisateur.
@@ -214,11 +216,11 @@ public class UtilisateurDAOImplt implements UtilisateurDAO {
 		
 	}
 	
-
-	/**
-	* Méthode pour afficher un l'utilisateur présent en BDD via son pseudo.
-	* Utilisée dans ServletInscription pour rappeler l'utilisateur nouvellement crée. 
-	*/
+/*************************************************METHODES-INSERTNOUVEL-UTILISATEUR***************************************************************/
+/**
+* Méthode pour afficher un l'utilisateur présent en BDD via son pseudo.
+* Utilisée dans ServletInscription pour rappeler l'utilisateur nouvellement crée. 
+*/
 	@Override
 	public Utilisateur selectAll(String pseudo) {
 		Utilisateur utilisateur = new Utilisateur();

@@ -31,7 +31,7 @@ public class ServletBoutonAccueil extends HttpServlet {
 		//______________________________________________RECUPERATION SESSION________________________________________________
 			
 			HttpSession session = request.getSession(false);
-			System.out.println(session);
+			
 		//________________________________________VERIFICATION UTILISATEUR CONNECTÉ_________________________________________
 			if (session != null && session.getAttribute("noUtilisateur") != null) {
 						

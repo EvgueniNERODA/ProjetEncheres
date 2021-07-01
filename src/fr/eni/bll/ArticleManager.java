@@ -8,12 +8,15 @@ import fr.eni.bo.Categorie;
 import fr.eni.dal.ArticleDAO;
 import fr.eni.dal.DAOFactory;
 import fr.eni.outils.BusinessException;
-
+/**
+ * 
+ * Classe ArticleManager pour l'appel des méthodes d'ArticleDAO et la vérification des erreurs 
+ * pouvant être levées.
+ *
+ */
 public class ArticleManager {
 
-	/*************************************************
-	 * CREATION-SINGLETON
-	 ************************************************/
+/************************************************** CREATION-SINGLETON ************************************************/
 	private static ArticleManager instance;
 
 	public static ArticleManager getInstance() {
@@ -23,10 +26,7 @@ public class ArticleManager {
 
 	}
 
-	/********************************
-	 * METHODE-INSERTION-NOUVEL-ARTICLE
-	 * @throws BusinessException 
-	 ************************************************/
+/********************************* METHODE-INSERTION-NOUVEL-ARTICLE* @throws BusinessException *************************/
 	public void inserNouvelArticle(Article nouvelArticle) throws BusinessException {
 
 		// Validation des données
@@ -49,18 +49,14 @@ public class ArticleManager {
 		
 
 	}
-	/*************************************************
-	 * METHODE-SELECTION-ARTICLES-SELON-CATEGORIE
-	 ************************************************/
+/**************************************** METHODE-SELECTION-ARTICLES-SELON-CATEGORIE****************************************/
 	public List<Article> selectArticlesSelonCategorie(Article articleARechercher) {
 		
 		ArticleDAO articleDAO = DAOFactory.getArticleDAO();
 		return DAOFactory.getArticleDAO().selectArticlesSelonCategorie(articleARechercher);
 	}
 	
-	/*************************************************
-	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-MOT-CLE
-	 ************************************************/	
+/************************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-MOT-CLE**************************************/	
 	public List<Article> selectAllArticles(Article articleARechercher) {
 		
 		return DAOFactory.getArticleDAO().selectAllArticlesByMotCle(articleARechercher);
@@ -68,9 +64,7 @@ public class ArticleManager {
 		
 	}
 	
-	/*************************************************************
-	 * METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-CATEGORIE
-	 *************************************************************/	
+/************************************** METHODE-SELECTION-TOUS-LES-ARTICLES-BY-USER-AND-CATEGORIE****************************/	
 	
 	public List<Article> selectArticlesByUserAndCategorie(Article articleARechercher) {
 		// TODO Auto-generated method stub
@@ -78,27 +72,21 @@ public class ArticleManager {
 	}
 	
 	
-	/*************************************************
-	 * METHODE-SELECTION-TOUS-LES-ARTICLES
-	 ************************************************/	
+/************************************************** METHODE-SELECTION-TOUS-LES-ARTICLES****************************************/	
 	public List<Article> selectAllArticles() {
 		
 		return DAOFactory.getArticleDAO().selectAllArticles();
 		
 	}
 	
-	/*************************************************
-	 * METHODE-SELECTION-ARTICLES-BY-ID
-	 ************************************************/	
+/************************************************** METHODE-SELECTION-ARTICLES-BY-ID********************************************/	
 	
 	public List<Article> selectArticleById(int idArticle) {
 		
 		return DAOFactory.getArticleDAO().selectArticleById(idArticle);
 	}
 	
-	/*************************************************
-	 * VALIDATIONS
-	 ************************************************/
+/************************************************** VALIDATIONS *****************************************************************/
 	private void validationDateDuJOur(LocalDate dateDebutVente, BusinessException be) {
 		if (dateDebutVente.isBefore(LocalDate.now())) {
 			be.ajouterErreur(CodesErreurBll.ARTICLE_DATE_ERREUR);
@@ -151,8 +139,5 @@ public class ArticleManager {
 		}
 	}
 
-	
-
-	
 
 }

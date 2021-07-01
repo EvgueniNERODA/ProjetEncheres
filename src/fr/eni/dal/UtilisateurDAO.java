@@ -12,7 +12,7 @@ public interface UtilisateurDAO {
 
 	String selectPseudo(String pseudo) ;
 
-	
+	//Méthode VERIFIER-UTILISATEUR-VIA-PSEUDO-OU-EMAIL
 	public boolean verifier(Utilisateur utilisateur);
 
 

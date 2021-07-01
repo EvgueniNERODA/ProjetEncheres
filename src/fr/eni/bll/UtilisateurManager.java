@@ -27,28 +27,25 @@ public class UtilisateurManager {
 
 	}
 
-/***************************************METHODES-VERIFIER-UTILISATEURS-EMAIL-OU-PSEUDO
- * @throws BusinessException ******************************/	
+/***************************************METHODES-VERIFIER-UTILISATEURS-EMAIL-OU-PSEUDO*** @throws BusinessException ****************************/	
 	public boolean verifier(Utilisateur utilisateur) throws BusinessException {
 		
 		// Validation des données
 				BusinessException be = new BusinessException();
 
-
-				if (utilisateur.getPseudo() != null) {
-					validationPseudo(utilisateur.getPseudo(), be);
-				}else {
-					validationEmail(utilisateur.getEmail(), be);
-				}
-
-				
-				if (be.hasErreurs()) {
-					throw be;
-				}
+		if (utilisateur.getPseudo() != null) {
+			validationPseudo(utilisateur.getPseudo(), be);
+		}else {
+			validationEmail(utilisateur.getEmail(), be);
+		}
+		
+		if (be.hasErreurs()) {
+			throw be;
+		}
 		return DAOFactory.getUtilisateurDAO().verifier(utilisateur);
 	}
 	
-
+	/***************************************************METHODES-SELECT-PSEUDO*** @throws BusinessException ************************************/
 	public String selectPseudo(String pseudo) throws BusinessException {
 		
 		// Validation des données
