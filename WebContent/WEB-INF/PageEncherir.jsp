@@ -41,7 +41,7 @@
 	<form action="${pageContext.request.contextPath }/ServletPageEncherir" method="post">
 		  <div class="card-body">
 		  <p class="card-text">Ma proposition : <input type="number" name="montantPropose" min="10" max="5000"></p>
-		  <input type="submit" value="Encherir">
+		  <input type="submit" value="Encherir" class="btn btn-outline-primary">
 		  </div>
 	</form>
 	
