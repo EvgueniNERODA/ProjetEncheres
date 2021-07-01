@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.eni.bo.Article;
 import fr.eni.bo.Categorie;
+import fr.eni.bo.Retrait;
 import fr.eni.bo.Utilisateur;
 import fr.eni.dal.ArticleDAO;
 import fr.eni.dal.JdbcTools;
@@ -29,7 +30,7 @@ public class ArticleJdbcImplt implements ArticleDAO {
 	
 	private static final String SELECT_ALL_ARTICLES = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo, description, date_debut_encheres, prix_vente, date_debut_encheres, description, prix_vente, no_article   FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur ";
 
-	
+	private static final String SELECT_ARTICLE_BY_ID ="SELECT * FROM ARTICLES_VENDUS JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur JOIN RETRAITS ON ARTICLES_VENDUS.no_retrait=RETRAITS.no_retrait JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie WHERE no_article=?";
 	
 	@Override
 	public void insertNouvelArticle(Article nouvelArticle) {
@@ -186,5 +187,33 @@ public class ArticleJdbcImplt implements ArticleDAO {
 		
 		return listeArticles;
 	} 
+	
+	/**************************************************METHODE-SELECT-ARTICLE-BY-ID*******************************************************/
+	
+	@Override
+	public List<Article> selectArticleById(int id){
+		
+		List<Article> listeArticle = new ArrayList<>();
+		try (Connection cnx = JdbcTools.getConnection()){
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_ARTICLE_BY_ID);
+			
+			psmt.setInt(1, id);
+	
+			ResultSet rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				Utilisateur utilisateur = new Utilisateur(rs.getString("pseudo"));
+				Categorie categorie = new Categorie(rs.getString("libelle"));
+				Retrait retrait = new Retrait(rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
+				listeArticle.add(new Article(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), utilisateur, categorie, retrait ));
+			}
+				
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return listeArticle;
+	}
 	
 }

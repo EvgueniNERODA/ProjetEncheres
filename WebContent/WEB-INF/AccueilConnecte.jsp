@@ -80,15 +80,11 @@
        	<fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
 		<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
 		</p>
-
-		<form action="${pageContext.request.contextPath }/ServletProfilUtilisateur" method="post">
-         <p class="card-text">Vendeur  :</p>
-			<input type="hidden" name="pseudo" value="${liste.getUtilisateur().getPseudo()}">
-         	<input type="submit" value="${liste.getUtilisateur().getPseudo()}">	
-
-        </form>
-       
-       
+		<p class="card-text">Vendeur  :
+		<a href="${pageContext.request.contextPath }/ServletProfilUtilisateur?pseudo=${liste.getUtilisateur().getPseudo()}" class="card-title text-dark">${liste.getUtilisateur().getPseudo()}</a>
+		</p>
+         
+			
       </div>
      </div>
      </div>

@@ -14,7 +14,7 @@
 	crossorigin="anonymous">
 <title>Nouvelle Vente</title>
 </head>
-<%@include file="./fragments/header.jsp" %>
+<%@include file="./fragments/headerConnecte.jsp" %>
 <body >
 
 

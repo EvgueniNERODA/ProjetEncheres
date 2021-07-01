@@ -78,6 +78,14 @@ public class ArticleManager {
 		
 	}
 	
+	/*************************************************
+	 * METHODE-SELECTION-ARTICLES-BY-ID
+	 ************************************************/	
+	
+	public List<Article> selectArticleById(int idArticle) {
+		
+		return DAOFactory.getArticleDAO().selectArticleById(idArticle);
+	}
 	
 	/*************************************************
 	 * VALIDATIONS
@@ -133,6 +141,8 @@ public class ArticleManager {
 			be.ajouterErreur(CodesErreurBll.ARTICLE_VILLE_ERREUR);
 		}
 	}
+
+	
 
 	
 

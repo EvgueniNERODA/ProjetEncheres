@@ -18,6 +18,8 @@ public interface ArticleDAO {
 
 	List<Article> selectAllArticles();
 
+	List<Article> selectArticleById(int idArticle);
+
 	
 			
 }
