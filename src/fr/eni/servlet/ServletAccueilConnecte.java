@@ -43,7 +43,6 @@ public class ServletAccueilConnecte extends HttpServlet {
 		ArticleManager articleManager = new ArticleManager();
 		listesArticles  = articleManager.selectAllArticles();
 		request.setAttribute("listesArticles", listesArticles);
-	
 				
 		//Passer la liste d'enchere en parametre à la jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AccueilConnecte.jsp");

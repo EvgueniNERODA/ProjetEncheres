@@ -87,6 +87,14 @@ public class ArticleManager {
 		
 	}
 	
+	/*************************************************
+	 * METHODE-SELECTION-ARTICLES-BY-ID
+	 ************************************************/	
+	
+	public List<Article> selectArticleById(int idArticle) {
+		
+		return DAOFactory.getArticleDAO().selectArticleById(idArticle);
+	}
 	
 	/*************************************************
 	 * VALIDATIONS

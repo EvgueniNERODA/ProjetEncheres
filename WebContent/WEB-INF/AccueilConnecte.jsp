@@ -143,27 +143,23 @@
   
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
- 
+ 	
   	 <c:forEach var ="liste" items="${listesArticles }">
   	  <div class="col">
     <div class="card shadow-sm bg-light">
       
       <div class="card-body">
-        <h5 class="card-title">${liste.nomArticle}</h5>
+      	<a href="${pageContext.request.contextPath }/ServletPageEncherir?id=${liste.noArticle}" class="card-title text-dark">${liste.nomArticle}</a>
         <p class="card-text">Prix : ${liste.miseAPrix} points</p>
         <p class="card-text">Fin de l'enchère  : 
        	<fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
 		<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
 		</p>
-
-		<form action="${pageContext.request.contextPath }/ServletProfilUtilisateur" method="post">
-         <p class="card-text">Vendeur  :</p>
-			<input type="hidden" name="pseudo" value="${liste.getUtilisateur().getPseudo()}">
-         	<input type="submit" value="${liste.getUtilisateur().getPseudo()}">	
-
-        </form>
-       
-       
+		<p class="card-text">Vendeur  :
+		<a href="${pageContext.request.contextPath }/ServletProfilUtilisateur?pseudo=${liste.getUtilisateur().getPseudo()}" class="card-title text-dark">${liste.getUtilisateur().getPseudo()}</a>
+		</p>
+         
+			
       </div>
      </div>
      </div>

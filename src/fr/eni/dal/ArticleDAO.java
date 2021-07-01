@@ -18,7 +18,11 @@ public interface ArticleDAO {
 
 	List<Article> selectAllArticles();
 
+
 	List<Article> selectArticlesByUserAndCategorie(Article articleARechercher);
+
+	List<Article> selectArticleById(int idArticle);
+
 
 	
 			
