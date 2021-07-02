@@ -59,8 +59,6 @@ public class ServletConnexion extends HttpServlet {
 		//___________________________________VERIFICATION SI L'UTILISATEUR EXISTE EN BDD___________________________________
 		boolean existeEnBdd = false;
     	Utilisateur utilisateur = new Utilisateur();
-    	//request.setAttribute("identifiant", identifiant);
-    	//request.setAttribute("motDePasse", motDePasse);
     	
     		//Si l'utilisateur existe avec son adresse mail
     		if(identifiant.contains("@")) {
