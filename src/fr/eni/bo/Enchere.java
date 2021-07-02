@@ -30,6 +30,20 @@ public class Enchere {
 
 
 
+	public Enchere(int montant_enchere, Utilisateur utilisateur) {
+	this();
+	
+	this.montant_enchere = montant_enchere;
+	this.utilisateur = utilisateur;
+	
+}
+
+
+
+
+
+
+
 	public Enchere(Article article) {
 	this();
 	this.article = article;
@@ -115,16 +129,23 @@ public void setArticle(Article article) {
 
 	public void setUtilisateurs(Utilisateur utilisateurs) {
 		this.utilisateur = utilisateurs;
-	} 
+	}
+
+
+
+
+
+
+
+	
 	
 /**************************************************AFFICHAGE****************************************************/	
-		@Override
-		public String toString() {
-			return "Enchere [no_enchere=" + no_enchere + ", dateEnchere=" + dateEnchere + ", montant_enchere="
-					+ montant_enchere + "]";
-		}
-
-
+		
+	@Override
+	public String toString() {
+		return "Enchere [no_enchere=" + no_enchere + ", dateEnchere=" + dateEnchere + ", montant_enchere="
+				+ montant_enchere + ", utilisateur=" + utilisateur + ", article=" + article + "]";
+	} 
 
 	
 }

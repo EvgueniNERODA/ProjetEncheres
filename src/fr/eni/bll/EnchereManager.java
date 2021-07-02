@@ -1,6 +1,9 @@
 package fr.eni.bll;
 
+import java.util.List;
+
 import fr.eni.bo.Enchere;
+import fr.eni.bo.Utilisateur;
 import fr.eni.dal.DAOFactory;
 import fr.eni.dal.EnchereDAO;
 
@@ -30,5 +33,13 @@ public class EnchereManager {
 		enchereDAO.insertNewEnchere(enchere);
 		
 	}
+
+	public List<Enchere> selectEnchereMaxById(int idArticle) {
+		return DAOFactory.getEnchereDAO().selectEnchereMaxById(idArticle);
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 	
 }

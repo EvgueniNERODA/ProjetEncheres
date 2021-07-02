@@ -95,20 +95,20 @@ public class ServletAccueilConnecte extends HttpServlet {
 				Article articleSansCategorie = new Article(utilisateurEnCours, nomArticle);
 				if (encheresOuvertes!= null) {
 					listesArticles = articleManager.selectAllArticles(articleSansCategorie);
-					System.out.println(1);
+					
 				} 
 				if (mesVentesEnCours != null) {
 					listesArticles = articleManager.selectArticlesByUserAndCategorie (articleSansCategorie);
-					System.out.println(2);
+				
 				}
 				if (mesEncheres!= null) {
-					System.out.println(3);
+				
 				} 
 				if (ventesNonDebutees!= null) {
 					listesArticles = articleManager.selectByUserAndDateDebutEnchere (articleSansCategorie);
 				} 
 				if (mesEncheresRemportees!= null) {
-					System.out.println(5);
+					
 				} 
 				if(ventesTerminees!= null) {
 					listesArticles = articleManager.selectByUserAndDateFinEnchere (articleSansCategorie);
@@ -117,22 +117,22 @@ public class ServletAccueilConnecte extends HttpServlet {
 				}
 			}else {
 				if (encheresOuvertes!= null) {
-					System.out.println(7);
+					
 				} 
 				if (mesVentesEnCours != null) {
-					System.out.println(8);
+					
 				}
 				if (mesEncheres!= null) {
-					System.out.println(9);
+					
 				} 
 				if (ventesNonDebutees!= null) {
-					System.out.println(10);
+					
 				} 
 				if (mesEncheresRemportees!= null) {
-					System.out.println(11);
+				
 				} 
 				if(ventesTerminees!= null) {
-					System.out.println(12);
+					
 				} else {
 				listesArticles = articleManager.selectArticlesSelonCategorie (article);
 			

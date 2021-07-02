@@ -13,6 +13,7 @@ import org.eclipse.jdt.internal.compiler.ast.TrueLiteral;
 
 import fr.eni.bll.UtilisateurManager;
 import fr.eni.bo.Enchere;
+import fr.eni.bo.Utilisateur;
 import fr.eni.dal.EnchereDAO;
 import fr.eni.dal.JdbcTools;
 import fr.eni.dal.UtilisateurDAO;
@@ -28,6 +29,9 @@ public class EnchereDAOImplt implements EnchereDAO{
 	private static final String FIND_ALL_ENCHERE = "SELECT * FROM ENCHERE";
 	private static final String SELECT_ENCHERE_BY_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article=?";
 	private static final String INSERT_NEW_ENCHERE = "INSERT INTO ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (?, ?, ?, ? )";
+	private static final String SELECT_ENCHEREMAX_BY_ID_ARTICLE = "SELECT no_enchere, montant_enchere, no_article, pseudo  FROM ENCHERES  AS e INNER JOIN UTILISATEURS AS u ON e.no_utilisateur = u.no_utilisateur WHERE no_article=?";
+
+
 
 	
 	
@@ -35,7 +39,7 @@ public class EnchereDAOImplt implements EnchereDAO{
 /**
 * Méthode pour afficher un l'utilisateur présent en BDD via son no_utilisateur.
 * Cette méthode est utilisée pour l'affichage des enchères en mode connecté. 
-
+*/
 	public List<Enchere> fin_all_enchere() {
 		
 		List<Enchere> list = new ArrayList<>();
@@ -47,7 +51,7 @@ public class EnchereDAOImplt implements EnchereDAO{
 			while (rs.next()) {
 				Enchere enchere = new Enchere();
 				enchere.setNo_enchere(rs.getInt("no_enchere"));
-				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+				enchere.setDateEnchere(rs.getTimestamp("date_enchere"));
 				enchere.setMontant_enchere(rs.getInt("montant_enchere"));
 				
 				
@@ -59,7 +63,7 @@ public class EnchereDAOImplt implements EnchereDAO{
 		}
 		return list;
 	}
-*/
+
 	
 	
 	
@@ -100,8 +104,33 @@ public Object insertNewEnchere(Enchere enchere) {
 		
 	} catch (Exception e) {
 		// TODO: handle exception
+		e.printStackTrace();
 	}
 	return null;
+}
+
+
+
+@Override
+public List<Enchere> selectEnchereMaxById(int idArticle) {
+	List <Enchere> liste = new ArrayList<>();
+	Enchere enchere = new Enchere();
+	try (Connection cnx = JdbcTools.getConnection()){
+		PreparedStatement pstm = cnx.prepareStatement(SELECT_ENCHEREMAX_BY_ID_ARTICLE);
+		pstm.setInt(1, idArticle);
+		
+		ResultSet rs = pstm.executeQuery();
+		
+		while (rs.next()) {
+			Utilisateur meilleurEncherisseur = new Utilisateur(rs.getString("pseudo"));
+			enchere = new Enchere(rs.getInt("montant_enchere"), meilleurEncherisseur );
+			liste.add(enchere);
+		}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return liste;
 }
 
 

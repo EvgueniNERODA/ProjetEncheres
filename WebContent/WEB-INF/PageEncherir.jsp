@@ -26,7 +26,7 @@
 		  <li class="list-group-item">Nom : ${listeDeLarticle[0].nomArticle}</li>
 		  <li class="list-group-item">Description : ${listeDeLarticle[0].description}</li>
 		  <li class="list-group-item">Catégorie : ${listeDeLarticle[0].categorie.libelle }</li>
-		  <li class="list-group-item">Meilleure offre : </li>
+		  <li class="list-group-item">Meilleure offre : ${meilleurEncherisseur.getMontant_enchere()} pts par ${pseudoEncherisseur}</li>
 		  <li class="list-group-item">Mise à prix : ${listeDeLarticle[0].miseAPrix }</li>
 		  <li class="list-group-item">Fin de l'enchère: 
 		  <fmt:parseDate value="${listeDeLarticle[0].dateFinEncheres }" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
@@ -34,8 +34,8 @@
 		  </li>
 		  <li class="list-group-item">Retrait : ${listeDeLarticle[0].retrait.rue } ${listeDeLarticle[0].retrait.code_Postal  } ${listeDeLarticle[0].retrait.ville  }</li>
 		  <li class="list-group-item">Vendeur : ${listeDeLarticle[0].utilisateur.pseudo }</li>
-		  <c:out value="${id}"></c:out>
-		  <p><p/>
+		  
+		  
 	</ul>
 	
 	<c:if test="${testVendeur == true}">
@@ -44,7 +44,7 @@
 		  <div class="card-body">
 		  <p class="card-text">Ma proposition : <input type="number" name="montantPropose" min="10" max="5000"></p>
 		  <input type="submit" value="Encherir" class="btn btn-outline-primary">
-		  <input value="${id}" name="id">
+		  <input type="hidden" value="${id}" name="id">
 		  
 		  </div>
 	</form>
