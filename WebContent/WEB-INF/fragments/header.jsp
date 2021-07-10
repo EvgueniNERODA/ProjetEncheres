@@ -5,46 +5,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./nav.css">
+    <script src="https://kit.fontawesome.com/e845f4b193.js" crossorigin="anonymous"></script>
 	
 <title>Insert title here</title>
 
 </head>
 <body >
 
-<nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
-  
-	
-	<a class="btn text-white" href="${pageContext.request.contextPath }/ServletBoutonAccueil"><button class="btn"><i class="fa fa-home"></i></button>LE
+
+<div class="topnav" id="myTopnav">
+		<a class="active" href="${pageContext.request.contextPath }/ServletBoutonAccueil"><i class="fa fa-home"></i> LE
 				COIN QU'EST BON</a>
-	
-	
-	
-	  	<div class="form-inline">
-		    <ul class="nav justify-content-end mr-auto mt-2 mt-lg-0">
-		  <li class="nav-item">
-		    <a href="${pageContext.request.contextPath }/ServletInscription" class="nav-link active text-white" >S'inscrire</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link text-white" href="${pageContext.request.contextPath }/ServletConnexion">Se connecter</a>
-		  </li>
-		
-			</ul>
-	  	</div>
-		
-	
+        <a href="${pageContext.request.contextPath }/ServletInscription" >S'inscrire</a>
+        <a href="${pageContext.request.contextPath }/ServletConnexion">Se connecter</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
 
-</nav>
+    <script>
+      
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
 
-
-
-
-
-
-
-	
-
+    </script>
 
 
 

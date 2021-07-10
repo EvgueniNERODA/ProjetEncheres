@@ -1,0 +1,129 @@
+.container {
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+    gap: 30px;
+    justify-content: center;
+    background-color: #FFFFFF;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+
+body {
+    
+    background-color: #FAFAFA;
+   margin: 0;
+   min-height: 100vh;
+   display: grid;
+   grid-template-rows: auto 1fr auto;
+   
+}
+
+h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-weight: 450;
+}
+
+.validation {
+display: inline-flex;
+width: 100%;
+justify-content: center;  
+gap: 10px;
+padding-bottom: 15px;
+padding-top: 25px;
+
+
+}
+
+#formbox {
+display: flex;
+flex-direction: column;
+width: 45%;
+
+
+}
+
+label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    text-transform: uppercase;
+    line-height: 1.8;
+    font-size: 19px;
+    font-weight: 400;
+    
+}
+
+input:focus {
+border-bottom: solid #46B5D1 1px;
+border-radius: 2px;
+outline: 0;
+
+
+}
+
+input {
+ 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    border-bottom : solid 1px  #cfcece;
+    border-radius: 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: medium;
+    
+    
+  
+
+
+}
+
+
+
+@media (max-width: 500px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        
+    }
+    #formbox {
+        width: 100%;
+
+    }
+    .validation {
+        display: inline-flex;
+        flex-wrap: wrap;
+             
+    }
+    #button {
+        width: 50%;
+        height: 80%;
+    }
+
+}
+
+button {
+    width: 100px;
+    border: solid 1px #46B5D1;
+    border-color: #46B5D1;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    transition-duration: 0.3s;
+    background: #46B5D1;
+    color: white;
+    font-weight: 300;
+    border-radius: 2px;
+    height: 40px;
+    font-size: medium;
+
+    
+  }
+
+  button:hover, button:focus, a:hover, a:focus {
+    background: #2D9BB7;
+    outline: 0;
+  }

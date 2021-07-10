@@ -9,76 +9,86 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./inscription.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+
 <title>Mon profil</title>
 </head>
 
 <body >
 <%@include file="./fragments/header.jsp" %>
-	<div class="container   p-3 mb-2 bg-light text-dark">
 
-	<h1 class="d-flex justify-content-center">Mon profil</h1>
-	<form action="${pageContext.request.contextPath }/ServletInscription" method="POST" name="inscription" class="row g-3">
 
-		
-		
-		<div  class="col-md-6">
-				<label  class="form-label">Pseudo</label>
-  				<input type="text" class="form-control" placeholder="Pseudo" name="pseudo" pattern="^(?![0-9]*$)[a-zA-Z0-9]+$"  id="exampleInputEmail1" required>
-  		</div>
-  		<div  class="col-md-6">		
-  				<label  class="form-label">Nom</label>
-  				<input type="text" class="form-control" placeholder="Nom" name="nom" required>
-  				
-		</div>
-		<div class="col-md-6">
-			
-				<label  class="form-label">Prénom</label>
-  				<input type="text" class="form-control" placeholder="Prénom" name="prenom" required>
-  		</div>
-  		<div class="col-md-6">	
-  				<label  class="form-label">Email</label>
-  				<input type="email" class="form-control" placeholder="Email" name="email" pattern="^[\w.-]+@\w+.\w{2,3}$" required>
-		</div>
-		<div class="col-md-6">	
-				
-				<label " class="form-label">Teléphone</label>
-  				<input type="text" class="form-control" placeholder="Teléphone" name="tel" pattern="[0-9]+">
-  		</div>		
-  		<div class="col-md-6">	
-  				<label  class="form-label">Rue</label>
-  				<input type="text" class="form-control" placeholder="Rue" name="rue" required>
-  				
-		</div>
-		<div class="col-md-6">	
-			
-				<label  class="form-label">Code postal</label>
-  				<input type="text" class="form-control" placeholder="Code postal" name="cp" pattern="[0-9]+" required>
-  		</div>
-  		<div class="col-md-6">	
-  				<label  class="form-label">Ville</label>
-  				<input type="text" class="form-control" placeholder="Ville" name="ville" required>
-		</div>
-		<div class="col-md-6">	
-			
-				<label  class="form-label">Mot de passe</label>
-  				<input type="password" class="form-control" placeholder="Mot de passe" name="password" required>
-  		</div>
-  		<div class="col-md-6">	
-  				<label  class="form-label">Confirmation mot de passe</label>
-  				<input type="password" class="form-control" placeholder="Confirmation" name="conf" required>
-		</div>
+ <h1>Inscription</h1>
+    <div >
+   
+    <form action="${pageContext.request.contextPath }/ServletInscription" method="POST" name="inscription"  class="container">
+        <div id="formbox">
+            <label for="pseudo">Pseudo</label>
+            <input type="text" name="pseudo" placeholder="Pseudo" pattern="^(?![0-9]*$)[a-zA-Z0-9]+$">
+        </div>
+        <div id="formbox">
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" placeholder="Nom">    
+        </div>
+        
+        <div id="formbox">
+            <label for="prenom">Prenom</label>
+            <input type="text" name="prenom" placeholder="Prénom">
 
-		<div class="d-flex justify-content-center">
-			<input class="btn btn-outline-primary" type="submit" value="   Créer   "> 
-			<a href="${pageContext.request.contextPath }/ServletAccueil" class="btn btn-outline-primary">Annuler</a>
-		</div>
-		
-	</form>
+        </div>
+        <div id="formbox">
+            <label for="email">email</label>
+            <input type="email" name="email" placeholder="john@example.com" pattern="^[\w.-]+@\w+.\w{2,3}$" required>
+
+        </div>
+                <div id="formbox">
+            <label for="tel">Telephone</label>
+            <input type="text" name="tel" placeholder="Teléphone" pattern="[0-9]+">
+
+        </div>
+        <div id="formbox">
+            <label for="rue">Rue</label>
+            <input type="text" name="rue" placeholder="Rue">
+
+        </div>
+        <div id="formbox">
+            <label for="cp">Code postal</label>
+            <input type="text" name="cp" placeholder="Code postal" pattern="[0-9]+" required>
+            
+        </div>
+        <div id="formbox">
+            <label for="ville">Ville</label>
+            <input type="text" name="ville" placeholder="Ville" >
+            
+        </div>
+        <div id="formbox">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" placeholder="Mot de passe">
+            
+        </div>
+        <div id="formbox">
+            <label for="conf">Repeter le mot de passe</label>
+            <input type="password" name="conf" placeholder="Répéter le mot de passe">
+
+        </div>
+        
+        
+      
+        
+        
+
+        <div class="validation">
+        <button id="button" type="submit">Enregistrer</button>
+        
+        <button id="button" type="reset">Annuler</button>
+        </div>
+
+
+
+
+    </form>
+</div>
+	
+	
 	
 		<c:if test="${!empty listeCodesErreur}">
         <div class="alert alert-danger" role="alert">
@@ -116,5 +126,5 @@
 
 
 </body>
-
+<%@include file="./fragments/footer.jsp" %>
 </html>
