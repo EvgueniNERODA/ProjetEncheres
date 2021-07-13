@@ -79,7 +79,7 @@
         <div class="validation">
         <button id="button" type="submit">Enregistrer</button>
         
-        <button id="button" type="reset">Annuler</button>
+        <button id="button" href="${pageContext.request.contextPath }/ServletAccueil">Annuler</button>
         </div>
 
 
@@ -91,7 +91,7 @@
 	
 	
 		<c:if test="${!empty listeCodesErreur}">
-        <div class="alert alert-danger" role="alert">
+        <div class="danger" >
             <strong>Erreur!</strong>
             
                 <c:forEach var="code" items="${listeCodesErreur}">
@@ -103,20 +103,20 @@
     </c:if>
 	
 	<c:if test="${verifMail == true}">
-		<div class="alert alert-danger" role="alert">
+		<div class="danger" >
 		 	 Le le mail existe déjà.
 		</div>
     	
 	</c:if>
 	<c:if test="${verifPseudo == true}">
-		<div class="alert alert-danger" role="alert">
+		<div class="danger" role="">
 			Le pseudo existe déjà!!!
 		</div>
 	
     	
 	</c:if>
 	<c:if test="${verifPassword == true}">
-		<div class="alert alert-danger" role="alert">
+		<div class="danger">
 			Veuillez saisir des mots de passe identiques.
 		</div>
 	

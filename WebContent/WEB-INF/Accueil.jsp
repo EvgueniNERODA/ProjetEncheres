@@ -9,28 +9,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	href="./accueil.css"
 	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+	>
 <title>Accueil</title>
 </head>
 <body>
-<%@include file="./fragments/header.jsp" %>
-	<h1 class="d-flex justify-content-center">Liste des enchères</h1>
+    <%@include file="./fragments/header.jsp" %>
+	<h1 >Liste des enchères</h1>
 
 
-<div class="container">
+<div class="container1">
 <h3>Filtres</h3>
-  <form class="form-inline col-md-3" action="${pageContext.request.contextPath }/ServletAccueil" method="POST">
-    <input class="form-control mr-md-2 shadow-sm" type="search" placeholder="Le nom de l'article contient" aria-label="Search" name="recherche">
+  <form class="container" action="${pageContext.request.contextPath }/ServletAccueil" method="POST">
+    <input  type="search" placeholder="Le nom de l'article contient"  name="recherche">
   
     
     
     <div >
-    
-    <label for="categorie">Catégorie</label>
-    <select class="form-control shadow-sm col-md-4" id="categorie" name="categorie">
+    <div>    <label for="categorie">Catégorie</label>
+    </div>
+ 
+    <select  id="categorie" name="categorie">
     
     
     		<option value="5">Toutes</option>
@@ -46,33 +46,32 @@
       
     </select>
 	</div>
-	<span><button class="btn btn-outline-success my-4 my-sm-4 btn-lg" type="submit">Rechercher</button></span>
+	<span><button class="btn" type="submit">Rechercher</button></span>
 	  
   </form>
   
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+  
+
+<div class="cards">
  
  	
   	 <c:forEach var ="liste" items="${listesArticles }">
-  	  <div class="col">
-   		 <div class="card shadow-sm bg-light">
-      
-     		 <div class="card-body">
-        		<h5 class="card-title">${liste.nomArticle}</h5>
-       			<p class="card-text">Prix : ${liste.miseAPrix} points</p>
-       			<p class="card-text">Fin de l'enchère  :
-       			<fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
-				<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
-				</p>
-         		<p class="card-text">Vendeur  : ${liste.getUtilisateur().getPseudo()}</p>
-      		</div>
-    	 </div>
-     </div>
-     <br>
+  	  <div class="card">
+        <img  alt="Image" style="width:100%">
+        <div class="container2">
+            <h5 class="card-title">${liste.nomArticle}</h5>
+            <p class="card-text">Prix : ${liste.miseAPrix} points</p>
+            <p class="card-text">Fin de l'enchère  :
+            <fmt:parseDate value="${liste.dateFinEncheres}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+         <fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd.MM.yyyy" />${newParsedDate}
+         </p>
+          <p class="card-text">Vendeur  : ${liste.getUtilisateur().getPseudo()}</p>
+        </div>
+      </div> 
      </c:forEach>
-  
 
+    
 </div>
 
 
@@ -97,6 +96,7 @@
 		</div>
     </c:if>
 	
-
+   
 </body>
+<%@include file="./fragments/footer.jsp" %>
 </html>
